@@ -114,8 +114,6 @@ hi Type    gui=italic
 hi htmlArg cterm=italic
 hi Comment cterm=italic
 hi Type    cterm=italic
-hi IndentGuidesOdd  guibg=red   ctermbg=3
-hi IndentGuidesEven guibg=green ctermbg=4
 let &colorcolumn="80,".join(range(120,120),",")
 highlight ColorColumn ctermbg=234 guibg=#404042
 highlight Pmenu guibg=#161616
