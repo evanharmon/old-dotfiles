@@ -1,6 +1,6 @@
 # OS
 alias mmv='noglob zmv -W'
-alias hsscfg='/usr/bin/git --git-dir=$HOME/.hss-cfg/ --work-tree=$HOME'
+alias hsscfg='/usr/bin/git --git-dir=$HOME/.hsscfg/ --work-tree=$HOME'
 alias vim=nvim
 
 # FILESYSTEM

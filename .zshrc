@@ -15,7 +15,6 @@ export PATH=$PATH:./bin/:./node_modules/.bin
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 export PATH="$HOME/.cargo/bin:$PATH"
-export HSS="$HOME/code/hss"
 export CC=clang
 export GOPATH=$HOME/go
 export GOROOT=/usr/local/opt/go/libexec
@@ -26,6 +25,12 @@ fi
 export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
+
+# define the code directory
+# This is where my code exists and where I want the `c` autocomplete to work from exclusively
+if [[ -d ~/code ]]; then
+    export CODE_DIR=~/code
+fi
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -46,7 +51,7 @@ precmd() { print "" }
 PS1="⟩"
 RPS1="%{$fg[magenta]%}%20<...<%~%<<%{$reset_color%}"
 
-# ALIAS
+# ALIAS FILES
 source ~/.config/zsh/alias.zsh
 source ~/.config/zsh/git.zsh
 
