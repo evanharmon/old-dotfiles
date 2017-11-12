@@ -1,18 +1,9 @@
 export DOTFILES=$HOME/.dotfiles
 export ZSH=$HOME/.config/zsh
 
+source ~/.config/zsh/zplug.sh
 # SOURCE ZSH FILES
 for config ($ZSH/**/*.zsh) source $config
-
-autoload colors zsh/terminfo
-colors
-
-setopt clobber
-setopt auto_cd
-setopt correctall
-
-# make mv easier
-autoload -U zmv
 
 export TERM=xterm-256color-italic
 export NVM_DIR="$HOME/.nvm"
@@ -52,13 +43,3 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 
-## PROMPT
-precmd() { print "" }
-PS1="⟩"
-RPS1="%{$fg[magenta]%}%20<...<%~%<<%{$reset_color%}"
-
-# BINDS
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
