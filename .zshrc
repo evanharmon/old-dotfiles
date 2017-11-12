@@ -1,5 +1,6 @@
 export DOTFILES=$HOME/.dotfiles
 export ZSH=$HOME/.config/zsh
+export ZPLUGHOME=$HOME/.zplug
 
 source ~/.config/zsh/zplug.sh
 # SOURCE ZSH FILES
