@@ -1,3 +1,9 @@
+export DOTFILES=$HOME/.dotfiles
+export ZSH=$HOME/.config
+
+# SOURCE ZSH FILES
+for config ($ZSH/**/*.zsh) source $config
+
 autoload colors zsh/terminfo
 colors
 
@@ -50,10 +56,6 @@ export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 precmd() { print "" }
 PS1="⟩"
 RPS1="%{$fg[magenta]%}%20<...<%~%<<%{$reset_color%}"
-
-# ALIAS FILES
-source ~/.config/zsh/alias.zsh
-source ~/.config/zsh/git.zsh
 
 # BINDS
 bindkey '^[[A' history-substring-search-up
