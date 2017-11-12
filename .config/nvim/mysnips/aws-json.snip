@@ -1,0 +1,125 @@
+snippet     AWSTemplate
+abbr        AWSTemplateFormatVersion
+  "AWSTemplateFormatVersion": "${1:2010-09-09}"${0}
+
+snippet     ec2route
+abbr        "EC2 Route"
+  "${1:Route Name}": {
+    "Type": "AWS::EC2::Route",
+    "DependsOn": "${2:GatewayId}"
+    "Properties": {
+      "DestinationCidrBlock": "${3:0.0.0.0/0}",
+      "GatewayId": {
+        "Ref": "${4:GatewayId}"
+      },
+      "InstanceId": "${5:InstanceId}",
+      "NatGatewayId": "${6:NatGatewayId}",
+      "NetworkInterfaceId": "${7:NetworkInterfaceId}",
+      "VpcPeeringConnectionId": "${8:VpcPeeringConnectionId}",
+      "RouteTableId": {
+        "Ref": "${9:RouteTableId}"
+      }
+    }
+  }
+
+snippet     ec2Subnet
+abbr        "EC2 Subnet"
+  "${1:Subnet Name}": {
+    "Type": "AWS::EC2::Subnet",
+    "Properties": {
+      "CidrBlock": "${2:CidrBlock}",
+      "MapPublicIpOnLaunch": ${3:boolean},
+      "Tags": [${4:Tags}],
+      "VpcId": {
+        "Ref": "${5:VpcId}"
+      }
+    }
+  }
+
+snippet     ec2RouteTable
+abbr        "EC2 Route Table"
+  "${1:Route Table Name}": {
+    "Type": "AWS::EC2::RouteTable",
+    "Properties": {
+      "VpcId": {
+        "Ref": "${2:VpcId}"
+      },
+      "Tags" : [${3}]
+    }
+  }
+
+snippet     ec2Instance
+abbr        "EC2 Instance"
+  "${1:Instance Name}" : {
+     "Type" : "AWS::EC2::Instance",
+     "Properties" : {
+        "Affinity": "${2:string}",
+        "AvailabilityZone": "${3:string}",
+        "BlockDeviceMappings" : [
+           {
+              "DeviceName" : "${4:DeviceName}",
+              "Ebs" : {
+                 "VolumeType" : "${5:io1}",
+                 "Iops" : "${6:200}",
+                 "DeleteOnTermination" : "${7:false}",
+                 "VolumeSize" : "${8:20}"
+              }
+           },
+           {
+              "DeviceName" : "${9:/dev/sdk}",
+              "NoDevice" : {}
+           }
+        ],
+        "DisableApiTermination": ${10:false},
+        "EbsOptimized": ${11:boolean},
+        "HostId": "${12:string}",
+        "IamInstanceProfile": "${13:string}",
+        "ImageId" : "${14:ImageId}",
+        "InstanceInitiatedShutdownBehavior": "${15:string}",
+        "InstanceType": "${16:string}",
+        "KernelId": "${17:string}",
+        "KeyName" : "${18:KeyName}",
+        "Monitoring": ${19:false},
+        "NetworkInterfaces": [${20}],
+        "PlacementGroupName": "${21:string}",
+        "PrivateIpAddress": "${22:string}",
+        "RamdiskId": "${23:string}",
+        "SecurityGroupIds": [${24}],
+        "SourceDestCheck": ${25:false},
+        "SsmAssociations": [${26}],
+        "SubnetId": "${27:string}",
+        "Tags": [${28}],
+        "Tenancy": [${29}],
+        "UserData": "${30:string}",
+        "Volumes": [${31}],
+        "AdditionalInfo": "${32}"
+     }
+  }
+
+snippet     ec2NetworkAcl
+abbr        "AWS Network ACL"
+  "${1}": {
+    "Type": "AWS::EC2::NetworkAcl",
+    "Properties": {
+      "VpcId": {${2}},
+      "Tags": [${3}]
+    }
+  }
+
+snippet     ref
+abbr        Ref: Reference
+  "Ref": "${1}"
+
+snippet     keyval
+abbr        "Key": "Value"
+  "${1:Key}": "${2:Value}"
+
+snippet     prop
+abbr        "Properties": {}
+  "Properties": {${1}}
+
+snippet     obj
+abbr        "Object": {}
+  "${1:ObjectName}": {
+    ${2:Key}
+  }

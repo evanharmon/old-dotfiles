@@ -1,0 +1,84 @@
+snippet     func
+abbr        func ...() { ... }
+alias       fn
+options     head
+  func ${1:fname}(${2}) (${3}) {
+      ${0:TARGET:return }
+  }
+
+snippet     afunc
+abbr        func ...() { ... }
+alias       afn
+options     word
+  func(${2}) (${3}) {
+      ${0:TARGET:return }
+  }
+
+snippet     rfunc
+abbr        func () ...() { ... }
+alias       rfn
+options     head
+  func (${1:receiver}) ${2:fname}(${3}) (${4:return}) {
+      ${0:TARGET:return }
+  }
+
+snippet     old_context
+abbr        /x/net/context
+options     head
+  "golang.org/x/net/context"
+
+snippet     gkendpoint
+abbr        go-kit endpoint
+options     head
+  "github.com/go-kit/kit/endpoint"
+
+snippet     gkhttp
+abbr        go-kit httptransport
+options     head
+  httptransport "github.com/go-kit/kit/transport/http"
+
+snippet     ctxc
+abbr        ctx context.Context
+options     word 
+  ctx context.Context
+
+snippet     ende
+abbr        endpoint.Endpoint
+options     word 
+  endpoint.Endpoint
+
+snippet     fn param interface
+abbr        var interface{}
+alias       fni
+options     word 
+  ${1:} interface{${2}}$0
+
+snippet     request interface
+abbr        request interface{}
+alias       reqi
+options     word 
+  request interface{}
+
+snippet     response interface
+abbr        response interface{}
+alias       resi
+options     word 
+  response interface{}
+
+snippet     r *http.Request
+abbr        r *http.Request
+alias       hreq
+options     word
+  r *http.Request
+
+snippet     r *http.Response
+abbr        r *http.Response
+alias       hres
+options     word
+  r *http.Response
+
+snippet     ResponseWriter
+abbr        w http.ResponseWriter
+alias       httpw
+options     word
+  w http.ResponseWriter
