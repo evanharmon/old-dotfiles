@@ -154,7 +154,6 @@ endfunction
 au! User FzfStatusLine call <SID>fzf_statusline()
 
 " NEOMAKE
-au! BufWritePost * Neomake
 if executable('./node_modules/.bin/eslint')
   let g:neomake_javascript_eslint_exe='./node_modules/.bin/eslint'
 endif
@@ -171,6 +170,15 @@ let g:neomake_jsx_eslint_maker={
     \ }
 let g:neomake_jsx_enabled_makers=['eslint']
 let g:neomake_yaml_enabled_makers=['yamllint']
+" let g:neomake_rust_enabled_makers = ['cargo']
+" let g:neomake_rust_cargo_maker = {
+    " \ 'exe': 'cargo',
+    " \ 'args': ['build'],
+    " \ 'append_file': 0,
+    " \ 'errorformat': '%Eerror%m,%Z\ %#-->\ %f:%l:%c',
+  " \ }
+au! BufWritePost * Neomake
+" au! BufWritePost *.rs Neomake cargo
 
 " GOLANG
 let g:go_snippet_engine="neosnippet"
