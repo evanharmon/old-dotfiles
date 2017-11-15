@@ -15,7 +15,6 @@ echo "alias hsscfg='/usr/bin/git --git-dir=$HOME/.hsscfg/ --work-tree=$HOME'" >>
 
 ## TODO
 ### ZSH
-- AWS completions not working
 - can't search history with fzf rg
 - add alias alias ava='nocorrect ava'
 - fix AWS completions
@@ -30,3 +29,7 @@ else
 # source /usr/bin/aws_zsh_completer.sh
 fi
 ```
+- fix tab error `_vim_files: function definition file not found`
+- fix errors `_git:58: _git_commands: function definition file not found
+_git:58: _git_commands: function definition file not found
+_git:58: _git_commands: function definition file not found`
