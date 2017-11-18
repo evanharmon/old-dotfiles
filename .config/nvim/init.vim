@@ -121,6 +121,7 @@ au FileType html setlocal sw=2 ts=2 sts=2
 au FileType javascript setlocal sw=2 ts=2 sts=2
 au FileType yaml setlocal sw=2 ts=2 sts=2 expandtab
 au FileType neosnippet setlocal sw=2 ts=2 sts=2 expandtab
+au FileType md setlocal sw=2 ts=2 sts=2 expandtab
 
 " GENERAL LETS
 let g:gitgutter_enabled=0
