@@ -2,8 +2,9 @@ export DOTFILES=$HOME/.dotfiles
 export ZSH=$HOME/.config/zsh
 export ZPLUGHOME=$HOME/.zplug
 
-source ~/.config/zsh/zplug.sh
 # SOURCE ZSH FILES
+source ~/.config/zsh/zplug.sh
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 for config ($ZSH/**/*.zsh) source $config
 
 export TERM=xterm-256color-italic
@@ -43,5 +44,3 @@ fi
 export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
