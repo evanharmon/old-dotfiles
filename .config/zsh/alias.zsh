@@ -4,7 +4,6 @@ alias reload!='source ~/.zshrc'
 # OS
 alias mmv='noglob zmv -W'
 alias hsscfg='/usr/bin/git --git-dir=$HOME/.hsscfg/ --work-tree=$HOME'
-alias vim=nvim
 
 # FILESYSTEM
 ## Detect which `ls` flavor is in use
