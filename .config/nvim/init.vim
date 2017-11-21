@@ -30,12 +30,11 @@ call dein#add('Yggdroot/indentLine')
 call dein#add('Valloric/MatchTagAlways')
 call dein#add('airblade/vim-gitgutter')
 " JS / JSX / WEB
-call dein#add('pangloss/vim-javascript', { 'on_ft': 'javascript' })
 call dein#add('othree/yajs.vim', { 'on_ft': 'javascript' })
 call dein#add('othree/html5.vim', { 'on_ft': 'html' })
 call dein#add('othree/xml.vim', { 'on_ft': 'xml' })
 call dein#add('othree/es.next.syntax.vim', { 'on_ft': 'javascript' })
-call dein#add('mxw/vim-jsx')
+call dein#add('maxmellon/vim-jsx-pretty')
 call dein#add('jparise/vim-graphql', { 'on_ft': ['graphql'] })
 call dein#add('mattn/emmet-vim', { 'on_ft': ['javascript', 'javascript.jsx', 'html', 'xml'] })
 " OTHERS
@@ -137,12 +136,14 @@ let g:fzf_buffers_jump=1
 let g:fzf_tags_command='fd | ctags --links=no -L-'
 let g:lexima_enable_basic_rules=1  " AUTOCLOSE PAIRS
 let g:lexima_enable_newline_rules=1 " AUTOCLOSE PAIRS
+let g:NERDCustomDelimiters={ 's': { 'left': '{/*','right': '*/}' } }
 let g:NERDCustomDelimiters={ 'conf': { 'left': '#' } }
 let g:NERDSpaceDelims=1
 let g:rustfmt_autosave=1
 let g:sneak#s_next=1
 let g:deoplete#enable_at_startup=1
 let g:neosnippet#snippets_directory="~/.config/nvim/mysnips"
+let g:jsx_ext_required=0
 
 " FUNCTIONS
 function! s:fzf_statusline()
