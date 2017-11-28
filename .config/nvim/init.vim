@@ -51,7 +51,6 @@ if dein#check_install()
   call map(dein#check_clean(), "delete(v:val, 'rf')")
 endif
 
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 set mouse=r  " DISABLE MOUSE
 set encoding=utf8
 set hidden
@@ -127,10 +126,6 @@ let g:gitgutter_enabled=0
 let g:indentLine_enabled=1
 let g:indentLine_color_term=239
 let g:indentLine_char="•"
-let g:fzf_layout={ 'down': '~40%' }
-let g:fzf_layout={ 'window': 'enew' }
-let g:fzf_layout={ 'window': '-tabnew' }
-let g:fzf_layout={ 'window': '10split enew' }
 let g:fzf_history_dir='~/.local/share/fzf-history'
 let g:fzf_buffers_jump=1
 let g:fzf_tags_command='fd | ctags --links=no -L-'
@@ -172,15 +167,7 @@ let g:neomake_jsx_eslint_maker={
     \ }
 let g:neomake_jsx_enabled_makers=['eslint']
 let g:neomake_yaml_enabled_makers=['yamllint']
-" let g:neomake_rust_enabled_makers = ['cargo']
-" let g:neomake_rust_cargo_maker = {
-    " \ 'exe': 'cargo',
-    " \ 'args': ['build'],
-    " \ 'append_file': 0,
-    " \ 'errorformat': '%Eerror%m,%Z\ %#-->\ %f:%l:%c',
-  " \ }
 au! BufWritePost * Neomake
-" au! BufWritePost *.rs Neomake cargo
 
 " GOLANG
 let g:go_snippet_engine="neosnippet"
@@ -232,14 +219,12 @@ nnoremap <Left> :vertical resize -1<CR>
 nnoremap <Right> :vertical resize +1<CR>
 nnoremap <Up> :resize -1<CR>
 nnoremap <Down> :resize +1<CR>
-" Disable arrow keys completely in Insert Mode
 imap <up> <nop>
 imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
 " if on iterm2, add key pref for CTRL-H in prefs,
-" action send escape sequence,
-" type in [104;5u
+" action send escape sequence, type in [104;5u
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap _ <C-w>_
