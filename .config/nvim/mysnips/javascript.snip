@@ -1,38 +1,26 @@
 include react.snip
 
-snippet     require-default
+snippet     require
 abbr        const defaultMember = require('module-name');
 options     head
-  const ${1:defaultMember} = require('${2:TARGET}');
+  const ${1:defaultMember} = require('${2:TARGET}');${0}
 
-snippet     require-member
-abbr        const {member} = require('module-name');
-options     head
-  const {${1:member}} = require('${2:TARGET}');
-
-snippet     import-default
+snippet     import
 abbr        import Module from 'module';
 options     head
-  import ${1:ModuleName} from '$1';${0}
+  import ${1:ModuleName} from '${2}';${0}
 
 snippet     constf
 abbr        const name = () => {}
 options     head
   ${1:const} ${2:name} = (${3:}) => {
     ${4}
-  };
-
-snippet     ES5constf
-abbr        const name = () => {}
-options     head
-  ${1:const} ${2:name} = function (${3:}) {
-    ${4}
-  };
+  };${0}
 
 snippet     consto
 abbr        const name = {};
 options     head
-  ${1:const} ${2:name} = {${3}};
+  ${1:const} ${2:name} = {${3}};${0}
 
 snippet     class
 abbr        class Name extends
@@ -41,33 +29,46 @@ options     head
     ${3}
   }
 
-snippet Stringify
-alias   stringify
-abbr    JSON.stringify()
-  JSON.stringify(${1:TARGET}, ${2:null}, ${3:' '})${0}
+snippet     Stringify
+alias       stringify
+abbr        JSON.stringify()
+  JSON.stringify(${1:TARGET}, ${2:null}, ${3:'\t'})${0}
 
-snippet Then
-alias   then
-abbr    .then(function)
+snippet     Then
+alias       then
+abbr        .then(function)
   .then((${1}) => {
     ${2}
   })${0}
 
-snippet ES5Then
-alias   ES5then
-abbr    .then(function)
-  .then((${1}) {
-    ${2}
-  })${0}
-
-snippet Env
-alias   env
-abbr    process.env
+snippet     Env
+alias       env
+abbr        process.env
   process.env.${1}
 
-snippet Promise
-alias   promise
-abbr    Promise()
+snippet     Promise
+alias       promise
+abbr        Promise()
   return new Promise((${1}) => {
     ${2}
   });
+
+snippet     Describe
+alias       describe
+abbr        describe('', () => {})
+  describe('${1}', (${2}) => {
+    ${3}
+  });
+
+snippet     Test
+alias       test
+abbr        test('', () => {})
+  test('${1}', (${2}) => {
+    ${3}
+  });
+
+snippet     export
+abbr        export default () => {}
+  export default ${1:()} ${2:=>} {
+    ${3}
+  };
