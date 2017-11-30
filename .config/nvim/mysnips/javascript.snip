@@ -69,6 +69,8 @@ abbr        test('', () => {})
 
 snippet     export
 abbr        export default () => {}
-  export default ${1:()} ${2:=>} {
-    ${3}
-  };
+  export ${1:default} (${2:}) => ${3:{}};
+
+snippet     exportc
+abbr        export const Name = () => {}
+  export const ${1:Name} = (${2:}) => ${3:\{\}};
