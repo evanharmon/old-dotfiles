@@ -26,6 +26,7 @@ call dein#add('mhartington/oceanic-next')
 call dein#add('prettier/vim-prettier')
 call dein#add('cohama/lexima.vim')
 call dein#add('tpope/vim-surround')
+call dein#add('tpope/vim-repeat')
 call dein#add('Yggdroot/indentLine')
 call dein#add('Valloric/MatchTagAlways')
 call dein#add('airblade/vim-gitgutter')
@@ -34,13 +35,13 @@ call dein#add('othree/yajs.vim', { 'on_ft': 'javascript' })
 call dein#add('othree/html5.vim', { 'on_ft': 'html' })
 call dein#add('othree/xml.vim', { 'on_ft': 'xml' })
 call dein#add('othree/es.next.syntax.vim', { 'on_ft': 'javascript' })
-call dein#add('maxmellon/vim-jsx-pretty')
+call dein#add('maxmellon/vim-jsx-pretty', { 'do': 'yarn install' })
 call dein#add('jparise/vim-graphql', { 'on_ft': ['graphql'] })
 call dein#add('mattn/emmet-vim', { 'on_ft': ['javascript', 'javascript.jsx', 'html', 'xml'] })
 " OTHERS
-call dein#add('vim-scripts/yaml.vim')
+call dein#add('vim-scripts/yaml.vim', { 'on_ft': 'yaml' })
 call dein#add('fatih/vim-go', { 'on_ft': ['go'] })
-call dein#add('rust-lang/rust.vim')
+call dein#add('rust-lang/rust.vim', { 'on_ft': ['rust'] })
 call dein#end()
 
 if dein#check_install()
@@ -81,8 +82,8 @@ set updatetime=250
 set timeoutlen=500
 set shiftwidth=4
 set expandtab
-set tabstop=4
-set softtabstop=4
+set tabstop=2
+set softtabstop=2
 set conceallevel=1
 set undolevels=100
 set nowrap
@@ -115,11 +116,6 @@ highlight Pmenu guibg=#161616
 " FORMATTING
 au FileType go,c,asm,python setlocal sw=4 ts=4 sts=4 expandtab
 au FileType make setlocal noexpandtab sw=4 ts=4 sts=4
-au FileType html setlocal sw=2 ts=2 sts=2
-au FileType javascript setlocal sw=2 ts=2 sts=2
-au FileType yaml setlocal sw=2 ts=2 sts=2 expandtab
-au FileType neosnippet setlocal sw=2 ts=2 sts=2 expandtab
-au FileType md setlocal sw=2 ts=2 sts=2 expandtab
 
 " GENERAL LETS
 let g:gitgutter_enabled=0
@@ -139,6 +135,9 @@ let g:sneak#s_next=1
 let g:deoplete#enable_at_startup=1
 let g:neosnippet#snippets_directory="~/.config/nvim/mysnips"
 let g:jsx_ext_required=0
+let g:prettier#exec_cmd_async=1
+let g:prettier#config#bracket_spacing='true'
+let g:prettier#config#trailing_comma='es5'
 
 " FUNCTIONS
 function! s:fzf_statusline()
