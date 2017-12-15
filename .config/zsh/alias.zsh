@@ -5,6 +5,9 @@ alias reload!='source ~/.zshrc'
 alias mmv='noglob zmv -W'
 alias hsscfg='/usr/bin/git --git-dir=$HOME/.hsscfg/ --work-tree=$HOME'
 
+# stop auto corrects
+alias ava='nocorrect ava'
+
 # FILESYSTEM
 ## Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
