@@ -35,7 +35,7 @@ call dein#add('othree/yajs.vim', { 'on_ft': 'javascript' })
 call dein#add('othree/html5.vim', { 'on_ft': 'html' })
 call dein#add('othree/xml.vim', { 'on_ft': 'xml' })
 call dein#add('othree/es.next.syntax.vim', { 'on_ft': 'javascript' })
-" call dein#add('maxmellon/vim-jsx-pretty', { 'do': 'yarn install' })
+call dein#add('maxmellon/vim-jsx-pretty', { 'do': 'yarn install' })
 call dein#add('jparise/vim-graphql', { 'on_ft': ['graphql'] })
 call dein#add('mattn/emmet-vim', { 'on_ft': ['javascript', 'javascript.jsx', 'html', 'xml'] })
 " OTHERS
