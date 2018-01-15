@@ -10,7 +10,8 @@ for config ($ZSH/**/*.zsh) source $config
 export TERM=xterm-256color-italic
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-export PATH=$PATH:./bin/:./node_modules/.bin
+export PATH=$PATH:./bin:./node_modules/.bin
+export PATH="/usr/local/sbin:$PATH"
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 export PATH="$HOME/.cargo/bin:$PATH"
