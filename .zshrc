@@ -1,4 +1,4 @@
-export DOTFILES=$HOME/.dotfiles
+export DOTFILES=$HOME
 export ZSH=$HOME/.config/zsh
 export ZPLUGHOME=$HOME/.zplug
 
