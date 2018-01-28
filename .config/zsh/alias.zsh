@@ -7,6 +7,7 @@ alias hsscfg='/usr/bin/git --git-dir=$HOME/.hsscfg/ --work-tree=$HOME'
 
 # stop auto corrects
 alias ava='nocorrect ava'
+alias aws='nocorrect aws'
 
 # FILESYSTEM
 ## Detect which `ls` flavor is in use

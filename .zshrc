@@ -10,11 +10,16 @@ for config ($ZSH/**/*.zsh) source $config
 export TERM=xterm-256color-italic
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-export PATH=$PATH:./bin:./node_modules/.bin
-export PATH="/usr/local/sbin:$PATH"
+
+# LAST IN FIRST OUT PRE-PATH
+# export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export PATH="/usr/local/opt/python3/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+# export PATH="/usr/local/sbin:$PATH"
+export PATH=$PATH:./node_modules/.bin
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
-export PATH="$HOME/.cargo/bin:$PATH"
 export CC=clang
 export GOPATH=$HOME/go
 export GOROOT=/usr/local/opt/go/libexec
