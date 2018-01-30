@@ -17,6 +17,8 @@ hsscfg config --local status.showUntrackedFiles no
 
 echo "alias hsscfg='/usr/bin/git --git-dir=$HOME/.hsscfg/ --work-tree=$HOME'" >> $HOME/.bashrc
 
+hsscfg remote add origin https://github.com/evanharmon/dotfiles.git
+
 ## TODO
 ### ZSH
 - can't search history with fzf rg
