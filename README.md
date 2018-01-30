@@ -8,9 +8,13 @@ With this power comes responsibility. NEVER BLANKET ADD `hsscfg add .`
 
 # How to setup on a new machine
 cd $HOME
+
 git init --bare $HOME/.hsscfg
+
 alias hsscfg='/usr/bin/git --git-dir=$HOME/.hsscfg/ --work-tree=$HOME'
+
 hsscfg config --local status.showUntrackedFiles no
+
 echo "alias hsscfg='/usr/bin/git --git-dir=$HOME/.hsscfg/ --work-tree=$HOME'" >> $HOME/.bashrc
 
 ## TODO
