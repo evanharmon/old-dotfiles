@@ -35,11 +35,11 @@ call dein#add('othree/yajs.vim', { 'on_ft': 'javascript' })
 call dein#add('othree/html5.vim', { 'on_ft': 'html' })
 call dein#add('othree/xml.vim', { 'on_ft': 'xml' })
 call dein#add('othree/es.next.syntax.vim', { 'on_ft': 'javascript' })
-call dein#add('maxmellon/vim-jsx-pretty', { 'do': 'yarn install' })
+call dein#add('othree/javascript-libraries-syntax.vim', { 'on_ft': ['javascript', 'javascript.jsx'] })
 call dein#add('jparise/vim-graphql', { 'on_ft': ['graphql'] })
 call dein#add('mattn/emmet-vim', { 'on_ft': ['javascript', 'javascript.jsx', 'html', 'xml'] })
 " OTHERS
-call dein#add('vim-scripts/yaml.vim', { 'on_ft': 'yaml' })
+call dein#add('vim-scripts/yaml.vim', { 'on_ft': ['yaml'] })
 call dein#add('fatih/vim-go', { 'on_ft': ['go'] })
 call dein#add('rust-lang/rust.vim', { 'on_ft': ['rust'] })
 call dein#end()
@@ -118,27 +118,29 @@ au FileType go,c,asm,python setlocal sw=4 ts=4 sts=4 expandtab
 au FileType make setlocal noexpandtab sw=4 ts=4 sts=4
 
 " GENERAL LETS
-let g:gitgutter_enabled=0
-let g:indentLine_enabled=1
-let g:indentLine_color_term=239
-let g:indentLine_char="•"
-let g:fzf_history_dir='~/.local/share/fzf-history'
+let g:NERDCustomDelimiters={ 'conf': { 'left': '#' } }
+let g:NERDCustomDelimiters={ 's': { 'left': '{/*','right': '*/}' } }
+let g:NERDSpaceDelims=1
+let g:deoplete#enable_at_startup=1
 let g:fzf_buffers_jump=1
+let g:fzf_history_dir='~/.local/share/fzf-history'
 let g:fzf_tags_command='fd | ctags --links=no -L-'
+let g:gitgutter_enabled=0
+let g:indentLine_char="•"
+let g:indentLine_color_term=239
+let g:indentLine_enabled=1
+let g:jsx_ext_required=0
 let g:lexima_enable_basic_rules=1  " AUTOCLOSE PAIRS
 let g:lexima_enable_newline_rules=1 " AUTOCLOSE PAIRS
-let g:NERDCustomDelimiters={ 's': { 'left': '{/*','right': '*/}' } }
-let g:NERDCustomDelimiters={ 'conf': { 'left': '#' } }
-let g:NERDSpaceDelims=1
+let g:neosnippet#snippets_directory="~/.config/nvim/mysnips"
+let g:prettier#config#bracket_spacing='true'
+let g:prettier#config#single_quote='true'
+let g:prettier#config#trailing_comma='all'
+let g:prettier#exec_cmd_async=1
 let g:rustfmt_autosave=1
 let g:sneak#s_next=1
-let g:deoplete#enable_at_startup=1
-let g:neosnippet#snippets_directory="~/.config/nvim/mysnips"
-let g:jsx_ext_required=0
-let g:prettier#exec_cmd_async=1
-let g:prettier#config#bracket_spacing='true'
-let g:prettier#config#trailing_comma='all'
-let g:prettier#config#single_quote='true'
+let g:used_javascript_libs='react'
+let g:vim_jsx_pretty_colorful_config=1
 
 " FUNCTIONS
 function! s:fzf_statusline()
@@ -207,6 +209,7 @@ nmap <Leader>b :Buffers<CR>
 nmap <Leader>f :GFiles<CR>
 nmap <Leader>F :Files<CR>
 nmap <Leader>t :Tags<CR>
+nmap <Leader>m :History<CR>
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
 nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
