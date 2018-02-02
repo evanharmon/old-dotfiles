@@ -14,6 +14,7 @@ if [ -z ${RELOAD} ]; then
     zplug 'akarzim/zsh-docker-aliases'
     zplug mafredri/zsh-async, from:github
     zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
+    zplug micha/resty, use:'resty'
 
     export NVM_LAZY_LOAD=true
     export NVM_AUTO_USE=true
