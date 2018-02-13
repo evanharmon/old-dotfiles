@@ -46,6 +46,11 @@ if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
   source /usr/local/opt/fzf/shell/completion.zsh
 fi
 
+# AWS completion
+if [ -e /usr/local/bin/aws_completer ]; then
+  source /usr/local/bin/aws_zsh_completer.sh
+fi
+
 # export FZF_DEFAULT_COMMAND="fd . $HOME"
 export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
