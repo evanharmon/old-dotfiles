@@ -1,5 +1,5 @@
 # HOMEBREW STAR RUNNER
-brew install zsh tmux neovim/neovim/neovim python3 reattach-to-user-namespace
+brew install zsh neovim/neovim/neovim python3 reattach-to-user-namespace
 brew tap caskroom/cask
 brew tap caskroom/fonts
 brew cask install iterm2
@@ -12,6 +12,3 @@ brew install delve
 ## JS
 brew install yarn
 brew cask install graphiql
-
-## UTILS
-brew cask install keycastr

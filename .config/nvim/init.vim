@@ -30,6 +30,7 @@ call dein#add('tpope/vim-repeat')
 call dein#add('Yggdroot/indentLine')
 call dein#add('Valloric/MatchTagAlways')
 call dein#add('airblade/vim-gitgutter')
+call dein#add('ntpeters/vim-better-whitespace')
 " JS / JSX / WEB
 call dein#add('othree/yajs.vim', { 'on_ft': 'javascript' })
 call dein#add('othree/html5.vim', { 'on_ft': 'html' })
@@ -133,9 +134,13 @@ let g:jsx_ext_required=0
 let g:lexima_enable_basic_rules=1  " AUTOCLOSE PAIRS
 let g:lexima_enable_newline_rules=1 " AUTOCLOSE PAIRS
 let g:neosnippet#snippets_directory="~/.config/nvim/mysnips"
+let g:prettier#config#print_width=80
+let g:prettier#config#tab_width=2
+let g:prettier#config#use_tabs='false'
 let g:prettier#config#bracket_spacing='true'
 let g:prettier#config#single_quote='true'
 let g:prettier#config#trailing_comma='all'
+let g:prettier#config#jsx_bracket_same_line='true'
 let g:prettier#exec_cmd_async=1
 let g:rustfmt_autosave=1
 let g:sneak#s_next=1

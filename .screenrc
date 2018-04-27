@@ -1,4 +1,9 @@
-termcapinfo xterm "Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm"
-
+hardstatus on
+hardstatus string "[%w] %h"
+shell -$SHELL
+startup_message off
+vbell off
+altscreen on
+maptimeout 10
+defbce on
 term screen-256color-italic
-term xterm-256color-italic
