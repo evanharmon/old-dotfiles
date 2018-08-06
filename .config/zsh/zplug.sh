@@ -14,11 +14,6 @@ if [ -z ${RELOAD} ]; then
     zplug 'akarzim/zsh-docker-aliases'
     zplug mafredri/zsh-async, from:github
     zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
-    zplug micha/resty, use:'resty'
-
-    export NVM_LAZY_LOAD=true
-    export NVM_AUTO_USE=true
-    zplug 'lukechilds/zsh-nvm'
 
     # Install plugins if there are plugins that have not been installed
     if ! zplug check; then
@@ -30,4 +25,3 @@ if [ -z ${RELOAD} ]; then
 
     zplug load
 fi
-
