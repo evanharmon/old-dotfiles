@@ -1,4 +1,4 @@
-Dotfiles Configuration
+# Dotfiles Configuration
 
 My dotfiles configuration uses a bare git repo. This allows the user home
 directory to keep files in their respective locations without the need for
@@ -6,9 +6,11 @@ linking.
 
 With this power comes responsibility. NEVER BLANKET ADD `hsscfg add .`
 
-# How to setup on a new machine
+# Setup
+open terminal
 cd $HOME
 
+## Step 1: GIT repo
 git init --bare $HOME/.hsscfg
 
 alias hsscfg='/usr/bin/git --git-dir=$HOME/.hsscfg/ --work-tree=$HOME'
@@ -17,11 +19,17 @@ hsscfg config --local status.showUntrackedFiles no
 
 hsscfg remote add origin https://github.com/evanharmon/dotfiles.git
 
-hsscfg branch --set-upstream-to=origin/master master
+hsscfg pull origin master
 
-hsscfg pull
+## Step 2: Tools
+### Sudo password will be requested as user input
+chmod -R a+x ./install/
 
+./install/brew.sh
+
+## Step 3: ZSH
 source $HOME/.zshrc
+
 ## TODO
 ### ZSH
 - can't search history with fzf rg
