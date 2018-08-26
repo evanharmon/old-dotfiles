@@ -14,16 +14,18 @@ open terminal
 `$ git init --bare $HOME/.dotfiles`
 If prompted to, install xcode developer tools
 
-`$ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'`
-`$ dotfiles config --local status.showUntrackedFiles no`
-`$ dotfiles remote add origin https://github.com/evanharmon/dotfiles.git`
-`$ dotfiles pull origin master`
+```
+$ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+$ dotfiles config --local status.showUntrackedFiles no
+$ dotfiles remote add origin https://github.com/evanharmon/dotfiles.git
+$ dotfiles pull origin master
+```
 
 ## Step 2: Tools
 ### Sudo password will be requested as user input
-`$ chmod -R a+x ./install/`
-
-`$ ./install/brew.sh`
-
+```
+$ chmod -R a+x ./install/
+$ ./install/brew.sh
+```
 ## Step 3: ZSH
 `$ source $HOME/.zshrc`
