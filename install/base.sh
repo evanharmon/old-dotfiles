@@ -9,7 +9,7 @@ fi
 if ! [[ $SHELL =~ .*zsh.* ]]; then
 	brew install zsh
 	echo "Configuring zsh as default shell"
-	chsh -s $(which zsh)
+	chsh -s /bin/zsh
 fi
 
 if [ ! -f $HOME/.zplug/run.sh ]; then
@@ -34,13 +34,15 @@ else
 	brew cask install iterm2
 
 fi
-brew install fd fzf editorconfig git-flow jq
 
-## JS
-if ! which yarn; then
-	brew install yarn
+if ! which fd; then
+	echo "fd already installed"
+else
+	brew install fd
 fi
 
-if ! which graphiql; then
-	brew cask install graphiql
+if ! which fzf; then
+	echo "fzf already installed"
+else
+	brew install fzf
 fi
