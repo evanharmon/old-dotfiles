@@ -3,7 +3,7 @@ alias reload!='source ~/.zshrc'
 
 # OS
 alias mmv='noglob zmv -W'
-alias hsscfg='/usr/bin/git --git-dir=$HOME/.hsscfg/ --work-tree=$HOME'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # stop auto corrects
 alias ava='nocorrect ava'

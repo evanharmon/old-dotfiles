@@ -7,7 +7,7 @@ source ~/.config/zsh/zplug.sh
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 for config ($ZSH/**/*.zsh) source $config
 
-export TERM=xterm-256color-italic
+export TERM=xterm-256color
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
