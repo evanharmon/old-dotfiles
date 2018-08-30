@@ -8,50 +8,52 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 for config ($ZSH/**/*.zsh) source $config
 
 export TERM=xterm-256color
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+if [ -d "$HOME/.nvm" ]; then
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+fi
 
-# LAST IN FIRST OUT PRE-PATH
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-export PATH="/usr/local/opt/python3/bin:$PATH"
+if [ -d "$HOME/.pyenv" ]; then
+	export PATH="/Users/evan/.pyenv/bin:$PATH"
+	eval "$(pyenv init -)"
+	eval "$(pyenv virtualenv-init -)"
+fi
+
+# PATHS
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH=$PATH:./node_modules/.bin
+#export PATH=$PATH:./node_modules/.bin
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+#export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export CC=clang
 export GOPATH=$HOME/go
 
 if [[ "$OSTYPE" == darwin* ]]; then
-  export BROWSER='open'
+	export BROWSER='open'
 fi
-export EDITOR='nvim'
-export VISUAL='nvim'
+
+if ! which nvim; then
+	export EDITOR='vim'
+	export VISUAL='vim'
+else
+	export EDITOR='nvim'
+	export VISUAL='nvim'
+fi
 export PAGER='less'
 
-# define the code directory
+# Define the code directory
 # This is where my code exists and where I want the `c` autocomplete to work from exclusively
 if [[ -d ~/code ]]; then
-    export CODE_DIR=~/code
+	export CODE_DIR=~/code
+else
+	mkdir $HOME/code
+	export CODE_DIR=~/code
 fi
 
-# FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# fzf via Homebrew
-if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
-  source /usr/local/opt/fzf/shell/key-bindings.zsh
-  source /usr/local/opt/fzf/shell/completion.zsh
-fi
-
-# AWS completion
 if [ -e /usr/local/bin/aws_completer ]; then
-  source /usr/local/bin/aws_zsh_completer.sh
+	  source /usr/local/bin/aws_zsh_completer.sh
 fi
-
-# export FZF_DEFAULT_COMMAND="fd . $HOME"
-export FZF_DEFAULT_COMMAND='fd --type f'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 
 export ANSIBLE_VAULT_PASSWORD_FILE="$HOME/.vault_pass.txt"

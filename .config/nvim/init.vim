@@ -2,55 +2,62 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-set runtimepath^=$HOME/.config/nvim/repos/github.com/Shougo/dein.vim
+set runtimepath^=~/.cache/dein/repos/github.com/Shougo/dein.vim
+set rtp+=/usr/local/opt/fzf
 set path+=**  " Recursive find
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/dist/*	" OSX/Linux
 
-" CORE
-call dein#begin(expand('$HOME/.config/nvim'))
-call dein#add('Shougo/dein.vim')
-call dein#add('Shougo/denite.nvim')
-call dein#add('Shougo/deoplete.nvim')
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
-call dein#add('benekastah/neomake')
-call dein#add('editorconfig/editorconfig-vim')
-call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
-call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
-call dein#add('scrooloose/nerdcommenter')
-call dein#add('tpope/vim-fugitive')
-call dein#add('justinmk/vim-sneak')
-call dein#add('mhinz/vim-grepper')
-" APPEARANCE
-call dein#add('mhartington/oceanic-next')
-call dein#add('prettier/vim-prettier')
-call dein#add('cohama/lexima.vim')
-call dein#add('tpope/vim-surround')
-call dein#add('tpope/vim-repeat')
-call dein#add('Yggdroot/indentLine')
-call dein#add('Valloric/MatchTagAlways')
-call dein#add('airblade/vim-gitgutter')
-call dein#add('ntpeters/vim-better-whitespace')
-" JS / JSX / WEB
-call dein#add('othree/yajs.vim', { 'on_ft': 'javascript' })
-call dein#add('othree/html5.vim', { 'on_ft': 'html' })
-call dein#add('othree/xml.vim', { 'on_ft': 'xml' })
-call dein#add('othree/es.next.syntax.vim', { 'on_ft': 'javascript' })
-call dein#add('othree/javascript-libraries-syntax.vim', { 'on_ft': ['javascript', 'javascript.jsx'] })
-call dein#add('jparise/vim-graphql', { 'on_ft': ['graphql'] })
-call dein#add('mattn/emmet-vim', { 'on_ft': ['javascript', 'javascript.jsx', 'html', 'xml'] })
-" OTHERS
-call dein#add('vim-scripts/yaml.vim', { 'on_ft': ['yaml'] })
-call dein#add('fatih/vim-go', { 'on_ft': ['go'] })
-call dein#add('rust-lang/rust.vim', { 'on_ft': ['rust'] })
-call dein#end()
+let g:python_host_prog=expand('$HOME/.pyenv/versions/neovim2/bin/python')
+let g:python3_host_prog=expand('$HOME/.pyenv/versions/neovim3/bin/python')
 
-if dein#check_install()
- call dein#install()
-endif
+if dein#load_state('~/.cache/dein')
+  " CORE
+  call dein#begin('~/.cache/dein')
+  call dein#add('~/.cache/dein')
+  call dein#add('Shougo/denite.nvim')
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('zchee/deoplete-go', {'build': 'make'})
+  call dein#add('zchee/deoplete-jedi')
+  call dein#add('zchee/deoplete-clang')
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('benekastah/neomake')
+  call dein#add('editorconfig/editorconfig-vim')
+  call dein#add('junegunn/fzf.vim')
+  call dein#add('scrooloose/nerdcommenter')
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('justinmk/vim-sneak')
+  call dein#add('mhinz/vim-grepper')
+  " APPEARANCE
+  call dein#add('mhartington/oceanic-next')
+  call dein#add('prettier/vim-prettier')
+  call dein#add('cohama/lexima.vim')
+  call dein#add('tpope/vim-surround')
+  call dein#add('tpope/vim-repeat')
+  call dein#add('Yggdroot/indentLine')
+  call dein#add('Valloric/MatchTagAlways')
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('ntpeters/vim-better-whitespace')
+  " JS / JSX / WEB
+  call dein#add('othree/yajs.vim', { 'on_ft': 'javascript' })
+  call dein#add('othree/html5.vim', { 'on_ft': 'html' })
+  call dein#add('othree/xml.vim', { 'on_ft': 'xml' })
+  call dein#add('othree/es.next.syntax.vim', { 'on_ft': 'javascript' })
+  call dein#add('othree/javascript-libraries-syntax.vim', { 'on_ft': ['javascript', 'javascript.jsx'] })
+  call dein#add('jparise/vim-graphql', { 'on_ft': ['graphql'] })
+  call dein#add('mattn/emmet-vim', { 'on_ft': ['javascript', 'javascript.jsx', 'html', 'xml'] })
+  " OTHERS
+  call dein#add('vim-scripts/yaml.vim', { 'on_ft': ['yaml'] })
+  call dein#add('fatih/vim-go', { 'on_ft': ['go'] })
+  call dein#add('rust-lang/rust.vim', { 'on_ft': ['rust'] })
 
-if dein#check_install()
-  call map(dein#check_clean(), "delete(v:val, 'rf')")
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+
+ call dein#end()
+ call dein#save_state()
 endif
 
 set mouse=r  " DISABLE MOUSE
@@ -88,8 +95,6 @@ set softtabstop=2
 set conceallevel=1
 set undolevels=100
 set nowrap
-" Stop word wrapping except... on Markdown. That's good stuff.
-au FileType markdown setlocal wrap
 
 filetype plugin indent on
 syntax enable
