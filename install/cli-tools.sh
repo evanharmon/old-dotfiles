@@ -1,8 +1,14 @@
 #!/bin/bash
 
 set -xe
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # REQS
+if ! which rg; then
+  brew install ripgrep
+fi
+
 if ! which fd; then
 	brew install fd
 fi
@@ -25,6 +31,34 @@ fi
 
 if ! brew list openssl; then
 	brew install openssl
+fi
+
+# AWS CLI
+if [ ! -f $HOME/.cache/awscli-bundle.zip ]; then
+  curl \
+    "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" \
+    -o "$HOME/.cache/awscli-bundle.zip"
+fi
+if ! which aws; then
+  unzip $HOME/.cache/awscli-bundle.zip -d $HOME/.cache
+  sudo $HOME/.cache/awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+  echo "Run aws configure afterwards"
+fi
+
+# Install gcloud cli
+if ! pyenv activate gcloud; then
+	pyenv virtualenv 2.7.11 gcloud
+  pyenv activate gcloud
+fi
+if ! which gcloud; then
+  curl \
+    "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-214.0.0-darwin-x86_64.tar.gz" \
+    -o "$HOME/.cache/google-cloud-sdk-214.0.0-darwin-x86_64.tar.gz"
+  mkdir -p $HOME/.cache/google-cloud-sdk
+  tar -C $HOME/.cache -xzf $HOME/.cache/google-cloud-sdk-214.0.0-darwin-x86_64.tar.gz
+  sh ~/.cache/google-cloud-sdk/install.sh
+  echo "gcloud available under pyenv activate gloud"
+  echo "Run gcloud init afterwards"
 fi
 
 # SETUP PYENV

@@ -26,7 +26,6 @@ if [ ! -L $HOME/.pyenv/versions/neovim3 ]; then
   	pip install --upgrade pip
   	pip install neovim
 fi
- 
 
 if ! which nvim; then
 	brew tap neovim/neovim

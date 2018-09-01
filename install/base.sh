@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -xe
+
 # HOMEBREW STAR RUNNER
 if ! which brew; then
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
