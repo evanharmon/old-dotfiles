@@ -6,7 +6,7 @@ colors
 
 setopt clobber
 setopt auto_cd
-setopt correctall
+setopt nocorrectall
 setopt NO_BG_NICE
 setopt NO_HUP
 setopt NO_LIST_BEEP

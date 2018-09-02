@@ -16,6 +16,9 @@ if dein#load_state('~/.cache/dein')
   call dein#add('~/.cache/dein')
   call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/deoplete.nvim')
+  call dein#add('rust-lang/rust.vim', { 'on_ft': ['rust'] })
+  call dein#add('fatih/vim-go', { 'on_ft': ['go'], 'build': 'GoInstallBinaries' })
+  " MAY HAVE TO MANUALLY RUN :GoInstallBihnaries or :GoUpdateBinaries
   call dein#add('zchee/deoplete-go', {'build': 'make'})
   call dein#add('zchee/deoplete-jedi')
   call dein#add('zchee/deoplete-clang')
@@ -38,6 +41,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Valloric/MatchTagAlways')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('ntpeters/vim-better-whitespace')
+  call dein#add('christoomey/vim-titlecase')
   " JS / JSX / WEB
   call dein#add('othree/yajs.vim', { 'on_ft': 'javascript' })
   call dein#add('othree/html5.vim', { 'on_ft': 'html' })
@@ -48,8 +52,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('mattn/emmet-vim', { 'on_ft': ['javascript', 'javascript.jsx', 'html', 'xml'] })
   " OTHERS
   call dein#add('vim-scripts/yaml.vim', { 'on_ft': ['yaml'] })
-  call dein#add('fatih/vim-go', { 'on_ft': ['go'] })
-  call dein#add('rust-lang/rust.vim', { 'on_ft': ['rust'] })
 
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
@@ -120,7 +122,7 @@ hi Type    cterm=italic
 highlight Pmenu guibg=#161616
 
 " FORMATTING
-au FileType go,c,asm,python setlocal sw=4 ts=4 sts=4 expandtab
+au FileType go,c,asm,python,sh setlocal sw=4 ts=4 sts=4 expandtab
 au FileType make setlocal noexpandtab sw=4 ts=4 sts=4
 
 " GENERAL LETS

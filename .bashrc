@@ -1,7 +1,8 @@
 #!/bin/bash
 
+set -o vi
 export TERM=xterm-256color
-export PATH=$HOME/.cargo/bin:$PATH
+alias dotfiles='/usr/bin/git --git-dir=/Users/evan/.dotfiles/ --work-tree=/Users/evan'
 
 if [[ "$OSTYPE" == darwin* ]]; then
 	export BROWSER='open'
@@ -16,6 +17,9 @@ else
 fi
 export PAGER='less'
 
+# RUST
+export PATH=$HOME/.cargo/bin:$PATH
+
 # GOLANG
 export PATH=/usr/local/go/bin:$PATH
 export PATH=$PATH:$GOPATH/bin
@@ -27,16 +31,23 @@ if [ -d $GOPATH/src/github.com/gomods/athens ]; then
   proxy &
 fi
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-alias dotfiles='/usr/bin/git --git-dir=/Users/evan/.dotfiles/ --work-tree=/Users/evan'
-
+# PY
 if [ -d "$HOME/.pyenv" ]; then
 	export PATH="~/.pyenv/bin:$PATH"
 	eval "$(pyenv init -)"
 	eval "$(pyenv virtualenv-init -)"
 fi
 
-# Define the code directory
+# NODE
+if [ -d "$HOME/.nvm" ]; then
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+fi
+
+# TOOLS
+export ANSIBLE_VAULT_PASSWORD_FILE="$HOME/.vault_pass.txt"
+## FZF
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # This is where my code exists and where I want the `c` autocomplete to work from exclusively
 if [[ -d ~/code ]]; then
 	export CODE_DIR=~/code
@@ -45,16 +56,15 @@ else
 	export CODE_DIR=~/code
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if [ -e /usr/local/bin/aws_completer ]; then
   complete -C '/usr/local/bin/aws_completer' aws
 fi
-
-export ANSIBLE_VAULT_PASSWORD_FILE="$HOME/.vault_pass.txt"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/evan/.cache/google-cloud-sdk/path.bash.inc' ]; then source '/Users/evan/.cache/google-cloud-sdk/path.bash.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/evan/.cache/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/evan/.cache/google-cloud-sdk/completion.bash.inc'; fi
+
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

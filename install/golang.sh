@@ -26,4 +26,3 @@ fi
 if [ ! -d $GOPATH/src/github.com/gomods/athens ]; then
   go get -u github.com/gomods/athens/cmd/proxy
 fi
-
