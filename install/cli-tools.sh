@@ -13,8 +13,10 @@ if ! which fd; then
     brew install fd
 fi
 
+# Requires User Input To Prompts
 if ! which fzf; then
     brew install fzf
+    /usr/local/opt/fzf/install
 fi
 
 if ! which jq; then

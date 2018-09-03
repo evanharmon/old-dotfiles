@@ -3,6 +3,13 @@ export DOTFILES=$HOME
 export ZSH=$HOME/.config/zsh
 export ZPLUGHOME=$HOME/.zplug
 
+# Define the code directory
+# This is where my code exists and where I want the `c` autocomplete to work from exclusively
+if [[ ! -d $HOME/code ]]; then
+	mkdir $HOME/code
+fi
+export CODE_DIR=~/code
+
 source ~/.config/zsh/zplug.sh
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 for config ($ZSH/**/*.zsh) source $config
@@ -27,13 +34,6 @@ export CC=clang
 export PATH=$HOME/.cargo/bin:$PATH
 #export PATH=$PATH:./node_modules/.bin
 #export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-# Define the code directory
-# This is where my code exists and where I want the `c` autocomplete to work from exclusively
-if [[ ! -d $HOME/code ]]; then
-	mkdir $HOME/code
-fi
-export CODE_DIR=~/code
 
 # GOLANG
 export PATH=/usr/local/go/bin:$PATH
@@ -62,6 +62,9 @@ fi
 
 # TOOLS
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND="fd . $HOME"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 
 if [ -e /usr/local/bin/aws_completer ]; then
   source /usr/local/bin/aws_zsh_completer.sh

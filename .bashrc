@@ -48,14 +48,6 @@ fi
 export ANSIBLE_VAULT_PASSWORD_FILE="$HOME/.vault_pass.txt"
 ## FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-# This is where my code exists and where I want the `c` autocomplete to work from exclusively
-if [[ -d ~/code ]]; then
-	export CODE_DIR=~/code
-else
-	mkdir $HOME/code
-	export CODE_DIR=~/code
-fi
-
 
 if [ -e /usr/local/bin/aws_completer ]; then
   complete -C '/usr/local/bin/aws_completer' aws
