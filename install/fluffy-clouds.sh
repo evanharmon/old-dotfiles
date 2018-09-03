@@ -6,7 +6,7 @@ eval "$(pyenv virtualenv-init -)"
 
 # SETUP PYENV
 ## EVERYONE SHOULD HAVE A PRIVATE BOOTH AT THIS PY PARTY
-if ! which pyenv; then
+if ! [ -x "$(command -v pyenv)" ]; then
   curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
   export PATH="/Users/evan/.pyenv/bin:$PATH"
   eval "$(pyenv init -)"
@@ -14,12 +14,10 @@ if ! which pyenv; then
 fi
 
 # AWS CLI
-if [ ! -f $HOME/.cache/awscli-bundle.zip ]; then
+if ! [ -x "$(command -v aws)" ]; then
   curl \
     "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" \
     -o "$HOME/.cache/awscli-bundle.zip"
-fi
-if ! which aws; then
   unzip $HOME/.cache/awscli-bundle.zip -d $HOME/.cache
   sudo $HOME/.cache/awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
   echo "Run aws configure afterwards"
@@ -42,7 +40,7 @@ if ! pyenv which gcloud; then
 fi
 
 # INSTALL HYPERKIT FOR K8S
-if ! which docker-machine-driver-hyperkit; then
+if ! [ -x "$(command -v docker-machine-driver-hyperkit)" ]; then
   curl -Lo $HOME/.cache/docker-machine-driver-hyperkit \
     https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-hyperkit
   chmod +x $HOME/.cache/docker-machine-driver-hyperkit
@@ -52,13 +50,13 @@ if ! which docker-machine-driver-hyperkit; then
 fi
 
 # INSTALL KUBERNETES
-if ! which minikube; then
+if ! [ -x "$(command -v minikube)"]; then
   curl -Lo $HOME/.cache/minikube \
     https://storage.googleapis.com/minikube/releases/v0.28.2/minikube-darwin-amd64
   chmod +x $HOME/.cache/minikube
   sudo mv $HOME/.cache/minikube /usr/local/bin/
 fi
-if ! which kubectl; then
+if ! [ -x "$(command -v kubectl)"]; then
   K8S_VERSION=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
   curl -Lo $HOME/.cache/kubectl \
     https://storage.googleapis.com/kubernetes-release/release/$K8S_VERSION/bin/darwin/amd64/kubectl
