@@ -61,16 +61,23 @@ if [ -d "$HOME/.pyenv" ]; then
 fi
 
 # TOOLS
+## FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND="fd . $HOME"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
+  source /usr/local/opt/fzf/shell/key-bindings.zsh
+  source /usr/local/opt/fzf/shell/completion.zsh
+fi
 
+## AWS
 if [ -e /usr/local/bin/aws_completer ]; then
   source /usr/local/bin/aws_zsh_completer.sh
 fi
 export ANSIBLE_VAULT_PASSWORD_FILE="$HOME/.vault_pass.txt"
 
+## GCLOUD
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/evan/.cache/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/evan/.cache/google-cloud-sdk/path.zsh.inc'; fi
 
