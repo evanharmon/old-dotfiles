@@ -3,7 +3,7 @@
 set -xe
 
 # HOMEBREW STAR RUNNER
-if ! which brew; then
+if ! [ -x "$(command -v brew)" ]; then
     /usr/bin/ruby -e \
         "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
@@ -24,11 +24,9 @@ if [ ! -f $HOME/.zplug/run.sh ]; then
     git clone https://github.com/zplug/zplug ~/.zplug
 fi
 
-brew tap caskroom/cask
-if brew cask ls --versions iterm2 > /dev/null; then
-    echo "iterm2 already installed"
-else
-    brew cask install iterm2
+if [ ! -d /Applications/iTerm.app ]; then
+  brew tap caskroom/cask
+  brew cask install iterm2
 fi
 
 if [ ! -f $HOME/.cache/hss-fonts/README.md ]; then

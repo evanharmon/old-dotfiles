@@ -5,21 +5,21 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 # REQS
-if ! which rg; then
+if ! [ -x "$(command -v rg)" ]; then
     brew install ripgrep
 fi
 
-if ! which fd; then
+if ! [ -x "$(command -v fd)" ]; then
     brew install fd
 fi
 
 # Requires User Input To Prompts
-if ! which fzf; then
+if ! [ -x "$(command -v fzf)" ]; then
     brew install fzf
     /usr/local/opt/fzf/install
 fi
 
-if ! which jq; then
+if ! [ -x "$(command -v jq)" ]; then
     brew install jq
 fi
 
@@ -27,7 +27,7 @@ if ! brew list readline; then
     brew install readline
 fi
 
-if ! which xz; then
+if ! [ -x "$(command -v xz)" ]; then
     brew install xz
 fi
 
@@ -35,8 +35,9 @@ if ! brew list openssl; then
     brew install openssl
 fi
 
-if ! which docker; then
-    curl -Lo \ $HOME/.cache
-    https://download.docker.com/mac/stable/Docker.dmg
+if ! [ -x "$(command -v docker)" ]; then
+    curl -Lo $HOME/.cache/Docker.dmg \
+      https://download.docker.com/mac/stable/Docker.dmg
+    open $HOME/.cache/Docker.dmg
     echo "Opening Docker.dmg... finish installing in Finder"
 fi
