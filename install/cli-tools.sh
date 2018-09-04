@@ -41,3 +41,11 @@ if ! [ -x "$(command -v docker)" ]; then
     open $HOME/.cache/Docker.dmg
     echo "Opening Docker.dmg... finish installing in Finder"
 fi
+
+if ! [ "$(command -v tree)" ]; then
+  brew install tree
+fi
+
+if ! [ "$(command -v rename)" ]; then
+  brew install rename
+fi
