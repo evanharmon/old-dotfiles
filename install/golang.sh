@@ -28,6 +28,7 @@ fi
 # INSTALL TOOLS
 if [ ! -d $HOME/.protoc ]; then
   mkdir -p $HOME/.protoc
+  go get -u google.golang.org/grpc
   go get -u github.com/golang/protobuf/protoc-gen-go
   curl -Lo $CACHE/protoc-3.6.1-osx-x86_64.zip \
     https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protoc-3.6.1-osx-x86_64.zip
