@@ -52,6 +52,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('mattn/emmet-vim', { 'on_ft': ['javascript', 'javascript.jsx', 'html', 'xml'] })
   " OTHERS
   call dein#add('vim-scripts/yaml.vim', { 'on_ft': ['yaml'] })
+  call dein#add('uarun/vim-protobuf', { 'on_ft': 'proto'})
 
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')

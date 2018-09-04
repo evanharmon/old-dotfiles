@@ -20,7 +20,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
 	export BROWSER='open'
 fi
 
-if ! which nvim; then
+if ! [ "$(command -v nvim)" ]; then
 	export EDITOR='vim'
 	export VISUAL='vim'
 else
@@ -31,21 +31,14 @@ export PAGER='less'
 export CC=clang
 
 # PATHS
+export PATH=/usr/local/go/bin:$PATH
+export PATH=$HOME/.pyenv/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$HOME/.protoc/bin
 #export PATH=$PATH:./node_modules/.bin
 #export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-# GOLANG
-export PATH=/usr/local/go/bin:$PATH
-export PATH=$PATH:$GOPATH/bin
-export GOPATH=$HOME/go
-export GO111MODULE=auto
-export GOPROXY=http://127.0.0.1:3000
-if lsof -i :3000; then
-  echo "Gomods Proxy already running"
-elif which proxy; then
-  proxy &
-fi
 
 # NODE
 if [ -d "$HOME/.nvm" ]; then
@@ -55,7 +48,6 @@ fi
 
 # PY
 if [ -d "$HOME/.pyenv" ]; then
-	export PATH="/Users/evan/.pyenv/bin:$PATH"
 	eval "$(pyenv init -)"
 	eval "$(pyenv virtualenv-init -)"
 fi
@@ -78,8 +70,15 @@ fi
 export ANSIBLE_VAULT_PASSWORD_FILE="$HOME/.vault_pass.txt"
 
 ## GCLOUD
+GCLOUD_CRED_FILE="$(find $HOME/.gcloud -name *.json -type f)"
+export GOOGLE_APPLICATION_CREDENTIALS=$GCLOUD_CRED_FILE
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/evan/.cache/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/evan/.cache/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/evan/.cache/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/evan/.cache/google-cloud-sdk/completion.zsh.inc'; fi
+
+# GOLANG
+export GO111MODULE=auto
+export GOPROXY=http://127.0.0.1:3000
