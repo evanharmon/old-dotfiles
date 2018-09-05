@@ -19,6 +19,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('rust-lang/rust.vim', { 'on_ft': ['rust'] })
   call dein#add('fatih/vim-go', { 'on_ft': ['go'], 'build': 'GoInstallBinaries' })
   " MAY HAVE TO MANUALLY RUN :GoInstallBihnaries or :GoUpdateBinaries
+  call dein#add('sebdah/vim-delve', { 'on_ft': ['go'] })
   call dein#add('zchee/deoplete-go', {'build': 'make'})
   call dein#add('zchee/deoplete-jedi')
   call dein#add('zchee/deoplete-clang')
@@ -57,6 +58,10 @@ if dein#load_state('~/.cache/dein')
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+
+  if dein#check_install()
+    call dein#install()
   endif
 
  call dein#end()
@@ -187,6 +192,7 @@ au! BufWritePost * Neomake
 " GOLANG
 let g:go_snippet_engine="neosnippet"
 let g:go_term_mode="split"
+let g:go_fmt_command="goimports"
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
   let l:file=expand('%')
