@@ -33,6 +33,9 @@ if [ ! -d $HOME/.protoc ]; then
   curl -Lo $CACHE/protoc-3.6.1-osx-x86_64.zip \
     https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protoc-3.6.1-osx-x86_64.zip
   unzip $CACHE/protoc-3.6.1-osx-x86_64.zip -d $HOME/.protoc
+  go get -u golang.org/x/oauth2
+  go get -u cloud.google.com/go/storage
+  go get -u google.golang.org/appengine/...
 fi
 
 unset OS
