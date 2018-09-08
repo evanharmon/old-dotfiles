@@ -70,7 +70,7 @@ fi
 export ANSIBLE_VAULT_PASSWORD_FILE="$HOME/.vault_pass.txt"
 
 ## GCLOUD
-GCLOUD_CRED_FILE="$(find $HOME/.gcloud -name *.json -type f)"
+GCLOUD_CRED_FILE=$(find $HOME/.gcloud -name "*.json" -type f)
 export GOOGLE_APPLICATION_CREDENTIALS=$GCLOUD_CRED_FILE
 
 # The next line updates PATH for the Google Cloud SDK.
