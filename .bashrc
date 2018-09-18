@@ -38,6 +38,10 @@ if [ -d "$HOME/.pyenv" ]; then
 	eval "$(pyenv virtualenv-init -)"
 fi
 
+if [ "$(command -v pipenv)" ]; then
+  eval "$(pipenv --completion)"
+fi
+
 # NODE
 if [ -d "$HOME/.nvm" ]; then
 	export NVM_DIR="$HOME/.nvm"

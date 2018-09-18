@@ -14,15 +14,25 @@ if dein#load_state('~/.cache/dein')
   " CORE
   call dein#begin('~/.cache/dein')
   call dein#add('~/.cache/dein')
-  call dein#add('Shougo/denite.nvim')
-  call dein#add('Shougo/deoplete.nvim')
-  call dein#add('rust-lang/rust.vim', { 'on_ft': ['rust'] })
-  call dein#add('fatih/vim-go', { 'on_ft': ['go'], 'build': 'GoInstallBinaries' })
+  " DEOPLETE PLUGINS REQS
+  call dein#add('autozimu/LanguageClient-neovim', { 'rev': 'next', 'build': './install.sh' })
   " MAY HAVE TO MANUALLY RUN :GoInstallBihnaries or :GoUpdateBinaries
+  call dein#add('fatih/vim-go', { 'on_ft': ['go'], 'build': 'GoInstallBinaries' })
+  call dein#add('HerringtonDarkholme/yats.vim')
+  call dein#add('mhartington/nvim-typescript', { 'build': './install.sh' })
+  call dein#add('rust-lang/rust.vim', { 'on_ft': ['rust'] })
   call dein#add('sebdah/vim-delve', { 'on_ft': ['go'] })
-  call dein#add('zchee/deoplete-go', {'build': 'make'})
-  call dein#add('zchee/deoplete-jedi')
+  call dein#add('Shougo/neco-syntax')
+
+  " DEOPLETE
+  call dein#add('Shougo/deoplete.nvim')
   call dein#add('zchee/deoplete-clang')
+  call dein#add('zchee/deoplete-go', { 'build': 'make' })
+  call dein#add('zchee/deoplete-jedi')
+  call dein#add('zchee/deoplete-zsh')
+  call dein#add('fszymanski/deoplete-emoji')
+
+  call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('benekastah/neomake')
@@ -64,9 +74,16 @@ if dein#load_state('~/.cache/dein')
     call dein#install()
   endif
 
+  if dein#check_update()
+    call dein#update()
+  endif
+
  call dein#end()
  call dein#save_state()
 endif
+
+filetype plugin indent on
+syntax enable
 
 set mouse=r  " DISABLE MOUSE
 set encoding=utf8
@@ -103,9 +120,8 @@ set softtabstop=2
 set conceallevel=1
 set undolevels=100
 set nowrap
+set autowrite
 
-filetype plugin indent on
-syntax enable
 " for vim 7
 set t_Co=256
 " for vim 8
@@ -131,6 +147,15 @@ highlight Pmenu guibg=#161616
 au FileType go,c,asm,python,sh setlocal sw=4 ts=4 sts=4 expandtab
 au FileType make setlocal noexpandtab sw=4 ts=4 sts=4
 
+" LANGUAGE SERVERS
+let g:LanguageClient_serverCommands = {
+    \ 'sh': ['bash-language-server', 'start'],
+    \ 'go': ["$GOPATH/bin/go-langserver"],
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+    \ 'python': ['/usr/local/bin/pyls'],
+    \ }
 " GENERAL LETS
 let g:NERDCustomDelimiters={ 'conf': { 'left': '#' } }
 let g:NERDCustomDelimiters={ 's': { 'left': '{/*','right': '*/}' } }

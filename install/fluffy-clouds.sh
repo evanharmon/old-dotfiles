@@ -4,6 +4,11 @@ set -xe
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+# REQS
+if ! [ -d $HOME/bin ]; then
+  mkdir -p $HOME/bin
+fi
+
 # SETUP PYENV
 ## EVERYONE SHOULD HAVE A PRIVATE BOOTH AT THIS PY PARTY
 if ! [ -x "$(command -v pyenv)" ]; then
@@ -50,13 +55,14 @@ if ! [ -x "$(command -v docker-machine-driver-hyperkit)" ]; then
 fi
 
 # INSTALL KUBERNETES
-if ! [ -x "$(command -v minikube)"]; then
+if ! [ -x "$(command -v minikube)" ]; then
   curl -Lo $HOME/.cache/minikube \
     https://storage.googleapis.com/minikube/releases/v0.28.2/minikube-darwin-amd64
   chmod +x $HOME/.cache/minikube
   sudo mv $HOME/.cache/minikube /usr/local/bin/
 fi
-if ! [ -x "$(command -v kubectl)"]; then
+
+if ! [ -x "$(command -v kubectl)" ]; then
   K8S_VERSION=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
   curl -Lo $HOME/.cache/kubectl \
     https://storage.googleapis.com/kubernetes-release/release/$K8S_VERSION/bin/darwin/amd64/kubectl
@@ -68,4 +74,11 @@ fi
 ## Avoid installing all the dependencies locally by using docker-compose in repo
 if [ ! -d $HOME/code/localstack ]; then
   git clone https://github.com/localstack/localstack.git $HOME/code/localstack
+fi
+
+if ! [ "$(command -v terraform)" ]; then
+  FNAME='terraform_0.11.8_darwin_amd64.zip'
+  curl -Lo $HOME/.cache/$FNAME \
+    https://releases.hashicorp.com/terraform/0.11.8/$FNAME
+  unzip $HOME/.cache/$FNAME -d $HOME/bin
 fi

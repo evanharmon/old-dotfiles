@@ -23,4 +23,11 @@ if ! which yarn; then
     brew install yarn --without-node
 fi
 
+# Idempotent
+yarn global add neovim \
+  typescript \
+  bash-language-server \
+  javascript-typescript-langserver \
+
+
 echo "Finished. Remember to source .zshrc before continuing"

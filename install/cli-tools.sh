@@ -49,3 +49,7 @@ fi
 if ! [ "$(command -v rename)" ]; then
   brew install rename
 fi
+
+if ! [ "$(command -v pipenv)" ]; then
+  brew install pipenv
+fi
