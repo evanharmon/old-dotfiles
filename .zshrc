@@ -3,8 +3,7 @@ export DOTFILES=$HOME
 export ZSH=$HOME/.config/zsh
 export ZPLUGHOME=$HOME/.zplug
 
-# Define the code directory
-# This is where my code exists and where I want the `c` autocomplete to work from exclusively
+# Used for FZF
 if [[ ! -d $HOME/code ]]; then
 	mkdir $HOME/code
 fi
@@ -58,7 +57,7 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND="fd . $HOME"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+export FZF_ALT_C_COMMAND="fd -t d . $CODE_DIR"
 if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
   source /usr/local/opt/fzf/shell/key-bindings.zsh
   source /usr/local/opt/fzf/shell/completion.zsh
@@ -71,8 +70,12 @@ fi
 export ANSIBLE_VAULT_PASSWORD_FILE="$HOME/.vault_pass.txt"
 
 ## GCLOUD
-GCLOUD_CRED_FILE=$(find $HOME/.gcloud -name "*.json" -type f)
-export GOOGLE_APPLICATION_CREDENTIALS=$GCLOUD_CRED_FILE
+export TF_VAR_org_id=YOUR_ORG_ID
+export TF_VAR_billing_account=YOUR_BILLING_ACCOUNT_ID
+export TF_ADMIN=${USER}-terraform-admin
+export TF_CREDS=~/.config/gcloud/${USER}-terraform-admin.json
+export GOOGLE_APPLICATION_CREDENTIALS=${TF_CREDS}
+export GOOGLE_PROJECT=${TF_ADMIN}
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/evan/.cache/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/evan/.cache/google-cloud-sdk/path.zsh.inc'; fi
