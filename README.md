@@ -37,6 +37,8 @@ $ ./install/cli-tools.sh
 Close and re-open the shell
 
 ## Install Editors
+Neovim setup relies on pyenv setup from `install/cli-tools.sh`
+pyenv virtual environments and python versions are installed with this script
 ```console
 $ ./install/editors.sh
 ```
