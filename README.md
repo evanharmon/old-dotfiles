@@ -8,13 +8,15 @@ With this power comes responsibility. NEVER BLANKET ADD aka `dotfiles add .`
 
 # Setup
 open terminal
-`$ cd $HOME`
+```console
+$ cd $HOME
+```
 
-## GIT repo / ZSH
+## GIT Repo / ZSH
 `$ git init --bare $HOME/.dotfiles`
 If prompted to, install xcode developer tools
 
-```
+```console
 $ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 $ dotfiles config --local status.showUntrackedFiles no
 $ dotfiles remote add origin https://github.com/evanharmon/dotfiles.git
@@ -22,24 +24,24 @@ $ dotfiles pull origin master
 ```
 
 ## Install Base
-### Sudo password will be requested as user input several times
-```
+Sudo password will be requested as user input several times
+```console
 $ chmod -R a+x ./install/
-$ ./install/brew.sh
+$ ./install/base.sh
 ```
 
 ## Install Tools
-```
+```console
 $ ./install/cli-tools.sh
 ```
 Close and re-open the shell
 
 ## Install Editors
-```
+```console
 $ ./install/editors.sh
 ```
 After installing Neovim, open and run the following commands
-```
+```console
 :UpdateRemotePlugins
 :call dein#install()
 ```

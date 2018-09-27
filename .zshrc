@@ -7,7 +7,7 @@ export ZPLUGHOME=$HOME/.zplug
 if [[ ! -d $HOME/code ]]; then
 	mkdir $HOME/code
 fi
-export CODE_DIR=~/code
+export CODE_DIR=$HOME/code
 
 source ~/.config/zsh/zplug.sh
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

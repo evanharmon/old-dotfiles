@@ -145,7 +145,7 @@ highlight Pmenu guibg=#161616
 
 " FORMATTING
 au FileType go,c,asm,python,sh setlocal sw=4 ts=4 sts=4 expandtab
-au FileType make setlocal noexpandtab sw=4 ts=4 sts=4
+au FileType make setlocal sw=4 ts=4 sts=4 noexpandtab
 
 " LANGUAGE SERVERS
 let g:LanguageClient_serverCommands = {
