@@ -20,8 +20,8 @@ if [ ! -L $HOME/.pyenv/versions/neovim2 ]; then
 fi
 
 if [ ! -L $HOME/.pyenv/versions/neovim3 ]; then
-    pyenv install --skip-existing 3.7.0
-    pyenv virtualenv 3.7.0 neovim3
+    pyenv install --skip-existing 3.5.5
+    pyenv virtualenv 3.5.5 neovim3
     pyenv activate neovim3
     pip install --upgrade pip
     pip install neovim
