@@ -1,9 +1,6 @@
 #!/bin/bash
 
 set -xe
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
 # REQS
 if ! [ -x "$(command -v rg)" ]; then
     brew install ripgrep
@@ -48,6 +45,11 @@ fi
 
 if ! [ "$(command -v rename)" ]; then
   brew install rename
+fi
+
+if ! [ "$(command -v pyenv)" ]; then
+  brew install pyenv
+  git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
 fi
 
 if ! [ "$(command -v pipenv)" ]; then
