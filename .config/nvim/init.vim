@@ -52,7 +52,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Valloric/MatchTagAlways')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('ntpeters/vim-better-whitespace')
-  call dein#add('christoomey/vim-titlecase')
+  " call dein#add('christoomey/vim-titlecase') TOO SLOW
   " JS / JSX / WEB
   call dein#add('othree/yajs.vim', { 'on_ft': 'javascript' })
   call dein#add('othree/html5.vim', { 'on_ft': 'html' })
@@ -218,6 +218,10 @@ au! BufWritePost * Neomake
 let g:go_snippet_engine="neosnippet"
 let g:go_term_mode="split"
 let g:go_fmt_command="goimports"
+let g:go_list_height=10
+let g:go_term_mode="split"
+let g:go_term_height=30
+let g:go_term_width=30
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
   let l:file=expand('%')
@@ -277,6 +281,6 @@ nnoremap <C-l> <C-w>l
 nnoremap _ <C-w>_
 
 au FileType javascript nmap <leader>fc :/\(\/\/\)\@<!console/<CR>
-au FileType go nmap <leader>gb :<C-u>call <SID>build_go_files()<CR>
-au FileType go nmap <leader>gt  <Plug>(go-test)
-au FileType go nmap <leader>gr  <Plug>(go-run)
+au FileType go nmap <leader>ggb :<C-u>call <SID>build_go_files()<CR>
+au FileType go nmap <leader>ggt  <Plug>(go-test)
+au FileType go nmap <leader>ggr  <Plug>(go-run)

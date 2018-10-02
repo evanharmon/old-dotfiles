@@ -19,7 +19,13 @@ if ! [ -x "$(command -v pyenv)" ]; then
 fi
 
 # AWS CLI
-if ! [ -x "$(command -v aws)" ]; then
+if ! [ -x "$(pyenv activate aws)" ]; then
+  pyenv install --skip-existing 3.5.5
+  pyenv virtualenv 3.5.5 aws
+  pyenv activate aws
+fi
+
+if ! [ -x "$(pyenv which aws)" ]; then
   curl \
     "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" \
     -o "$HOME/.cache/awscli-bundle.zip"
@@ -28,12 +34,19 @@ if ! [ -x "$(command -v aws)" ]; then
   echo "Run aws configure afterwards"
 fi
 
+## Serverless Applications Manager
+if ! [ -x "$(pyenv which sam)" ]; then
+  pip3 install aws-sam-cli
+fi
+
 # INSTALL GCLOUD CLI
-if ! pyenv activate gcloud; then
+if ! [ -x "$(pyenv activate gcloud)" ]; then
+  pyenv install --skip-existing 2.7.11
   pyenv virtualenv 2.7.11 gcloud
   pyenv activate gcloud
 fi
-if ! pyenv which gcloud; then
+
+if ! [ -x "$(pyenv which gcloud)" ]; then
   GCLOUD_SDK_VERSION='google-cloud-sdk-214.0.0-darwin-x86_64'
   curl -Lo $HOME/.cache/$GCLOUD_SDK_VERSION.tar.gz \
     https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/$GCLOUD_SDK_VERSION.tar.gz
