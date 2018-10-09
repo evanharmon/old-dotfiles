@@ -19,7 +19,11 @@ if [ -d "$HOME/.nvm" ]; then
     nvm install node
 fi
 
-if ! which yarn; then
+if ! [ -d /Applications/GraphiQL.app ]; then
+    brew cask install graphiql
+fi
+
+if ! [ -x "$(command -v yarn)" ]; then
     brew install yarn --without-node
 fi
 
@@ -27,7 +31,6 @@ fi
 yarn global add neovim \
   typescript \
   bash-language-server \
-  javascript-typescript-langserver \
-
+  javascript-typescript-langserver
 
 echo "Finished. Remember to source .zshrc before continuing"

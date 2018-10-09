@@ -52,7 +52,10 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Valloric/MatchTagAlways')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('ntpeters/vim-better-whitespace')
-  " call dein#add('christoomey/vim-titlecase') TOO SLOW
+
+  " TOO SLOW
+  " call dein#add('christoomey/vim-titlecase')
+
   " JS / JSX / WEB
   call dein#add('othree/yajs.vim', { 'on_ft': 'javascript' })
   call dein#add('othree/html5.vim', { 'on_ft': 'html' })
@@ -61,7 +64,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('othree/javascript-libraries-syntax.vim', { 'on_ft': ['javascript', 'javascript.jsx'] })
   call dein#add('jparise/vim-graphql', { 'on_ft': ['graphql'] })
   call dein#add('mattn/emmet-vim', { 'on_ft': ['javascript', 'javascript.jsx', 'html', 'xml'] })
-  " OTHERS
   call dein#add('vim-scripts/yaml.vim', { 'on_ft': ['yaml'] })
   call dein#add('uarun/vim-protobuf', { 'on_ft': 'proto'})
 
@@ -218,10 +220,11 @@ au! BufWritePost * Neomake
 let g:go_snippet_engine="neosnippet"
 let g:go_term_mode="split"
 let g:go_fmt_command="goimports"
-let g:go_list_height=10
+let g:go_list_height=0
 let g:go_term_mode="split"
-let g:go_term_height=30
-let g:go_term_width=30
+let g:go_term_height=10
+let g:go_term_width=10
+let g:delve_new_command="enew"
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
   let l:file=expand('%')
@@ -284,3 +287,5 @@ au FileType javascript nmap <leader>fc :/\(\/\/\)\@<!console/<CR>
 au FileType go nmap <leader>ggb :<C-u>call <SID>build_go_files()<CR>
 au FileType go nmap <leader>ggt  <Plug>(go-test)
 au FileType go nmap <leader>ggr  <Plug>(go-run)
+au FileType go nmap <leader>gdd :DlvDebug
+au FileType go nmap <leader>gdt :DlvTest
