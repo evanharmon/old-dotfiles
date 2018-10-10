@@ -18,11 +18,14 @@ if [[ "$OSTYPE" == darwin* ]]; then
 fi
 
 # password prompt
+GOLANG_DOWNLOAD=go$GOLANG_VERSION.$OS-$ARCH.tar.gz
+if [[ ! -f $CACHE/$GOLANG_DOWNLOAD ]]; then
+  curl -Lo $CACHE/$GOLANG_DOWNLOAD \
+    "https://dl.google.com/go/$GOLANG_DOWNLOAD"
+fi
+
 if [[ ! -d /usr/local/go ]]; then
-  curl \
-    "https://dl.google.com/go/go$GOLANG_VERSION.$OS-$ARCH.tar.gz" \
-    -o "~/.cache/go$GOLANG_VERSION.$OS-$ARCH.tar.gz"
-  sudo tar -C /usr/local -xzf go$GOLANG_VERSION.$OS-$ARCH.tar.gz
+  sudo tar -C /usr/local -xzf $CACHE/$GOLANG_DOWNLOAD
 fi
 
 # INSTALL TOOLS
@@ -44,3 +47,4 @@ go get -u github.com/sourcegraph/go-langserver
 unset OS
 unset ARCH
 unset GOLANG_VERSION
+unset GOLANG_DOWNLOAD
