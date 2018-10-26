@@ -1,2 +1,5 @@
 #!/bin/bash
-source $HOME/.bashrc
+
+if ! echo "$0" == "/bin/zsh"; then
+    source $HOME/.bashrc
+fi

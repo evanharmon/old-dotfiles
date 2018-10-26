@@ -19,17 +19,17 @@ if ! git --version; then
     xcode-select --install
 fi
 
-if [ ! -f $HOME/.zplug/run.sh ]; then
+if ! [ -d $HOME/.zplug ]; then
     echo "installing zplug, a plugin manager for zsh - http://zplug.sh"
-    git clone https://github.com/zplug/zplug ~/.zplug
+    git clone https://github.com/zplug/zplug $HOME/.zplug
 fi
 
-if [ ! -d /Applications/iTerm.app ]; then
+if ! [ -d /Applications/iTerm.app ]; then
   brew tap caskroom/cask
   brew cask install iterm2
 fi
 
-if [ ! -f $HOME/.cache/hss-fonts/README.md ]; then
+if ! [ -f $HOME/.cache/hss-fonts/README.md ]; then
     echo "installing fonts"
     git clone \
         https://git-codecommit.us-east-1.amazonaws.com/v1/repos/hss-fonts \

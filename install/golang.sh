@@ -3,6 +3,7 @@
 set -xe
 CACHE=$HOME/.cache
 GOLANG_VERSION='1.11'
+GOLANG_DOWNLOAD=''
 OS=''
 ARCH=''
 
@@ -43,6 +44,9 @@ go get -u golang.org/x/oauth2
 go get -u cloud.google.com/go/storage
 go get -u google.golang.org/appengine/...
 go get -u github.com/sourcegraph/go-langserver
+go get -u github.com/golang/mock/gomock
+go install github.com/golang/mock/mockgen
+go get -u github.com/derekparker/delve/cmd/dlv
 
 unset OS
 unset ARCH

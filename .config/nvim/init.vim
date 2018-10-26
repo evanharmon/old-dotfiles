@@ -16,7 +16,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('~/.cache/dein')
   " DEOPLETE PLUGINS REQS
   call dein#add('autozimu/LanguageClient-neovim', { 'rev': 'next', 'build': './install.sh' })
-  " MAY HAVE TO MANUALLY RUN :GoInstallBihnaries or :GoUpdateBinaries
+  " MAY HAVE TO MANUALLY RUN :GoInstallBinaries or :GoUpdateBinaries
   call dein#add('fatih/vim-go', { 'on_ft': ['go'], 'build': 'GoInstallBinaries' })
   call dein#add('HerringtonDarkholme/yats.vim')
   call dein#add('mhartington/nvim-typescript', { 'build': './install.sh' })
@@ -30,13 +30,11 @@ if dein#load_state('~/.cache/dein')
   call dein#add('zchee/deoplete-go', { 'build': 'make' })
   call dein#add('zchee/deoplete-jedi')
   call dein#add('zchee/deoplete-zsh')
-  call dein#add('fszymanski/deoplete-emoji')
 
   call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('benekastah/neomake')
-  call dein#add('editorconfig/editorconfig-vim')
   call dein#add('junegunn/fzf.vim')
   call dein#add('scrooloose/nerdcommenter')
   call dein#add('tpope/vim-fugitive')
@@ -52,9 +50,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Valloric/MatchTagAlways')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('ntpeters/vim-better-whitespace')
-
-  " TOO SLOW
-  " call dein#add('christoomey/vim-titlecase')
 
   " JS / JSX / WEB
   call dein#add('othree/yajs.vim', { 'on_ft': 'javascript' })

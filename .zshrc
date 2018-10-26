@@ -58,7 +58,7 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND="fd . $HOME"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd -t d . $CODE_DIR"
+export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
   source /usr/local/opt/fzf/shell/key-bindings.zsh
   source /usr/local/opt/fzf/shell/completion.zsh
@@ -78,12 +78,12 @@ export TF_CREDS=~/.config/gcloud/${USER}-terraform-admin.json
 export GOOGLE_APPLICATION_CREDENTIALS=${TF_CREDS}
 export GOOGLE_PROJECT=${TF_ADMIN}
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/evan/.cache/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/evan/.cache/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/evan/.cache/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/evan/.cache/google-cloud-sdk/completion.zsh.inc'; fi
-
 # GOLANG
 export GO111MODULE=auto
 export GOPROXY=http://127.0.0.1:3000
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/evanharmon/.cache/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/evanharmon/.cache/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/evanharmon/.cache/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/evanharmon/.cache/google-cloud-sdk/completion.zsh.inc'; fi
