@@ -30,7 +30,7 @@ $ chmod -R a+x ./install/
 $ ./install/base.sh
 ```
 
-## Install Tools
+## Install General Tools
 ```console
 $ ./install/cli-tools.sh
 ```
@@ -46,6 +46,23 @@ After installing Neovim, open and run the following commands
 ```console
 :UpdateRemotePlugins
 :call dein#install()
+```
+
+## Install Cloud Tools
+```console
+$ ./install/fluffy-clouds.sh
+```
+Close and re-open the shell
+
+## Install Language Specific Tools
+```console
+$ ./install/javascript.sh
+$ ./install/golang.sh
+```
+
+## Install Apps
+```console
+$ ./install/apps.sh
 ```
 
 ## Setup iTerm

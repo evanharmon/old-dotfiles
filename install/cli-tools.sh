@@ -32,7 +32,8 @@ if ! brew list openssl; then
     brew install openssl
 fi
 
-if ! [ -x "$(command -v docker)" ]; then
+## docker command not available until app opened for the first time
+if ! [ -d /Applications/Docker.app ]; then
     curl -Lo $HOME/.cache/Docker.dmg \
       https://download.docker.com/mac/stable/Docker.dmg
     open $HOME/.cache/Docker.dmg
@@ -54,4 +55,8 @@ fi
 
 if ! [ "$(command -v pipenv)" ]; then
   brew install pipenv
+fi
+
+if ! [ "$(command -v ansible)" ]; then
+  brew install ansible
 fi

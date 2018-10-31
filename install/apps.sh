@@ -7,7 +7,7 @@ if ! [ -d /Applications/Anki.app ]; then
     curl -Lo $HOME/.cache/anki-$ANKI_VERSION-mac.dmg \
         https://apps.ankiweb.net/downloads/current/anki-$ANKI_VERSION-mac.dmg
     open $HOME/.cache/anki-$ANKI_VERSION-mac.dmg
-    sleep 2s
+    sleep 10s
     cp -R /Volumes/Anki/Anki.app /Applications
     umount /Volumes/Anki
     echo "Open Anki, press the `sync` button and sign in"
@@ -20,7 +20,7 @@ fi
 
 if [ -f $HOME/.cache/insomnia.dmg ] && ! [ -d /Applications/Insomnia.app ]; then
   open $HOME/.cache/insomnia.dmg
-  sleep 5s
+  sleep 10s
   cp -R /Volumes/Insomnia*/Insomnia.app /Applications
   umount /Volumes/Insomnia*
 fi
