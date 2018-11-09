@@ -34,6 +34,11 @@ if ! [ -x "$(pyenv which aws)" ]; then
   echo "Run aws configure afterwards"
 fi
 
+## Localstack CLI
+if ! [ -x "$(pyenv which awslocal)" ]; then
+  pip3 install awscli-local
+fi
+
 ## Serverless Applications Manager
 if ! [ -x "$(pyenv which sam)" ]; then
   pip3 install aws-sam-cli
@@ -95,3 +100,7 @@ if ! [ "$(command -v terraform)" ]; then
     https://releases.hashicorp.com/terraform/0.11.8/$FNAME
   unzip $HOME/.cache/$FNAME -d $HOME/bin
 fi
+
+unset GCLOUD_SDK_VERSION
+unset K8S_VERSION
+unset FNAME

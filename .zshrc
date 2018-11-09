@@ -37,9 +37,9 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$HOME/.protoc/bin
 export PATH=$HOME/bin:$PATH
-export PATH="/usr/local/sbin:$PATH"
+export PATH=/usr/local/sbin:$PATH
 export PATH=$PATH:./node_modules/.bin
-#export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH=$PATH:$HOME/.cache/dein/repos/github.com/juliosueiras/vim-terraform-completion/bin
 
 # NODE
 if [ -d "$HOME/.nvm" ]; then
@@ -51,12 +51,13 @@ fi
 if [ -d "$HOME/.pyenv" ]; then
 	eval "$(pyenv init -)"
 	eval "$(pyenv virtualenv-init -)"
+  export PYENV_VERSION='2.7.11'
 fi
 
 # TOOLS
 ## FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND="fd . $HOME"
+export FZF_DEFAULT_COMMAND="fd . $CODE_DIR"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
@@ -71,12 +72,7 @@ fi
 export ANSIBLE_VAULT_PASSWORD_FILE="$HOME/.vault_pass.txt"
 
 ## GCLOUD
-export TF_VAR_org_id=YOUR_ORG_ID
-export TF_VAR_billing_account=YOUR_BILLING_ACCOUNT_ID
-export TF_ADMIN=${USER}-terraform-admin
-export TF_CREDS=~/.config/gcloud/${USER}-terraform-admin.json
-export GOOGLE_APPLICATION_CREDENTIALS=${TF_CREDS}
-export GOOGLE_PROJECT=${TF_ADMIN}
+export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/${USER}.json
 
 # GOLANG
 export GO111MODULE=auto

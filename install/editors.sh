@@ -11,6 +11,10 @@ if ! brew list editorconfig; then
     brew install editorconfig
 fi
 
+if ! [ -x "$(command -v yamllint)" ]; then
+	brew install yamllint
+fi
+
 if [ ! -L $HOME/.pyenv/versions/neovim2 ]; then
     pyenv install --skip-existing 2.7.11
     pyenv virtualenv 2.7.11 neovim2
@@ -27,6 +31,10 @@ if [ ! -L $HOME/.pyenv/versions/neovim3 ]; then
     pip install neovim
 fi
 
+if ! [ -x "$(gem list neovim -i)" ]; then
+    gem install neovim --user-install
+fi
+
 if ! [ -x "$(command -v nvim)" ]; then
     brew tap neovim/neovim
     brew install --HEAD neovim
@@ -40,3 +48,12 @@ if [ ! -d $HOME/.cache/dein ]; then
     sh installer.sh $HOME/.cache/dein
     rm installer.sh
 fi
+
+if ! [ -f $HOME/bin/tflint ];then
+    FNAME='tflint_darwin_amd64.zip'
+    curl -LO $HOME/.cache/$FNAME \
+        "https://github.com/wata727/tflint/releases/download/v0.7.2/$FNAME"
+    unzip $HOME/.cache/$FNAME -d $HOME/bin
+fi
+
+unset FNAME

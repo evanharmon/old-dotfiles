@@ -9,6 +9,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/dist/*	" OSX/Linux
 
 let g:python_host_prog=expand('$HOME/.pyenv/versions/neovim2/bin/python')
 let g:python3_host_prog=expand('$HOME/.pyenv/versions/neovim3/bin/python')
+let g:ruby_host_prog=expand('$HOME/.gem/ruby/2.3.0/bin/neovim-ruby-host')
 
 if dein#load_state('~/.cache/dein')
   " CORE
@@ -40,6 +41,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('tpope/vim-fugitive')
   call dein#add('justinmk/vim-sneak')
   call dein#add('mhinz/vim-grepper')
+
   " APPEARANCE
   call dein#add('mhartington/oceanic-next')
   call dein#add('prettier/vim-prettier')
@@ -61,6 +63,11 @@ if dein#load_state('~/.cache/dein')
   call dein#add('mattn/emmet-vim', { 'on_ft': ['javascript', 'javascript.jsx', 'html', 'xml'] })
   call dein#add('vim-scripts/yaml.vim', { 'on_ft': ['yaml'] })
   call dein#add('uarun/vim-protobuf', { 'on_ft': 'proto'})
+
+  " CLOUD TOOLS
+  call dein#add('hashivim/vim-terraform', { 'on_ft': 'terraform' })
+  call dein#add('juliosueiras/vim-terraform-completion', { 'on_ft': 'terraform' })
+
 
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
@@ -110,7 +117,7 @@ set splitright
 set display+=lastline
 set updatetime=250
 set timeoutlen=500
-set shiftwidth=4
+set shiftwidth=2
 set expandtab
 set tabstop=2
 set softtabstop=2
@@ -192,24 +199,49 @@ function! s:fzf_statusline()
 endfunction
 au! User FzfStatusLine call <SID>fzf_statusline()
 
-" NEOMAKE
+" LINTERS / COMPLETIONS
+"" NEOMAKE
 if executable('./node_modules/.bin/eslint')
+  let g:neomake_javascript_eslint_maker={
+    \ 'args': ['-f', 'compact'],
+    \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+    \ '%W%f: line %l\, col %c\, Warning - %m'
+    \ }
+  let g:neomake_jsx_eslint_maker={
+    \ 'args': ['-f', 'compact'],
+    \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+    \ '%W%f: line %l\, col %c\, Warning - %m'
+    \ }
   let g:neomake_javascript_eslint_exe='./node_modules/.bin/eslint'
 endif
-let g:neomake_javascript_eslint_maker={
-    \ 'args': ['-f', 'compact'],
-    \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
-    \ '%W%f: line %l\, col %c\, Warning - %m'
-    \ }
 let g:neomake_javascript_enabled_makers=['eslint']
-let g:neomake_jsx_eslint_maker={
-    \ 'args': ['-f', 'compact'],
-    \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
-    \ '%W%f: line %l\, col %c\, Warning - %m'
-    \ }
 let g:neomake_jsx_enabled_makers=['eslint']
+if executable(expand('$HOME/bin/terraform'))
+  let g:neomake_terraform_exe=expand('$HOME/bin/terraform')
+  let g:neomake_terraform_maker={
+      \ 'args': ['validate'],
+      \ 'errorformat': '%f:%l:%c: %m',
+      \ }
+  if executable(expand('$HOME/bin/tflint'))
+    let g:neomake_terraform_tflint_exe=expand('$HOME/bin/tflint')
+    let g:neomake_terraform_tflint_maker={
+      \ 'args': ['.'],
+      \ 'errorformat': '%f:%l:%c: %m',
+      \ }
+  endif
+  let g:neomake_terraform_enabled_makers=['terraform', 'tflint']
+endif
 let g:neomake_yaml_enabled_makers=['yamllint']
 au! BufWritePost * Neomake
+"" DEOPLETE
+let g:deoplete#omni_patterns = {}
+
+call deoplete#custom#option('omni_patterns', {
+  \ 'complete_method': 'omnifunc',
+  \ 'terraform': '[^ *\t"{=$]\w*',
+  \ })
+
+call deoplete#initialize()
 
 " GOLANG
 let g:go_snippet_engine="neosnippet"
