@@ -160,6 +160,7 @@ let g:LanguageClient_serverCommands = {
     \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
     \ 'python': ['/usr/local/bin/pyls'],
     \ }
+
 " GENERAL LETS
 let g:NERDCustomDelimiters={ 'conf': { 'left': '#' } }
 let g:NERDCustomDelimiters={ 's': { 'left': '{/*','right': '*/}' } }
@@ -172,10 +173,10 @@ let g:gitgutter_enabled=0
 let g:indentLine_char="•"
 let g:indentLine_color_term=239
 let g:indentLine_enabled=1
-let g:jsx_ext_required=0
 let g:lexima_enable_basic_rules=1  " AUTOCLOSE PAIRS
 let g:lexima_enable_newline_rules=1 " AUTOCLOSE PAIRS
 let g:neosnippet#snippets_directory="~/.config/nvim/mysnips"
+" JAVASCRIPT
 let g:prettier#config#print_width=80
 let g:prettier#config#tab_width=2
 let g:prettier#config#use_tabs='false'
@@ -184,10 +185,26 @@ let g:prettier#config#single_quote='true'
 let g:prettier#config#trailing_comma='es5'
 let g:prettier#config#jsx_bracket_same_line='true'
 let g:prettier#exec_cmd_async=1
-let g:rustfmt_autosave=1
-let g:sneak#s_next=1
 let g:used_javascript_libs='react'
 let g:vim_jsx_pretty_colorful_config=1
+let g:jsx_ext_required=0
+
+" GOLANG
+let g:go_snippet_engine="neosnippet"
+let g:go_term_mode="split"
+let g:go_fmt_command="goimports"
+let g:go_list_height=0
+let g:go_term_mode="split"
+let g:go_term_height=10
+let g:go_term_width=10
+let g:delve_new_command="enew"
+
+let g:rustfmt_autosave=1
+let g:sneak#s_next=1
+
+" INFRASTRUCTURE AS CODE
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
 
 " FUNCTIONS
 function! s:fzf_statusline()
@@ -213,9 +230,9 @@ if executable('./node_modules/.bin/eslint')
     \ '%W%f: line %l\, col %c\, Warning - %m'
     \ }
   let g:neomake_javascript_eslint_exe='./node_modules/.bin/eslint'
+  let g:neomake_javascript_enabled_makers=['eslint']
+  let g:neomake_jsx_enabled_makers=['eslint']
 endif
-let g:neomake_javascript_enabled_makers=['eslint']
-let g:neomake_jsx_enabled_makers=['eslint']
 if executable(expand('$HOME/bin/terraform'))
   let g:neomake_terraform_exe=expand('$HOME/bin/terraform')
   let g:neomake_terraform_maker={
@@ -234,24 +251,15 @@ endif
 let g:neomake_yaml_enabled_makers=['yamllint']
 au! BufWritePost * Neomake
 "" DEOPLETE
-let g:deoplete#omni_patterns = {}
-
-call deoplete#custom#option('omni_patterns', {
-  \ 'complete_method': 'omnifunc',
-  \ 'terraform': '[^ *\t"{=$]\w*',
-  \ })
+" OMNI IS TOO SLOW AND NOT ASYNC
+" let g:deoplete#omni_patterns = {}
+" call deoplete#custom#option('omni_patterns', {
+  " \ 'complete_method': 'omnifunc',
+  " \ 'terraform': '[^ *\t"{=$]\w*',
+  " \ })
 
 call deoplete#initialize()
 
-" GOLANG
-let g:go_snippet_engine="neosnippet"
-let g:go_term_mode="split"
-let g:go_fmt_command="goimports"
-let g:go_list_height=0
-let g:go_term_mode="split"
-let g:go_term_height=10
-let g:go_term_width=10
-let g:delve_new_command="enew"
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
   let l:file=expand('%')

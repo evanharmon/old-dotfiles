@@ -31,6 +31,7 @@ fi
 yarn global add neovim \
   typescript \
   bash-language-server \
-  javascript-typescript-langserver
+  javascript-typescript-langserver \
+  serverless
 
 echo "Finished. Remember to source .zshrc before continuing"

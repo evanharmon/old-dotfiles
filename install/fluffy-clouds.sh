@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -xe
+set -e
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
@@ -11,21 +11,17 @@ fi
 
 # SETUP PYENV
 ## EVERYONE SHOULD HAVE A PRIVATE BOOTH AT THIS PY PARTY
-if ! [ -x "$(command -v pyenv)" ]; then
+if ! [ "$(command -v pyenv)" ]; then
   curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
   export PATH="/Users/evan/.pyenv/bin:$PATH"
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
-fi
-
-# AWS CLI
-if ! [ -x "$(pyenv activate aws)" ]; then
   pyenv install --skip-existing 3.5.5
   pyenv virtualenv 3.5.5 aws
   pyenv activate aws
 fi
 
-if ! [ -x "$(pyenv which aws)" ]; then
+if ! [ "$(pyenv which aws)" ]; then
   curl \
     "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" \
     -o "$HOME/.cache/awscli-bundle.zip"
@@ -34,14 +30,27 @@ if ! [ -x "$(pyenv which aws)" ]; then
   echo "Run aws configure afterwards"
 fi
 
+## AWS-SHELL
+if ! [ "$(pyenv which aws-shell)" ]; then
+    pyenv activate aws
+    pip3 install aws-shell
+fi
+
 ## Localstack CLI
-if ! [ -x "$(pyenv which awslocal)" ]; then
-  pip3 install awscli-local
+if ! [ "$(pyenv which awslocal)" ]; then
+    pip3 install awscli-local
 fi
 
 ## Serverless Applications Manager
-if ! [ -x "$(pyenv which sam)" ]; then
-  pip3 install aws-sam-cli
+if ! [ "$(pyenv which sam)" ]; then
+    pip3 install aws-sam-cli
+fi
+
+## local code-build
+if [ ! -f $HOME/bin/code_build.sh ]; then
+    FNAME='codebuild_build.sh'
+    curl -Lo $HOME/bin/$FNAME \
+        https://raw.githubusercontent.com/aws/aws-codebuild-docker-images/master/local_builds/$FNAME
 fi
 
 # INSTALL GCLOUD CLI
@@ -51,7 +60,7 @@ if ! [ -x "$(pyenv activate gcloud)" ]; then
   pyenv activate gcloud
 fi
 
-if ! [ -x "$(pyenv which gcloud)" ]; then
+if ! [ "$(pyenv which gcloud)" ]; then
   GCLOUD_SDK_VERSION='google-cloud-sdk-214.0.0-darwin-x86_64'
   curl -Lo $HOME/.cache/$GCLOUD_SDK_VERSION.tar.gz \
     https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/$GCLOUD_SDK_VERSION.tar.gz
@@ -63,7 +72,7 @@ if ! [ -x "$(pyenv which gcloud)" ]; then
 fi
 
 # INSTALL HYPERKIT FOR K8S
-if ! [ -x "$(command -v docker-machine-driver-hyperkit)" ]; then
+if ! [ "$(command -v docker-machine-driver-hyperkit)" ]; then
   curl -Lo $HOME/.cache/docker-machine-driver-hyperkit \
     https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-hyperkit
   chmod +x $HOME/.cache/docker-machine-driver-hyperkit
@@ -73,14 +82,14 @@ if ! [ -x "$(command -v docker-machine-driver-hyperkit)" ]; then
 fi
 
 # INSTALL KUBERNETES
-if ! [ -x "$(command -v minikube)" ]; then
+if ! [ "$(command -v minikube)" ]; then
   curl -Lo $HOME/.cache/minikube \
     https://storage.googleapis.com/minikube/releases/v0.28.2/minikube-darwin-amd64
   chmod +x $HOME/.cache/minikube
   sudo mv $HOME/.cache/minikube /usr/local/bin/
 fi
 
-if ! [ -x "$(command -v kubectl)" ]; then
+if ! [ "$(command -v kubectl)" ]; then
   K8S_VERSION=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
   curl -Lo $HOME/.cache/kubectl \
     https://storage.googleapis.com/kubernetes-release/release/$K8S_VERSION/bin/darwin/amd64/kubectl

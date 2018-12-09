@@ -69,17 +69,28 @@ fi
 if [ -e /usr/local/bin/aws_completer ]; then
   source /usr/local/bin/aws_zsh_completer.sh
 fi
+
+if [ -e $HOME/.pyenv/versions/aws/bin/aws_completer ]; then
+  source $HOME/.pyenv/versions/aws/bin/aws_zsh_completer.sh
+fi
+
+export AWS_DEFAULT_REGION='us-east-1'
 export ANSIBLE_VAULT_PASSWORD_FILE="$HOME/.vault_pass.txt"
+
+# GOLANG
+export GO111MODULE=off
+export GOPROXY=http://127.0.0.1:3000
 
 ## GCLOUD
 export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/${USER}.json
-
-# GOLANG
-export GO111MODULE=auto
-export GOPROXY=http://127.0.0.1:3000
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/evanharmon/.cache/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/evanharmon/.cache/google-cloud-sdk/path.zsh.inc'; fi
-
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/evanharmon/.cache/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/evanharmon/.cache/google-cloud-sdk/completion.zsh.inc'; fi
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/eharmon/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/eharmon/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/eharmon/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/eharmon/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh
