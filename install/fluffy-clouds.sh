@@ -31,8 +31,7 @@ if ! [ "$(pyenv which aws)" ]; then
 fi
 
 ## AWS-SHELL
-if ! [ "$(pyenv which aws-shell)" ]; then
-    pyenv activate aws
+if ! [ "$(command -v aws-shell)" ]; then
     pip3 install aws-shell
 fi
 
@@ -54,13 +53,10 @@ if [ ! -f $HOME/bin/code_build.sh ]; then
 fi
 
 # INSTALL GCLOUD CLI
-if ! [ -x "$(pyenv activate gcloud)" ]; then
+if ! [ -f "$HOME/.cache/google-cloud-sdk/bin/gcloud" ]; then
   pyenv install --skip-existing 2.7.11
   pyenv virtualenv 2.7.11 gcloud
   pyenv activate gcloud
-fi
-
-if ! [ "$(pyenv which gcloud)" ]; then
   GCLOUD_SDK_VERSION='google-cloud-sdk-214.0.0-darwin-x86_64'
   curl -Lo $HOME/.cache/$GCLOUD_SDK_VERSION.tar.gz \
     https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/$GCLOUD_SDK_VERSION.tar.gz
@@ -107,6 +103,13 @@ if ! [ "$(command -v terraform)" ]; then
   FNAME='terraform_0.11.8_darwin_amd64.zip'
   curl -Lo $HOME/.cache/$FNAME \
     https://releases.hashicorp.com/terraform/0.11.8/$FNAME
+  unzip $HOME/.cache/$FNAME -d $HOME/bin
+fi
+
+if ! [ "$(command -v packer)" ]; then
+    FNAME='packer_1.3.3_darwin_amd64.zip'
+  curl -Lo $HOME/.cache/$FNAME \
+    https://releases.hashicorp.com/packer/1.3.3/$FNAME
   unzip $HOME/.cache/$FNAME -d $HOME/bin
 fi
 

@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/bash -xe
 
-set -xe
-# REQS
+# REQUIREMENTS
+
 if ! [ -x "$(command -v rg)" ]; then
     brew install ripgrep
 fi
