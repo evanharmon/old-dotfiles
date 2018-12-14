@@ -6,7 +6,6 @@ alias mmv='noglob zmv -W'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # stop auto corrects
-alias ava='nocorrect ava'
 alias aws='nocorrect aws'
 
 # FILESYSTEM
@@ -20,17 +19,6 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-
-alias l="ls -lah ${colorflag}"
-alias la="ls -AF ${colorflag}"
-alias ll="ls -lFh ${colorflag}"
-alias lld="ls -l | grep ^d"
-alias rmf="rm -rf"
-
-# Helpers
-alias grep='grep --color=auto'
-alias df='df -h' # disk free, in Gigabytes, not bytes
-alias du='du -h -c' # calculate disk usage for a folder
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -60,10 +48,6 @@ alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; rm -rfv ~/.Trash"
 # Hide/show all desktop icons (useful when presenting)
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
-
-# Kill all the tabs in Chrome to free up memory
-# [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
-alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 
 alias chrome="/Applications/Google\\ \\Chrome.app/Contents/MacOS/Google\\ \\Chrome"
 alias canary="/Applications/Google\\ Chrome\\ Canary.app/Contents/MacOS/Google\\ Chrome\\ Canary"
