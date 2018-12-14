@@ -18,12 +18,14 @@ if dein#load_state('~/.cache/dein')
   " DEOPLETE PLUGINS REQS
   call dein#add('autozimu/LanguageClient-neovim', { 'rev': 'next', 'build': './install.sh' })
   " MAY HAVE TO MANUALLY RUN :GoInstallBinaries or :GoUpdateBinaries
+  call dein#add('mattn/webapi-vim')
   call dein#add('fatih/vim-go', { 'on_ft': ['go'], 'build': 'GoInstallBinaries' })
   call dein#add('HerringtonDarkholme/yats.vim')
   call dein#add('mhartington/nvim-typescript', { 'build': './install.sh' })
   call dein#add('rust-lang/rust.vim', { 'on_ft': ['rust'] })
   call dein#add('sebdah/vim-delve', { 'on_ft': ['go'] })
   call dein#add('Shougo/neco-syntax')
+  call dein#add('majutsushi/tagbar')
 
   " DEOPLETE
   call dein#add('Shougo/deoplete.nvim')
@@ -43,13 +45,14 @@ if dein#load_state('~/.cache/dein')
   call dein#add('mhinz/vim-grepper')
 
   " APPEARANCE
+  call dein#add('jiangmiao/auto-pairs')
   call dein#add('mhartington/oceanic-next')
   call dein#add('prettier/vim-prettier')
-  call dein#add('cohama/lexima.vim')
+  " call dein#add('cohama/lexima.vim')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-repeat')
   call dein#add('Yggdroot/indentLine')
-  call dein#add('Valloric/MatchTagAlways')
+  call dein#add('Valloric/MatchTagAlways', { 'on_ft': ['javascript', 'javascript.jsx', 'html', 'xml'] })
   call dein#add('airblade/vim-gitgutter')
   call dein#add('ntpeters/vim-better-whitespace')
 
@@ -161,11 +164,15 @@ let g:LanguageClient_serverCommands = {
     \ 'python': ['/usr/local/bin/pyls'],
     \ }
 
+" COMPLETION
+let g:neosnippet#enable_completed_snippet=1
+let g:neosnippet#snippets_directory="~/.config/nvim/mysnips"
+let g:deoplete#enable_at_startup=1
+
 " GENERAL LETS
 let g:NERDCustomDelimiters={ 'conf': { 'left': '#' } }
 let g:NERDCustomDelimiters={ 's': { 'left': '{/*','right': '*/}' } }
 let g:NERDSpaceDelims=1
-let g:deoplete#enable_at_startup=1
 let g:fzf_buffers_jump=1
 let g:fzf_history_dir='~/.local/share/fzf-history'
 let g:fzf_tags_command='fd | ctags --links=no -L-'
@@ -175,7 +182,7 @@ let g:indentLine_color_term=239
 let g:indentLine_enabled=1
 let g:lexima_enable_basic_rules=1  " AUTOCLOSE PAIRS
 let g:lexima_enable_newline_rules=1 " AUTOCLOSE PAIRS
-let g:neosnippet#snippets_directory="~/.config/nvim/mysnips"
+
 " JAVASCRIPT
 let g:prettier#config#print_width=80
 let g:prettier#config#tab_width=2
@@ -199,8 +206,11 @@ let g:go_term_height=10
 let g:go_term_width=10
 let g:delve_new_command="enew"
 
-let g:rustfmt_autosave=1
 let g:sneak#s_next=1
+
+" RUST
+let g:rustfmt_autosave=1
+let g:rust_clip_command='pbcopy'
 
 " INFRASTRUCTURE AS CODE
 let g:terraform_align=1
@@ -258,7 +268,7 @@ au! BufWritePost * Neomake
   " \ 'terraform': '[^ *\t"{=$]\w*',
   " \ })
 
-call deoplete#initialize()
+" call deoplete#initialize()
 
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
@@ -269,6 +279,17 @@ function! s:build_go_files()
     call go#cmd#Build(0)
   endif
 endfunction
+
+" COMPLETION
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
+
 
 " GENERAL KEY MAPPINGS
 let mapleader="\<SPACE>"
@@ -282,15 +303,14 @@ nnoremap <Tab> :bnext!<CR>
 nnoremap <S-Tab> :bprev!<CR><Paste>
 nnoremap <bar> <C-w><bar>
 xnoremap p pgvy
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
 nmap f <Plug>Sneak_f
 nmap F <Plug>Sneak_F
 xmap f <Plug>Sneak_f
 xmap F <Plug>Sneak_F
 omap f <Plug>Sneak_f
 omap F <Plug>Sneak_F
+
+" File Management
 nmap <Leader>b :Buffers<CR>
 nmap <Leader>f :GFiles<CR>
 nmap <Leader>F :Files<CR>
@@ -301,6 +321,7 @@ xmap gs <plug>(GrepperOperator)
 nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
 nnoremap <leader>g :Grepper -tool rg<cr>
 nnoremap <leader>G :Grepper -tool rg -buffers<cr>
+
 " WINDOWS
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -318,6 +339,7 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap _ <C-w>_
 
+" FILE TYPE MAPPINGS
 au FileType javascript nmap <leader>fc :/\(\/\/\)\@<!console/<CR>
 au FileType go nmap <leader>ggb :<C-u>call <SID>build_go_files()<CR>
 au FileType go nmap <leader>ggt  <Plug>(go-test)
