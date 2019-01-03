@@ -171,8 +171,9 @@ let g:deoplete#enable_at_startup=1
 
 " GENERAL LETS
 let g:NERDCustomDelimiters={ 'conf': { 'left': '#' } }
-let g:NERDCustomDelimiters={ 's': { 'left': '{/*','right': '*/}' } }
+let g:NERDCustomDelimiters={ 'javascript': { 'left': '{/*', 'right': '*/}', 'leftAlt': '//' } }
 let g:NERDSpaceDelims=1
+let g:NERDDefaultAlign='left'
 let g:fzf_buffers_jump=1
 let g:fzf_history_dir='~/.local/share/fzf-history'
 let g:fzf_tags_command='fd | ctags --links=no -L-'
@@ -207,6 +208,7 @@ let g:go_term_width=10
 let g:delve_new_command="enew"
 
 let g:sneak#s_next=1
+let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 
 " RUST
 let g:rustfmt_autosave=1
