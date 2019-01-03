@@ -66,6 +66,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('mattn/emmet-vim', { 'on_ft': ['javascript', 'javascript.jsx', 'html', 'xml'] })
   call dein#add('vim-scripts/yaml.vim', { 'on_ft': ['yaml'] })
   call dein#add('uarun/vim-protobuf', { 'on_ft': 'proto'})
+  call dein#add('iamcco/markdown-preview.nvim', { 'build': 'cd app & yarn install' })
 
   " CLOUD TOOLS
   call dein#add('hashivim/vim-terraform', { 'on_ft': 'terraform' })
