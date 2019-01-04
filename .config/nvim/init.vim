@@ -55,6 +55,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Valloric/MatchTagAlways', { 'on_ft': ['javascript', 'javascript.jsx', 'html', 'xml'] })
   call dein#add('airblade/vim-gitgutter')
   call dein#add('ntpeters/vim-better-whitespace')
+  call dein#add('jeffkreeftmeijer/vim-numbertoggle')
 
   " JS / JSX / WEB
   call dein#add('othree/yajs.vim', { 'on_ft': 'javascript' })
@@ -107,7 +108,7 @@ set showcmd
 set showmatch
 set showmode
 set ruler
-set number
+set number relativenumber
 set nofoldenable
 set scrolloff=1
 set sidescrolloff=5
