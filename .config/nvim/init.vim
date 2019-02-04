@@ -2,7 +2,7 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-set runtimepath^=~/.cache/dein/repos/github.com/Shougo/dein.vim
+" set runtimepath^=~/.cache/dein/repos/github.com/Shougo/dein.vim
 set rtp+=/usr/local/opt/fzf
 set path+=**  " Recursive find
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/dist/*	" OSX/Linux
@@ -11,85 +11,37 @@ let g:python_host_prog=expand('$HOME/.pyenv/versions/neovim2/bin/python')
 let g:python3_host_prog=expand('$HOME/.pyenv/versions/neovim3/bin/python')
 let g:ruby_host_prog=expand('$HOME/.gem/ruby/2.3.0/bin/neovim-ruby-host')
 
-if dein#load_state('~/.cache/dein')
-  " CORE
-  call dein#begin('~/.cache/dein')
-  call dein#add('~/.cache/dein')
-  " DEOPLETE PLUGINS REQS
-  call dein#add('autozimu/LanguageClient-neovim', { 'rev': 'next', 'build': './install.sh' })
-  " MAY HAVE TO MANUALLY RUN :GoInstallBinaries or :GoUpdateBinaries
-  call dein#add('mattn/webapi-vim')
-  call dein#add('fatih/vim-go', { 'on_ft': ['go'], 'build': 'GoInstallBinaries' })
-  call dein#add('HerringtonDarkholme/yats.vim')
-  call dein#add('mhartington/nvim-typescript', { 'build': './install.sh' })
-  call dein#add('rust-lang/rust.vim', { 'on_ft': ['rust'] })
-  call dein#add('sebdah/vim-delve', { 'on_ft': ['go'] })
-  call dein#add('Shougo/neco-syntax')
-  call dein#add('majutsushi/tagbar')
+call plug#begin(expand('$HOME/.local/share/nvim/plugged'))
+Plug 'mhartington/oceanic-next'
+Plug 'airblade/vim-gitgutter'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'Yggdroot/indentLine'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
 
-  " DEOPLETE
-  call dein#add('Shougo/deoplete.nvim')
-  call dein#add('zchee/deoplete-clang')
-  call dein#add('zchee/deoplete-go', { 'build': 'make' })
-  call dein#add('zchee/deoplete-jedi')
-  call dein#add('zchee/deoplete-zsh')
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'w0rp/ale'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-fugitive'
+Plug 'justinmk/vim-sneak'
+Plug 'mhinz/vim-grepper'
 
-  call dein#add('Shougo/denite.nvim')
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('benekastah/neomake')
-  call dein#add('junegunn/fzf.vim')
-  call dein#add('scrooloose/nerdcommenter')
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('justinmk/vim-sneak')
-  call dein#add('mhinz/vim-grepper')
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'rust-lang/rust.vim', { 'do': 'rustup component add rls rust-analysis rust-src' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'sebdah/vim-delve'
 
-  " APPEARANCE
-  call dein#add('jiangmiao/auto-pairs')
-  call dein#add('mhartington/oceanic-next')
-  call dein#add('prettier/vim-prettier')
-  " call dein#add('cohama/lexima.vim')
-  call dein#add('tpope/vim-surround')
-  call dein#add('tpope/vim-repeat')
-  call dein#add('Yggdroot/indentLine')
-  call dein#add('Valloric/MatchTagAlways', { 'on_ft': ['javascript', 'javascript.jsx', 'html', 'xml'] })
-  call dein#add('airblade/vim-gitgutter')
-  call dein#add('ntpeters/vim-better-whitespace')
-  call dein#add('jeffkreeftmeijer/vim-numbertoggle')
+Plug 'majutsushi/tagbar'
+Plug 'uarun/vim-protobuf'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'hashivim/vim-terraform'
+Plug 'juliosueiras/vim-terraform-completion'
+Plug 'Valloric/MatchTagAlways'
 
-  " JS / JSX / WEB
-  call dein#add('othree/yajs.vim', { 'on_ft': 'javascript' })
-  call dein#add('othree/html5.vim', { 'on_ft': 'html' })
-  call dein#add('othree/xml.vim', { 'on_ft': 'xml' })
-  call dein#add('othree/es.next.syntax.vim', { 'on_ft': 'javascript' })
-  call dein#add('othree/javascript-libraries-syntax.vim', { 'on_ft': ['javascript', 'javascript.jsx'] })
-  call dein#add('jparise/vim-graphql', { 'on_ft': ['graphql'] })
-  call dein#add('mattn/emmet-vim', { 'on_ft': ['javascript', 'javascript.jsx', 'html', 'xml'] })
-  call dein#add('vim-scripts/yaml.vim', { 'on_ft': ['yaml'] })
-  call dein#add('uarun/vim-protobuf', { 'on_ft': 'proto'})
-  call dein#add('iamcco/markdown-preview.nvim', { 'build': 'cd app & yarn install' })
-
-  " CLOUD TOOLS
-  call dein#add('hashivim/vim-terraform', { 'on_ft': 'terraform' })
-  call dein#add('juliosueiras/vim-terraform-completion', { 'on_ft': 'terraform' })
-
-
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
-
-  if dein#check_install()
-    call dein#install()
-  endif
-
-  if dein#check_update()
-    call dein#update()
-  endif
-
- call dein#end()
- call dein#save_state()
-endif
+call plug#end()
 
 filetype plugin indent on
 syntax enable
@@ -156,21 +108,6 @@ highlight Pmenu guibg=#161616
 au FileType go,c,asm,python,sh setlocal sw=4 ts=4 sts=4 expandtab
 au FileType make setlocal sw=4 ts=4 sts=4 noexpandtab
 
-" LANGUAGE SERVERS
-let g:LanguageClient_serverCommands = {
-    \ 'sh': ['bash-language-server', 'start'],
-    \ 'go': ["$GOPATH/bin/go-langserver"],
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-    \ 'python': ['/usr/local/bin/pyls'],
-    \ }
-
-" COMPLETION
-let g:neosnippet#enable_completed_snippet=1
-let g:neosnippet#snippets_directory="~/.config/nvim/mysnips"
-let g:deoplete#enable_at_startup=1
-
 " GENERAL LETS
 let g:NERDCustomDelimiters={ 'conf': { 'left': '#' } }
 let g:NERDCustomDelimiters={ 'javascript': { 'left': '{/*', 'right': '*/}', 'leftAlt': '//' } }
@@ -183,8 +120,7 @@ let g:gitgutter_enabled=0
 let g:indentLine_char="•"
 let g:indentLine_color_term=239
 let g:indentLine_enabled=1
-let g:lexima_enable_basic_rules=1  " AUTOCLOSE PAIRS
-let g:lexima_enable_newline_rules=1 " AUTOCLOSE PAIRS
+let g:sneak#s_next=1
 
 " JAVASCRIPT
 let g:prettier#config#print_width=80
@@ -200,7 +136,6 @@ let g:vim_jsx_pretty_colorful_config=1
 let g:jsx_ext_required=0
 
 " GOLANG
-let g:go_snippet_engine="neosnippet"
 let g:go_term_mode="split"
 let g:go_fmt_command="goimports"
 let g:go_list_height=0
@@ -208,9 +143,6 @@ let g:go_term_mode="split"
 let g:go_term_height=10
 let g:go_term_width=10
 let g:delve_new_command="enew"
-
-let g:sneak#s_next=1
-let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 
 " RUST
 let g:rustfmt_autosave=1
@@ -231,48 +163,37 @@ endfunction
 au! User FzfStatusLine call <SID>fzf_statusline()
 
 " LINTERS / COMPLETIONS
-"" NEOMAKE
-if executable('./node_modules/.bin/eslint')
-  let g:neomake_javascript_eslint_maker={
-    \ 'args': ['-f', 'compact'],
-    \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
-    \ '%W%f: line %l\, col %c\, Warning - %m'
-    \ }
-  let g:neomake_jsx_eslint_maker={
-    \ 'args': ['-f', 'compact'],
-    \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
-    \ '%W%f: line %l\, col %c\, Warning - %m'
-    \ }
-  let g:neomake_javascript_eslint_exe='./node_modules/.bin/eslint'
-  let g:neomake_javascript_enabled_makers=['eslint']
-  let g:neomake_jsx_enabled_makers=['eslint']
-endif
-if executable(expand('$HOME/bin/terraform'))
-  let g:neomake_terraform_exe=expand('$HOME/bin/terraform')
-  let g:neomake_terraform_maker={
-      \ 'args': ['validate'],
-      \ 'errorformat': '%f:%l:%c: %m',
-      \ }
-  if executable(expand('$HOME/bin/tflint'))
-    let g:neomake_terraform_tflint_exe=expand('$HOME/bin/tflint')
-    let g:neomake_terraform_tflint_maker={
-      \ 'args': ['.'],
-      \ 'errorformat': '%f:%l:%c: %m',
-      \ }
-  endif
-  let g:neomake_terraform_enabled_makers=['terraform', 'tflint']
-endif
-let g:neomake_yaml_enabled_makers=['yamllint']
-au! BufWritePost * Neomake
-"" DEOPLETE
-" OMNI IS TOO SLOW AND NOT ASYNC
-" let g:deoplete#omni_patterns = {}
-" call deoplete#custom#option('omni_patterns', {
-  " \ 'complete_method': 'omnifunc',
-  " \ 'terraform': '[^ *\t"{=$]\w*',
-  " \ })
-
-" call deoplete#initialize()
+let g:ale_linters_explicit=1
+let g:ale_fix_on_save=1
+let g:ale_linters={
+\ 'css': ['prettier'],
+\ 'go': ['gofmt'],
+\ 'graphql': ['prettier'],
+\ 'html': ['prettier'],
+\ 'javascript': ['prettier'],
+\ 'javascript.jsx': ['prettier'],
+\ 'json': ['prettier'],
+\ 'less': ['prettier'],
+\ 'markdown': ['prettier'],
+\ 'rust': ['rustfmt'],
+\ 'scss': ['prettier'],
+\ 'sh': ['language_server'],
+\ 'terraform': ['fmt'],
+\ 'xml': ['xmllint'],
+\ 'yaml': ['prettier'],
+\}
+let g:ale_fixers={
+\ 'css': ['prettier'],
+\ 'graphql': ['prettier'],
+\ 'html': ['prettier'],
+\ 'javascript': ['prettier'],
+\ 'javascript.jsx': ['prettier'],
+\ 'json': ['prettier'],
+\ 'less': ['prettier'],
+\ 'markdown': ['prettier'],
+\ 'scss': ['prettier'],
+\ 'yaml': ['prettier'],
+\}
 
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
@@ -285,14 +206,114 @@ function! s:build_go_files()
 endfunction
 
 " COMPLETION
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
+
+" tab triggers completio
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col=col('.') - 1
+  return !col || getline('.')[col - 1]=~# '\s'
+endfunction
+
+" Use <c-space> for trigger completion
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` breaks undo chain
+inoremap <expr> <cr> pumvisible() ? "\<C-y" : "\<C-g>u\<CR>"
+
+" Use `[c` and `]c` for navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR><Paste>
+
+function! s:show_documentation()
+  if &filetype=='vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+" nmap <leader>rn <Plug>(coc-rename)
+
+" NOTE: This would conflict with Sneak?
+" Remap for format selected region
+" vmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+vmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use `:Format` for format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` for fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+
+" Add diagnostic info for https://github.com/itchyny/lightline.vim
+let g:lightline ={
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status'
+      \ },
+      \ }
+
+" Using CocList
+" Show all diagnostics
+" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" " Manage extensions
+" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" " Show commands
+" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" " Find symbol of current document
+" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" " Search workspace symbols
+" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" " Do default action for next item.
+" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" " Do default action for previous item.
+" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" " Resume latest coc list
+" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 
 " GENERAL KEY MAPPINGS
@@ -303,10 +324,10 @@ noremap <leader>w :w<CR>
 noremap <leader>q! :q!<CR>
 nnoremap <ESC> :noh<return><ESC>
 nnoremap <leader><leader> <c-^>
-nnoremap <Tab> :bnext!<CR>
-nnoremap <S-Tab> :bprev!<CR><Paste>
+" nnoremap <Tab> :bnext!<CR>
+" nnoremap <S-Tab> :bprev!<CR><Paste>
 nnoremap <bar> <C-w><bar>
-xnoremap p pgvy
+" xnoremap p pgvy
 nmap f <Plug>Sneak_f
 nmap F <Plug>Sneak_F
 xmap f <Plug>Sneak_f
@@ -314,17 +335,19 @@ xmap F <Plug>Sneak_F
 omap f <Plug>Sneak_f
 omap F <Plug>Sneak_F
 
+
 " File Management
 nmap <Leader>b :Buffers<CR>
 nmap <Leader>f :GFiles<CR>
 nmap <Leader>F :Files<CR>
 nmap <Leader>t :Tags<CR>
 nmap <Leader>m :History<CR>
-nmap gs <plug>(GrepperOperator)
-xmap gs <plug>(GrepperOperator)
-nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
-nnoremap <leader>g :Grepper -tool rg<cr>
-nnoremap <leader>G :Grepper -tool rg -buffers<cr>
+" nmap gs <plug>(GrepperOperator)
+" xmap gs <plug>(GrepperOperator)
+" nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
+" nnoremap <leader>g :Grepper -tool rg<cr>
+" nnoremap <leader>G :Grepper -tool rg -buffers<cr>
+
 
 " WINDOWS
 nnoremap <C-j> <C-w>j
@@ -342,11 +365,3 @@ imap <right> <nop>
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap _ <C-w>_
-
-" FILE TYPE MAPPINGS
-au FileType javascript nmap <leader>fc :/\(\/\/\)\@<!console/<CR>
-au FileType go nmap <leader>ggb :<C-u>call <SID>build_go_files()<CR>
-au FileType go nmap <leader>ggt  <Plug>(go-test)
-au FileType go nmap <leader>ggr  <Plug>(go-run)
-au FileType go nmap <leader>gdd :DlvDebug
-au FileType go nmap <leader>gdt :DlvTest

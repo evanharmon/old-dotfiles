@@ -10,6 +10,14 @@ if ! [ -x "$(command -v fd)" ]; then
     brew install fd
 fi
 
+if ! [ -x "$(command -v bat)" ]; then
+    VERSION='bat-v0.9.0-x86_64-apple-darwin'
+    curl -Lo $HOME/.cache/$VERSION.tar.gz \
+        https://github.com/sharkdp/bat/releases/download/v0.9.0/$VERSION.tar.gz
+    tar -xf $HOME/.cache/$VERSION.tar.gz -C $HOME/.cache
+    cp $HOME/.cache/$VERSION/bat $HOME/bin
+fi
+
 # Requires User Input To Prompts
 if ! [ -x "$(command -v fzf)" ]; then
     brew install fzf

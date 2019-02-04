@@ -7,12 +7,12 @@ export PATH="/Users/evan/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-if ! brew list editorconfig; then
-    brew install editorconfig
+if [[ ! -d $HOME/.local ]]; then
+	mkdir $HOME/.local
 fi
 
-if ! [ -x "$(command -v yamllint)" ]; then
-	brew install yamllint
+if ! brew list editorconfig; then
+    brew install editorconfig
 fi
 
 if [ ! -L $HOME/.pyenv/versions/neovim2 ]; then
@@ -40,13 +40,9 @@ if ! [ -x "$(command -v nvim)" ]; then
     brew install --HEAD neovim
 fi
 
-if [ ! -d $HOME/.cache/dein ]; then
-    mkdir $HOME/.cache/dein
-    curl \
-        https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh >\
-        installer.sh
-    sh installer.sh $HOME/.cache/dein
-    rm installer.sh
+if [ ! -d $HOME/.local/share/nvim/site/autoload/plug.vim ]; then
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
 if ! [ -f $HOME/bin/tflint ];then
