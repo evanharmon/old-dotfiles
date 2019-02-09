@@ -20,6 +20,7 @@ alias ...='cd ../..'
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
+alias la=ls -la
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
@@ -54,3 +55,6 @@ alias canary="/Applications/Google\\ Chrome\\ Canary.app/Contents/MacOS/Google\\
 
 alias lol=log --graph --decorate --pretty=oneline --abbrev-commit
 alias lola=log --graph --decorate --pretty=oneline --abbrev-commit --all
+
+# ripgrep defaults
+# alias rg=rg -S
