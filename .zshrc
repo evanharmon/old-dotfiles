@@ -1,24 +1,25 @@
 # SOURCE ZSH FILES
 export DOTFILES=$HOME
 export ZSH=$HOME/.config/zsh
-export ZPLUGHOME=$HOME/.zplug
+if [[ -d $HOME/.zplug ]]; then
+  export ZPLUGHOME=$HOME/.zplug
+  source $HOME/.config/zsh/zplug.sh
+fi
 
-# Used for FZF
 if [[ ! -d $HOME/code ]]; then
 	mkdir $HOME/code
 fi
 export CODE_DIR=$HOME/code
 
-source ~/.config/zsh/zplug.sh
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+if [[ "$OSTYPE" == darwin* ]]; then
+  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+	export BROWSER='open'
+fi
+
 for config ($ZSH/**/*.zsh) source $config
 
 # OS SHELL SETTINGS
 export TERM=xterm-256color
-if [[ "$OSTYPE" == darwin* ]]; then
-	export BROWSER='open'
-fi
-
 if ! [ "$(command -v nvim)" ]; then
 	export EDITOR='vim'
 	export VISUAL='vim'
@@ -75,7 +76,6 @@ if [ -e $HOME/.pyenv/versions/aws/bin/aws_completer ]; then
 fi
 
 export AWS_DEFAULT_REGION='us-east-1'
-export ANSIBLE_VAULT_PASSWORD_FILE="$HOME/.vault_pass.txt"
 
 # GOLANG
 export GO111MODULE=off
