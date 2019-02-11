@@ -1,9 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 # only source zplug on initial load
-if [ -z ${RELOAD} ]; then
-    if ! [ type "zplug" > /dev/null 2>&1 ]; then
-        source ~/.zplug/init.zsh
+if [ -z "${RELOAD}" ]; then
+    # if ! [ type "zplug" > /dev/null 2>&1 ]; then
+    if ! [[ "$(command -v zplug)" == "zplug" ]]; then
+        source "$HOME/.zplug/init.zsh"
     fi
 
     zplug "zplug/zplug", hook-build:"zplug --self-manage"
@@ -17,7 +18,7 @@ if [ -z ${RELOAD} ]; then
     # Install plugins if there are plugins that have not been installed
     if ! zplug check; then
         printf "Install? [y/N]: "
-        if read -q; then
+        if read -rq; then
             echo; zplug install
         fi
     fi
