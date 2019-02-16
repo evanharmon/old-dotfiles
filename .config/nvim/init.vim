@@ -30,7 +30,8 @@ Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-grepper'
 
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-Plug 'rust-lang/rust.vim', { 'do': 'rustup component add rls rust-analysis rust-src' }
+" Plug 'rust-lang/rust.vim', { 'do': 'rustup component add rls rust-analysis rust-src' }
+Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'sebdah/vim-delve'
 
