@@ -20,7 +20,9 @@ alias ...='cd ../..'
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-alias la=ls -la
+alias la="ls -a"
+alias ll="ls -la"
+
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"

@@ -3,20 +3,17 @@
 # Don't set -e as nvm install will then fail while multiple curls
 set -x
 
-# NVM
-if ! [ -d "$HOME/.nvm" ]; then
-    unset NVM_DIR
-    NVM_VERSION=v0.33.11
-    curl -o- \
-      https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh |\
-      bash
+# Node Manager
+if ! [ -d "$HOME/.fnm" ]; then
+    curl https://raw.githubusercontent.com/Schniz/fnm/master/.ci/install.sh | bash
 fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-if [ -d "$HOME/.nvm" ]; then
-    echo "install node via nvm"
-    nvm install node
+if [ -d "$HOME/.fnm" ]; then
+    echo "install node via fnm"
+    fnm install latest
+    export PATH=$HOME/.fnm:$PATH
+    eval `fnm env`
+    fnm use latest
 fi
 
 if ! [ -x "$(command -v yarn)" ]; then

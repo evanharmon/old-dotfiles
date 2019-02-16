@@ -11,7 +11,6 @@ if [ -z "${RELOAD}" ]; then
     zplug "zsh-users/zsh-syntax-highlighting", defer:2
     zplug "zsh-users/zsh-history-substring-search"
     zplug "zsh-users/zsh-completions", depth:1
-    zplug "tcnksm/docker-alias", use:zshrc
     zplug mafredri/zsh-async, from:github
     zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 

@@ -28,25 +28,13 @@ else
 	export VISUAL='nvim'
 fi
 export PAGER='less'
-export CC=clang
 
 # PATHS
-export PATH=/usr/local/go/bin:$PATH
 export PATH=$HOME/.pyenv/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$HOME/.protoc/bin
-export PATH=$HOME/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
-export PATH=$PATH:./node_modules/.bin
-export PATH=$PATH:$HOME/.cache/dein/repos/github.com/juliosueiras/vim-terraform-completion/bin
-
-# NODE
-if [ -d "$HOME/.nvm" ]; then
-	export NVM_DIR="$HOME/.nvm"
-	[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-fi
+export PATH=$HOME/.protoc/bin:$PATH
+export PATH=$HOME/bin:/usr/local/sbin:$PATH
+export PATH=$PATH
 
 # PY
 if [ -d "$HOME/.pyenv" ]; then
@@ -78,19 +66,11 @@ fi
 export AWS_DEFAULT_REGION='us-east-1'
 
 # GOLANG
+export GOPATH=$HOME/go
+export PATH=/usr/local/go/bin:$GOPATH/bin:$PATH
 export GO111MODULE=off
 export GOPROXY=http://127.0.0.1:3000
 
-## GCLOUD
-export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/${USER}.json
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/evanharmon/.cache/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/evanharmon/.cache/google-cloud-sdk/path.zsh.inc'; fi
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/evanharmon/.cache/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/evanharmon/.cache/google-cloud-sdk/completion.zsh.inc'; fi
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/eharmon/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/eharmon/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/eharmon/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/eharmon/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh
+# NODEJS
+export PATH=$HOME/.fnm:./node_modules/.bin:$PATH
+eval `fnm env`
