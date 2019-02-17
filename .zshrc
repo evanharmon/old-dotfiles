@@ -34,7 +34,6 @@ export PATH=$HOME/.pyenv/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.protoc/bin:$PATH
 export PATH=$HOME/bin:/usr/local/sbin:$PATH
-export PATH=$PATH
 
 # PY
 if [ -d "$HOME/.pyenv" ]; then
@@ -63,8 +62,6 @@ if [ -e $HOME/.pyenv/versions/aws/bin/aws_completer ]; then
   source $HOME/.pyenv/versions/aws/bin/aws_zsh_completer.sh
 fi
 
-export AWS_DEFAULT_REGION='us-east-1'
-
 # GOLANG
 export GOPATH=$HOME/go
 export PATH=/usr/local/go/bin:$GOPATH/bin:$PATH
@@ -72,5 +69,9 @@ export GO111MODULE=off
 export GOPROXY=http://127.0.0.1:3000
 
 # NODEJS
-export PATH=$HOME/.fnm:./node_modules/.bin:$PATH
-eval `fnm env`
+if [ -d $HOME/.fnm ]; then
+  export PATH=$HOME/.fnm:./node_modules/.bin:$PATH
+  eval `fnm env`
+fi
+
+export AWS_DEFAULT_REGION='us-east-1'
