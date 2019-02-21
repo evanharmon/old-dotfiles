@@ -1,7 +1,7 @@
 # SOURCE ZSH FILES
 export DOTFILES=$HOME
 export ZSH=$HOME/.config/zsh
-if [[ -d $HOME/.zplug ]]; then
+if [[ "$OSTYPE" == darwin* && -d $HOME/.zplug ]]; then
   export ZPLUGHOME=$HOME/.zplug
   source $HOME/.config/zsh/zplug.sh
 fi
@@ -16,7 +16,9 @@ if [[ "$OSTYPE" == darwin* ]]; then
 	export BROWSER='open'
 fi
 
-for config ($ZSH/**/*.zsh) source $config
+if [[ "$OSTYPE" == darwin* ]]; then
+  for config ($ZSH/**/*.zsh) source $config
+fi
 
 # OS SHELL SETTINGS
 export TERM=xterm-256color
