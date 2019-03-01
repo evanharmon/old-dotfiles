@@ -16,6 +16,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
 	export BROWSER='open'
 fi
 
+fpath=($HOME/zsh-completions/src $fpath)
 for config ($ZSH/**/*.zsh) source $config
 
 # OS SHELL SETTINGS
