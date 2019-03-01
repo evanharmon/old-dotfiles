@@ -2,6 +2,11 @@
 
 set -xe
 
+if [[ "$OS_TYPE" != darwin* ]]; then
+    echo "Only supports Mac"
+    exit 1
+fi
+
 if ! [ -d /Applications/Anki.app ]; then
     ANKI_VERSION=2.1.3
     curl -Lo $HOME/.cache/anki-$ANKI_VERSION-mac.dmg \

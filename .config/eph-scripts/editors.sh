@@ -2,8 +2,13 @@
 
 set -xe
 
+if [[ "$OS_TYPE" != darwin* ]]; then
+    echo "This script only supports Mac"
+    exit 1
+fi
+
 # EXPORTS
-export PATH="/Users/evan/.pyenv/bin:$PATH"
+export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 

@@ -2,6 +2,11 @@
 
 set -xe
 
+if [[ "$OS_TYPE" != darwin* ]]; then
+    echo "This script only supports Mac"
+    exit 1
+fi
+
 # HOMEBREW STAR RUNNER
 if ! [ -x "$(command -v brew)" ]; then
     /usr/bin/ruby -e \

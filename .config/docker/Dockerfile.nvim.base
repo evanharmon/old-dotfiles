@@ -1,0 +1,77 @@
+# BASE NEOVIM
+FROM amazonlinux
+
+# DOTFILES
+WORKDIR /root
+RUN yum groupinstall -y 'Development Tools'
+
+RUN git init --bare $HOME/.dotfiles
+RUN /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
+RUN /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME remote add origin https://github.com/evanharmon/dotfiles.git
+RUN /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin master
+
+RUN yum install -y zsh
+RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+RUN yum install -y neovim
+
+# FNM
+RUN curl https://raw.githubusercontent.com/Schniz/fnm/master/.ci/install.sh | bash
+RUN /bin/bash -c 'export PATH=$HOME/.fnm:$PATH; eval `fnm env --multi`; \
+  fnm install v11; $HOME/.fnm/fnm use v11; \
+  npm install --global pure-prompt --allow-root --unsafe-perm=true;'
+
+
+# BAT
+RUN mkdir $HOME/.cache
+ARG BAT_VERSION='bat-v0.10.0-x86_64-unknown-linux-gnu'
+RUN curl -Lo $HOME/.cache/$BAT_VERSION.tar.gz \
+        https://github.com/sharkdp/bat/releases/download/v0.10.0/$BAT_VERSION.tar.gz && \
+    tar -xf $HOME/.cache/$BAT_VERSION.tar.gz -C $HOME/.cache
+RUN cp $HOME/.cache/$BAT_VERSION/bat $HOME/bin
+
+# FZF
+RUN git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf && $HOME/.fzf/install
+
+# JQ
+ARG JQ_VERSION='https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64'
+RUN curl -qL -o jq $JQ_VERSION && chmod +x ./jq && mv jq $HOME/bin
+
+# FD
+ARG FD_VERSION='fd-v7.3.0-x86_64-unknown-linux-gnu'
+RUN curl -Lo $HOME/.cache/$FD_VERSION.tar.gz \
+        https://github.com/sharkdp/fd/releases/download/v7.3.0/$FD_VERSION.tar.gz && \
+    tar -xf $HOME/.cache/$FD_VERSION.tar.gz -C $HOME/.cache
+RUN cp $HOME/.cache/$FD_VERSION/fd $HOME/bin
+
+RUN yum install -y tree
+
+# PYENV / virtualenv
+ENV ZSH=$HOME/.config/zsh
+ENV CODE_DIR=$HOME/code
+ENV PYENV_ROOT="$HOME/.pyenv"
+ENV PYENV_VERSION='2.7.11'
+RUN mkdir -p $HOME/.local
+RUN git clone https://github.com/pyenv/pyenv.git $HOME/.pyenv
+RUN git clone https://github.com/pyenv/pyenv-virtualenv.git $PYENV_ROOT/plugins/pyenv-virtualenv
+
+# Neovim2 Environment
+# RUN /bin/bash -c 'export PATH="$HOME/.pyenv/bin:$PATH"; \
+#     eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)" \
+#     pyenv install --skip-existing 2.7.11; \
+#     pyenv virtualenv 2.7.11 neovim2; \
+#     pyenv activate neovim2; \
+#     pip install --upgrade pip; \
+#     pip install neovim;'
+
+# RUN /bin/bash -c 'export PATH="$HOME/.pyenv/bin:$PATH"; \
+#     eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)" \
+#     pyenv install --skip-existing 3.5.5; \
+#     pyenv virtualenv 3.5.5 neovim3; \
+#     pyenv activate neovim3; \
+#     pip install --upgrade pip; \
+#     pip install neovim;'
+
+
+ENV TERM=xterm-256color
+RUN git config --global user.name "Evan Harmon"
+RUN git config --global user.email "evan.p.harmon@gmail.com"

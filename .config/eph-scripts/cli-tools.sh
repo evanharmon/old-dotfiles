@@ -1,5 +1,9 @@
 #!/bin/bash -xe
 
+if [[ "$OS_TYPE" != darwin* ]]; then
+    echo "This script only supports Mac"
+    exit 1
+fi
 # REQUIREMENTS
 
 if ! [ -x "$(command -v rg)" ]; then

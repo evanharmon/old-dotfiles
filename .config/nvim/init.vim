@@ -37,7 +37,7 @@ Plug 'sebdah/vim-delve'
 
 Plug 'majutsushi/tagbar'
 Plug 'uarun/vim-protobuf'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install'  }
 Plug 'hashivim/vim-terraform'
 Plug 'juliosueiras/vim-terraform-completion'
 Plug 'Valloric/MatchTagAlways'

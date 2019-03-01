@@ -16,9 +16,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
 	export BROWSER='open'
 fi
 
-if [[ "$OSTYPE" == darwin* ]]; then
-  for config ($ZSH/**/*.zsh) source $config
-fi
+for config ($ZSH/**/*.zsh) source $config
 
 # OS SHELL SETTINGS
 export TERM=xterm-256color
@@ -39,9 +37,10 @@ export PATH=$HOME/bin:/usr/local/sbin:$PATH
 
 # PY
 if [ -d "$HOME/.pyenv" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PYENV_VERSION='2.7.11'
 	eval "$(pyenv init -)"
 	eval "$(pyenv virtualenv-init -)"
-  export PYENV_VERSION='2.7.11'
 fi
 
 # TOOLS
@@ -77,3 +76,4 @@ if [ -d $HOME/.fnm ]; then
 fi
 
 export AWS_DEFAULT_REGION='us-east-1'
+export AWS_REGION='us-east-1'
