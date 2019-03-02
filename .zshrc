@@ -40,6 +40,7 @@ export PATH=$HOME/bin:/usr/local/sbin:$PATH
 if [ -d "$HOME/.pyenv" ]; then
   export PYENV_ROOT="$HOME/.pyenv"
   export PYENV_VERSION='2.7.11'
+  export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 	eval "$(pyenv init -)"
 	eval "$(pyenv virtualenv-init -)"
 fi
