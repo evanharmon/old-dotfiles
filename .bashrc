@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if ! [ "$(command -v nvim)"]; then
+if ! [ "$(command -v nvim)" ]; then
     export EDITOR='vim'
     export VISUAL='vim'
 else
