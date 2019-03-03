@@ -2,7 +2,9 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
+set rtp+=expand("$HOME/.fzf")
 set rtp+=/usr/local/opt/fzf
+set rtp+=expand("$HOME/.fnm")
 set path+=**  " Recursive find
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/dist/*	" OSX/Linux
 set shell=/bin/zsh
@@ -11,43 +13,43 @@ let g:python_host_prog=expand('$HOME/.pyenv/versions/neovim2/bin/python')
 let g:python3_host_prog=expand('$HOME/.pyenv/versions/neovim3/bin/python')
 let g:ruby_host_prog=expand('$HOME/.gem/ruby/2.3.0/bin/neovim-ruby-host')
 
-  autocmd VimEnter *
-    \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-    \|   PlugInstall --sync | q
-    \| endif
+autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall --sync | q
+  \| endif
 
-  call plug#begin(expand('$HOME/.local/share/nvim/plugged'))
-  Plug 'mhartington/oceanic-next'
-  Plug 'airblade/vim-gitgutter'
-  Plug 'ntpeters/vim-better-whitespace'
-  Plug 'jeffkreeftmeijer/vim-numbertoggle'
-  Plug 'Yggdroot/indentLine'
-  Plug 'tpope/vim-repeat'
-  Plug 'tpope/vim-surround'
-  Plug 'jiangmiao/auto-pairs'
+call plug#begin(expand('$HOME/.local/share/nvim/plugged'))
+Plug 'mhartington/oceanic-next'
+Plug 'airblade/vim-gitgutter'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'Yggdroot/indentLine'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
 
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
-  Plug 'w0rp/ale'
-  Plug 'scrooloose/nerdcommenter'
-  Plug 'tpope/vim-fugitive'
-  Plug 'justinmk/vim-sneak'
-  Plug 'mhinz/vim-grepper'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'w0rp/ale'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-fugitive'
+Plug 'justinmk/vim-sneak'
+Plug 'mhinz/vim-grepper'
 
-  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-  " Plug 'rust-lang/rust.vim', { 'do': 'rustup component add rls rust-analysis rust-src' }
-  Plug 'rust-lang/rust.vim'
-  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-  Plug 'sebdah/vim-delve'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+" Plug 'rust-lang/rust.vim', { 'do': 'rustup component add rls rust-analysis rust-src' }
+Plug 'rust-lang/rust.vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'sebdah/vim-delve'
 
-  Plug 'majutsushi/tagbar'
-  Plug 'uarun/vim-protobuf'
-  Plug 'iamcco/markdown-preview.nvim', { 'do': 'eval `fnm env` & cd app & npm install'  }
-  Plug 'hashivim/vim-terraform'
-  Plug 'juliosueiras/vim-terraform-completion'
-  Plug 'Valloric/MatchTagAlways'
+Plug 'majutsushi/tagbar'
+Plug 'uarun/vim-protobuf'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'eval `fnm env` & cd app & npm install'  }
+Plug 'hashivim/vim-terraform'
+Plug 'juliosueiras/vim-terraform-completion'
+Plug 'Valloric/MatchTagAlways'
 
-  call plug#end()
+call plug#end()
 
 
 filetype plugin indent on
