@@ -72,7 +72,7 @@ RUN rm $HOME/.bashrc
 RUN git clone git://github.com/zsh-users/zsh-completions.git $HOME/zsh-completions
 
 # DOTFILES
-RUN echo "dotfiles commit b7df215"
+RUN echo "dotfiles commit 226397e"
 RUN git init --bare $HOME/.dotfiles
 RUN /bin/sh -c "\
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no; \
