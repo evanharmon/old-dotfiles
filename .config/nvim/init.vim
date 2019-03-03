@@ -11,7 +11,7 @@ let g:python_host_prog=expand('$HOME/.pyenv/versions/neovim2/bin/python')
 let g:python3_host_prog=expand('$HOME/.pyenv/versions/neovim3/bin/python')
 let g:ruby_host_prog=expand('$HOME/.gem/ruby/2.3.0/bin/neovim-ruby-host')
 
-if exists('PlugInstall')
+if exists(':PlugInstall')
   autocmd VimEnter *
     \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
     \|   PlugInstall --sync | q
@@ -43,7 +43,7 @@ if exists('PlugInstall')
 
   Plug 'majutsushi/tagbar'
   Plug 'uarun/vim-protobuf'
-  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install'  }
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'eval `fnm env` & cd app & npm install'  }
   Plug 'hashivim/vim-terraform'
   Plug 'juliosueiras/vim-terraform-completion'
   Plug 'Valloric/MatchTagAlways'
