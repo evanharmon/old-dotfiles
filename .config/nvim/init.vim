@@ -15,7 +15,7 @@ let g:ruby_host_prog=expand('$HOME/.gem/ruby/2.3.0/bin/neovim-ruby-host')
 
 autocmd VimEnter *
   \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \|   PlugInstall --sync | q
+  \|   PlugInstall | q
   \| endif
 
 call plug#begin(expand('$HOME/.local/share/nvim/plugged'))
