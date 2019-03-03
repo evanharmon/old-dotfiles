@@ -41,6 +41,7 @@ if [ -d "$HOME/.pyenv" ]; then
   export PYENV_ROOT="$HOME/.pyenv"
   export PYENV_VERSION='2.7.14'
   export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+  export PYENV_SHELL=zsh
 	eval "$(pyenv init -)"
 	eval "$(pyenv virtualenv-init -)"
   source $PYENV_ROOT/completions/pyenv.zsh
