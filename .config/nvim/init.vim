@@ -11,7 +11,6 @@ let g:python_host_prog=expand('$HOME/.pyenv/versions/neovim2/bin/python')
 let g:python3_host_prog=expand('$HOME/.pyenv/versions/neovim3/bin/python')
 let g:ruby_host_prog=expand('$HOME/.gem/ruby/2.3.0/bin/neovim-ruby-host')
 
-if exists(':PlugInstall')
   autocmd VimEnter *
     \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
     \|   PlugInstall --sync | q
@@ -49,7 +48,6 @@ if exists(':PlugInstall')
   Plug 'Valloric/MatchTagAlways'
 
   call plug#end()
-endif
 
 
 filetype plugin indent on
