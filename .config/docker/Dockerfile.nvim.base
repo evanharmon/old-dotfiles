@@ -1,15 +1,18 @@
 # BASE NEOVIM
 FROM amazonlinux
 
+ENV HOME /root
+ENV CODE_DIR=$HOME/code
+
 # DOTFILES
 WORKDIR /root
 RUN yum groupinstall -y 'Development Tools'
 
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-RUN yum install -y neovim
+RUN yum install -y neovim tree readline-devel bzip2-devel sqlite-devel \
+  openssl-devel awscli
 
-RUN amazon-linux-extras install golang1.11
-RUN amazon-linux-extras install rust1
+RUN amazon-linux-extras install golang1.11 rust1 vim
 
 # BAT
 RUN mkdir $HOME/.cache
@@ -33,10 +36,8 @@ RUN curl -Lo $HOME/.cache/$FD_VERSION.tar.gz \
     tar -xf $HOME/.cache/$FD_VERSION.tar.gz -C $HOME/.cache
 RUN cp $HOME/.cache/$FD_VERSION/fd $HOME/bin
 
-RUN yum install -y tree
 
 # PYENV / virtualenv
-ENV HOME /root
 ENV PYENV_ROOT $HOME/.pyenv
 ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 ENV PYENV_VERSION '2.7.14'
@@ -45,7 +46,6 @@ ENV PYENV_VERSION3 '3.5.5'
 RUN mkdir -p $HOME/.local
 RUN git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT
 RUN git clone https://github.com/pyenv/pyenv-virtualenv.git $PYENV_ROOT/plugins/pyenv-virtualenv
-RUN yum install -y readline-devel bzip2-devel sqlite-devel openssl-devel
 
 # Neovim2 Environment
 RUN pyenv install --skip-existing $PYENV_VERSION
@@ -67,12 +67,11 @@ RUN /bin/bash -c 'eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)"; \
 # ZSH SETUP
 RUN yum install -y zsh
 ENV ZSH=$HOME/.config/zsh
-ENV CODE_DIR=$HOME/code
 RUN rm $HOME/.bashrc
 RUN git clone git://github.com/zsh-users/zsh-completions.git $HOME/zsh-completions
 
 # DOTFILES
-RUN echo "dotfiles commit #b76fbb3"
+RUN echo "dotfiles commit cca0942"
 RUN git init --bare $HOME/.dotfiles
 RUN /bin/sh -c "\
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no; \
@@ -116,16 +115,18 @@ RUN mkdir -p /root/plugins
 RUN curl -o terraform.zip $TF_DOWNLOAD_LINK && \
   echo "$TF_SHA256 terraform.zip" | sha256sum -c && \
   unzip terraform.zip && mv ./terraform /root/bin
-# RUN curl -o $TF_AWS $TF_AWS_DOWNLOAD_LINK && \
-#   echo "$TF_AWS_SHA256 $TF_AWS" | sha256sum -c && unzip $TF_AWS -d /root/plugins
+RUN curl -o $TF_AWS $TF_AWS_DOWNLOAD_LINK && \
+  echo "$TF_AWS_SHA256 $TF_AWS" | sha256sum -c && unzip $TF_AWS -d /root/plugins
 
 RUN curl -Lo $CACHE/rustup.sh https://sh.rustup.rs -sSf && cat $CACHE/rustup.sh | sh -s -- -y
 
 ENV PATH $HOME/.cargo/bin:$PATH
 
 RUN rustup component add rustfmt rls-preview rust-analysis rust-src
-RUN yum install -y awscli
 RUN curl -sL https://rpm.nodesource.com/setup_11.x | bash -
 RUN yum install -y nodejs
+
+# Lastly, install plugins for editors
+RUN nvim --headless +PlugInstall +UpdateRemotePlugins +qall
 
 CMD ["zsh", "-l"]
