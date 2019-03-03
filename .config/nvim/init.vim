@@ -2,47 +2,55 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-" set runtimepath^=~/.cache/dein/repos/github.com/Shougo/dein.vim
 set rtp+=/usr/local/opt/fzf
 set path+=**  " Recursive find
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/dist/*	" OSX/Linux
+set shell=/bin/zsh
 
 let g:python_host_prog=expand('$HOME/.pyenv/versions/neovim2/bin/python')
 let g:python3_host_prog=expand('$HOME/.pyenv/versions/neovim3/bin/python')
 let g:ruby_host_prog=expand('$HOME/.gem/ruby/2.3.0/bin/neovim-ruby-host')
 
-call plug#begin(expand('$HOME/.local/share/nvim/plugged'))
-Plug 'mhartington/oceanic-next'
-Plug 'airblade/vim-gitgutter'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'Yggdroot/indentLine'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'jiangmiao/auto-pairs'
+if exists('PlugInstall')
+  autocmd VimEnter *
+    \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+    \|   PlugInstall --sync | q
+    \| endif
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'w0rp/ale'
-Plug 'scrooloose/nerdcommenter'
-Plug 'tpope/vim-fugitive'
-Plug 'justinmk/vim-sneak'
-Plug 'mhinz/vim-grepper'
+  call plug#begin(expand('$HOME/.local/share/nvim/plugged'))
+  Plug 'mhartington/oceanic-next'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'ntpeters/vim-better-whitespace'
+  Plug 'jeffkreeftmeijer/vim-numbertoggle'
+  Plug 'Yggdroot/indentLine'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-surround'
+  Plug 'jiangmiao/auto-pairs'
 
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-" Plug 'rust-lang/rust.vim', { 'do': 'rustup component add rls rust-analysis rust-src' }
-Plug 'rust-lang/rust.vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'sebdah/vim-delve'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+  Plug 'w0rp/ale'
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'tpope/vim-fugitive'
+  Plug 'justinmk/vim-sneak'
+  Plug 'mhinz/vim-grepper'
 
-Plug 'majutsushi/tagbar'
-Plug 'uarun/vim-protobuf'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install'  }
-Plug 'hashivim/vim-terraform'
-Plug 'juliosueiras/vim-terraform-completion'
-Plug 'Valloric/MatchTagAlways'
+  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+  " Plug 'rust-lang/rust.vim', { 'do': 'rustup component add rls rust-analysis rust-src' }
+  Plug 'rust-lang/rust.vim'
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  Plug 'sebdah/vim-delve'
 
-call plug#end()
+  Plug 'majutsushi/tagbar'
+  Plug 'uarun/vim-protobuf'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install'  }
+  Plug 'hashivim/vim-terraform'
+  Plug 'juliosueiras/vim-terraform-completion'
+  Plug 'Valloric/MatchTagAlways'
+
+  call plug#end()
+endif
+
 
 filetype plugin indent on
 syntax enable
@@ -94,7 +102,7 @@ endif
 " APPEARANCE
 set background=dark
 syntax on
-colorscheme OceanicNext
+silent! colorscheme OceanicNext
 let g:oceanic_next_terminal_bold=1
 let g:oceanic_next_terminal_italic=1
 hi htmlArg gui=italic
@@ -212,7 +220,7 @@ set updatetime=300
 set shortmess+=c
 set signcolumn=yes
 
-" tab triggers completio
+" tab triggers completion
 inoremap <silent><expr> <TAB>
   \ pumvisible() ? "\<C-n>" :
   \ <SID>check_back_space() ? "\<TAB>" :
@@ -252,7 +260,9 @@ function! s:show_documentation()
 endfunction
 
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+if exists(':CocActionAsync')
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+endif
 
 " Remap for rename current word
 " nmap <leader>rn <Plug>(coc-rename)

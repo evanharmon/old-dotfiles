@@ -5,21 +5,11 @@ FROM amazonlinux
 WORKDIR /root
 RUN yum groupinstall -y 'Development Tools'
 
-RUN git init --bare $HOME/.dotfiles
-RUN /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
-RUN /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME remote add origin https://github.com/evanharmon/dotfiles.git
-RUN /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin master
-
-RUN yum install -y zsh
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum install -y neovim
 
-# FNM
-RUN curl https://raw.githubusercontent.com/Schniz/fnm/master/.ci/install.sh | bash
-RUN /bin/bash -c 'export PATH=$HOME/.fnm:$PATH; eval `fnm env --multi`; \
-  fnm install v11; $HOME/.fnm/fnm use v11; \
-  npm install --global pure-prompt --allow-root --unsafe-perm=true;'
-
+RUN amazon-linux-extras install golang1.11
+RUN amazon-linux-extras install rust1
 
 # BAT
 RUN mkdir $HOME/.cache
@@ -46,33 +36,94 @@ RUN cp $HOME/.cache/$FD_VERSION/fd $HOME/bin
 RUN yum install -y tree
 
 # PYENV / virtualenv
-ENV ZSH=$HOME/.config/zsh
-ENV CODE_DIR=$HOME/code
-ENV PYENV_ROOT="$HOME/.pyenv"
-ENV PYENV_VERSION='2.7.11'
+ENV HOME /root
+ENV PYENV_ROOT $HOME/.pyenv
+ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
+ENV PYENV_VERSION '2.7.14'
+ENV PYENV_VERSION3 '3.5.5'
+
 RUN mkdir -p $HOME/.local
-RUN git clone https://github.com/pyenv/pyenv.git $HOME/.pyenv
+RUN git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT
 RUN git clone https://github.com/pyenv/pyenv-virtualenv.git $PYENV_ROOT/plugins/pyenv-virtualenv
-RUN git clone git://github.com/zsh-users/zsh-completions.git $HOME/zsh-completions
+RUN yum install -y readline-devel bzip2-devel sqlite-devel openssl-devel
 
 # Neovim2 Environment
-# RUN /bin/bash -c 'export PATH="$HOME/.pyenv/bin:$PATH"; \
-#     eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)" \
-#     pyenv install --skip-existing 2.7.11; \
-#     pyenv virtualenv 2.7.11 neovim2; \
-#     pyenv activate neovim2; \
-#     pip install --upgrade pip; \
-#     pip install neovim;'
+RUN pyenv install --skip-existing $PYENV_VERSION
+RUN /bin/bash -c 'eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)"; \
+    pyenv virtualenv $PYENV_VERSION neovim2; \
+    pyenv activate neovim2; \
+    pip install --upgrade pip; \
+'
+RUN pip install neovim
 
-# RUN /bin/bash -c 'export PATH="$HOME/.pyenv/bin:$PATH"; \
-#     eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)" \
-#     pyenv install --skip-existing 3.5.5; \
-#     pyenv virtualenv 3.5.5 neovim3; \
-#     pyenv activate neovim3; \
-#     pip install --upgrade pip; \
-#     pip install neovim;'
+RUN pyenv install --skip-existing $PYENV_VERSION3
+RUN /bin/bash -c 'eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)"; \
+    pyenv install --skip-existing 3.5.5; \
+    pyenv virtualenv 3.5.5 neovim3; \
+    pyenv activate neovim3; \
+    pip install --upgrade pip; \
+    pip install neovim;'
 
+# ZSH SETUP
+RUN yum install -y zsh
+ENV ZSH=$HOME/.config/zsh
+ENV CODE_DIR=$HOME/code
+RUN rm $HOME/.bashrc
+RUN git clone git://github.com/zsh-users/zsh-completions.git $HOME/zsh-completions
+
+# DOTFILES
+RUN echo "dotfiles commit 1ed702b"
+RUN git init --bare $HOME/.dotfiles
+RUN /bin/sh -c "\
+    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no; \
+    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME remote add origin https://github.com/evanharmon/dotfiles.git; \
+    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin master;"
 
 ENV TERM=xterm-256color
 RUN git config --global user.name "Evan Harmon"
 RUN git config --global user.email "evan.p.harmon@gmail.com"
+
+RUN curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# FNM & NPMS
+ENV PATH $HOME/.fnm:$PATH
+RUN curl https://raw.githubusercontent.com/Schniz/fnm/master/.ci/install.sh | bash
+RUN /bin/bash -c 'export PATH=$HOME/.fnm:$PATH; eval `fnm env --multi`; \
+  fnm install v11; $HOME/.fnm/fnm use v11; \
+  npm install --global pure-prompt --allow-root --unsafe-perm=true \
+    add neovim \
+    prettier \
+    typescript \
+    bash-language-server \
+    javascript-typescript-langserver \
+    serverless \
+    dockerfile-language-server-nodejs; \
+'
+
+# GOLANG
+RUN go get -u github.com/sourcegraph/go-langserver
+RUN go get -u github.com/derekparker/delve/cmd/dlv
+
+# TERRAFORM
+ARG TF_DOWNLOAD_LINK="https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip"
+ARG TF_SHA256="94504f4a67bad612b5c8e3a4b7ce6ca2772b3c1559630dfd71e9c519e3d6149c"
+ARG TF_AWS="terraform-provider-aws_1.58.0_linux_amd64.zip"
+ARG TF_AWS_DOWNLOAD_LINK="https://releases.hashicorp.com/terraform-provider-aws/1.58.0/terraform-provider-aws_1.58.0_linux_amd64.zip"
+ARG TF_AWS_SHA256="788635cd3e923ba601b238f9ec988fa5237696b2d0688d89027e8cdc31e5c3c6"
+
+RUN mkdir -p /root/plugins
+RUN curl -o terraform.zip $TF_DOWNLOAD_LINK && \
+  echo "$TF_SHA256 terraform.zip" | sha256sum -c && \
+  unzip terraform.zip && mv ./terraform /root/bin
+# RUN curl -o $TF_AWS $TF_AWS_DOWNLOAD_LINK && \
+#   echo "$TF_AWS_SHA256 $TF_AWS" | sha256sum -c && unzip $TF_AWS -d /root/plugins
+
+RUN curl -Lo $CACHE/rustup.sh https://sh.rustup.rs -sSf && cat $CACHE/rustup.sh | sh -s -- -y
+
+ENV PATH $HOME/.cargo/bin:$PATH
+
+RUN rustup component add rustfmt rls-preview rust-analysis rust-src
+RUN yum install -y awscli
+
+CMD ["zsh", "-l"]
