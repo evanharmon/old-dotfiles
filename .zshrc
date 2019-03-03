@@ -39,10 +39,11 @@ export PATH=$HOME/bin:/usr/local/sbin:$PATH
 # PY
 if [ -d "$HOME/.pyenv" ]; then
   export PYENV_ROOT="$HOME/.pyenv"
-  export PYENV_VERSION='2.7.11'
+  export PYENV_VERSION='2.7.14'
   export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 	eval "$(pyenv init -)"
 	eval "$(pyenv virtualenv-init -)"
+  source $(PYENV_ROOT)/completions/pyenv.zsh
 fi
 
 # TOOLS
@@ -72,7 +73,7 @@ export GO111MODULE=off
 export GOPROXY=http://127.0.0.1:3000
 
 # NODEJS
-if [ -d $HOME/.fnm ]; then
+if [ -d "$HOME/.fnm" ]; then
   export PATH=$HOME/.fnm:./node_modules/.bin:$PATH
   eval `fnm env`
 fi
