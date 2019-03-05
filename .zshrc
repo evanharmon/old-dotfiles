@@ -74,6 +74,7 @@ export GO111MODULE=off
 export GOPROXY=http://127.0.0.1:3000
 
 # NODEJS
+export PATH=$HOME/.yarn/bin:$PATH
 if [ -d "$HOME/.fnm" ]; then
   export PATH=$HOME/.fnm:$HOME/.fnm/current/bin:node_modules/.bin:$PATH
   eval `fnm env`
