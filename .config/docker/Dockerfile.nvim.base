@@ -3,24 +3,32 @@ FROM amazonlinux
 
 ENV HOME /root
 ENV CODE_DIR=$HOME/code
+ENV TERM=xterm-256color
+
+# Home Directories
+RUN mkdir $HOME/.local
+RUN mkdir $HOME/.cache
+RUN mkdir $HOME/bin
+RUN mkdir $HOME/code
+RUN mkdir $HOME/plugins
 
 # DOTFILES
 WORKDIR /root
 RUN yum groupinstall -y 'Development Tools'
 
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-RUN yum install -y neovim tree readline-devel bzip2-devel sqlite-devel \
-  openssl-devel awscli
+RUN yum install -y tree readline-devel bzip2-devel sqlite-devel openssl-devel \
+  awscli nodejs
 
 RUN amazon-linux-extras install golang1.11 rust1 vim
 
 # BAT
-RUN mkdir $HOME/.cache
 ARG BAT_VERSION='bat-v0.10.0-x86_64-unknown-linux-gnu'
 RUN curl -Lo $HOME/.cache/$BAT_VERSION.tar.gz \
         https://github.com/sharkdp/bat/releases/download/v0.10.0/$BAT_VERSION.tar.gz && \
-    tar -xf $HOME/.cache/$BAT_VERSION.tar.gz -C $HOME/.cache
-RUN cp $HOME/.cache/$BAT_VERSION/bat $HOME/bin
+    tar -xzf $HOME/.cache/$BAT_VERSION.tar.gz -C $HOME/.cache && \
+    cp $HOME/.cache/$BAT_VERSION/bat $HOME/bin/ && \
+    rm -rf $HOME/.cache/$BAT_VERSION
 
 # FZF
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf && $HOME/.fzf/install
@@ -33,8 +41,9 @@ RUN curl -qL -o jq $JQ_VERSION && chmod +x ./jq && mv jq $HOME/bin
 ARG FD_VERSION='fd-v7.3.0-x86_64-unknown-linux-gnu'
 RUN curl -Lo $HOME/.cache/$FD_VERSION.tar.gz \
         https://github.com/sharkdp/fd/releases/download/v7.3.0/$FD_VERSION.tar.gz && \
-    tar -xf $HOME/.cache/$FD_VERSION.tar.gz -C $HOME/.cache
-RUN cp $HOME/.cache/$FD_VERSION/fd $HOME/bin
+    tar -xzf $HOME/.cache/$FD_VERSION.tar.gz -C $HOME/.cache && \
+    cp $HOME/.cache/$FD_VERSION/fd $HOME/bin && \
+    rm -rf $HOME/.cache/$FD_VERSION
 
 
 # PYENV / virtualenv
@@ -42,8 +51,6 @@ ENV PYENV_ROOT $HOME/.pyenv
 ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 ENV PYENV_VERSION '2.7.14'
 ENV PYENV_VERSION3 '3.5.5'
-
-RUN mkdir -p $HOME/.local
 RUN git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT
 RUN git clone https://github.com/pyenv/pyenv-virtualenv.git $PYENV_ROOT/plugins/pyenv-virtualenv
 
@@ -53,8 +60,7 @@ RUN /bin/bash -c 'eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)"; \
     pyenv virtualenv $PYENV_VERSION neovim2; \
     pyenv activate neovim2; \
     pip install --upgrade pip; \
-'
-RUN pip install neovim
+    pip install neovim;'
 
 RUN pyenv install --skip-existing $PYENV_VERSION3
 RUN /bin/bash -c 'eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)"; \
@@ -67,42 +73,37 @@ RUN /bin/bash -c 'eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)"; \
 # ZSH SETUP
 RUN yum install -y zsh
 ENV ZSH=$HOME/.config/zsh
-RUN rm $HOME/.bashrc
 RUN git clone git://github.com/zsh-users/zsh-completions.git $HOME/zsh-completions
 
-# DOTFILES
-RUN echo "dotfiles commit cca0942"
-RUN git init --bare $HOME/.dotfiles
-RUN /bin/sh -c "\
-    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no; \
-    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME remote add origin https://github.com/evanharmon/dotfiles.git; \
-    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin master;"
-
-ENV TERM=xterm-256color
-RUN git config --global user.name "Evan Harmon"
-RUN git config --global user.email "evan.p.harmon@gmail.com"
-
+# NEOVIM
+ARG NVIM_VERSION='nvim-linux64'
+ENV PATH $HOME/bin/$NVIM_VERSION/bin:$PATH
+RUN curl -fLo $HOME/.cache/$NVIM_VERSION.tar.gz \
+  https://github.com/neovim/neovim/releases/download/v0.3.4/$NVIM_VERSION.tar.gz && \
+    tar -xzf $HOME/.cache/$NVIM_VERSION.tar.gz -C $HOME/bin
+## NEOVIM Plugins
 RUN curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # FNM & NPMS
-ENV PATH $HOME/.fnm:$PATH
+ENV DK_NODE_VERSION "v11.10.1"
+ENV PATH $HOME/.fnm:$HOME/.fnm/current/bin:$HOME/.fnm/node-versions/$DK_NODE_VERSION/installation/bin:$PATH
 RUN curl https://raw.githubusercontent.com/Schniz/fnm/master/.ci/install.sh | bash
 RUN /bin/bash -c 'export PATH=$HOME/.fnm:$PATH; eval `fnm env --multi`; \
-  fnm install v11; $HOME/.fnm/fnm use v11; \
-  npm install --global pure-prompt --allow-root --unsafe-perm=true \
+  fnm install $DK_NODE_VERSION; $HOME/.fnm/fnm use $DK_NODE_VERSION;'
+RUN npm install --global --allow-root --unsafe-perm=true \
+    pure-prompt \
     add neovim vim-node-rpc \
     prettier \
     typescript \
     bash-language-server \
     javascript-typescript-langserver \
     serverless \
-    dockerfile-language-server-nodejs; \
-'
+    dockerfile-language-server-nodejs
 
 # GOLANG
-RUN go get -u github.com/saibing/bingo
-RUN go get -u github.com/derekparker/delve/cmd/dlv
+RUN go get -u github.com/saibing/bingo && \
+    go get -u github.com/derekparker/delve/cmd/dlv
 
 # TERRAFORM
 ARG TF_DOWNLOAD_LINK="https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip"
@@ -111,20 +112,29 @@ ARG TF_AWS="terraform-provider-aws_1.58.0_linux_amd64.zip"
 ARG TF_AWS_DOWNLOAD_LINK="https://releases.hashicorp.com/terraform-provider-aws/1.58.0/terraform-provider-aws_1.58.0_linux_amd64.zip"
 ARG TF_AWS_SHA256="788635cd3e923ba601b238f9ec988fa5237696b2d0688d89027e8cdc31e5c3c6"
 
-RUN mkdir -p /root/plugins
 RUN curl -o terraform.zip $TF_DOWNLOAD_LINK && \
   echo "$TF_SHA256 terraform.zip" | sha256sum -c && \
   unzip terraform.zip && mv ./terraform /root/bin
 RUN curl -o $TF_AWS $TF_AWS_DOWNLOAD_LINK && \
   echo "$TF_AWS_SHA256 $TF_AWS" | sha256sum -c && unzip $TF_AWS -d /root/plugins
 
-RUN curl -Lo $CACHE/rustup.sh https://sh.rustup.rs -sSf && cat $CACHE/rustup.sh | sh -s -- -y
-
+# RUST
 ENV PATH $HOME/.cargo/bin:$PATH
-
+RUN curl -Lo $CACHE/rustup.sh https://sh.rustup.rs -sSf && cat $CACHE/rustup.sh | sh -s -- -y
 RUN rustup component add rustfmt rls-preview rust-analysis rust-src
 RUN curl -sL https://rpm.nodesource.com/setup_11.x | bash -
-RUN yum install -y nodejs
+
+# DOTFILES
+RUN rm $HOME/.bashrc
+RUN echo "dotfiles commit ffb7cab4fdc519f6e5fdc17284a0a3c86f2838f1"
+RUN git init --bare $HOME/.dotfiles
+RUN /bin/sh -c "\
+    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no; \
+    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME remote add origin https://github.com/evanharmon/dotfiles.git; \
+    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin master;"
+
+RUN git config --global user.name "Evan Harmon" && \
+    git config --global user.email "evan.p.harmon@gmail.com"
 
 # Lastly, install plugins for editors
 RUN nvim --headless +PlugInstall +UpdateRemotePlugins +qall
