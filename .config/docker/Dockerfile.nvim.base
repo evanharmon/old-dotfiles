@@ -124,9 +124,15 @@ RUN curl -Lo $CACHE/rustup.sh https://sh.rustup.rs -sSf && cat $CACHE/rustup.sh 
 RUN rustup component add rustfmt rls-preview rust-analysis rust-src
 RUN curl -sL https://rpm.nodesource.com/setup_11.x | bash -
 
+# RUBY
+ENV PATH $HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
+ENV RBENV_VERSION=2.6.0
+RUN curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash
+RUN /bin/sh -c 'rbenv install $RBENV_VERSION; rbenv global $RBENV_VERSION; gem install neovim'
+
 # DOTFILES
 RUN rm $HOME/.bashrc
-RUN echo "dotfiles commit ffb7cab4fdc519f6e5fdc17284a0a3c86f2838f1"
+RUN echo "dotfiles commit d4eb5c3"
 RUN git init --bare $HOME/.dotfiles
 RUN /bin/sh -c "\
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no; \

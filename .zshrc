@@ -81,5 +81,8 @@ if [ -d "$HOME/.fnm" ]; then
   fnm use v11.10.1
 fi
 
+# RUBY
+export PATH=$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
+
 export AWS_DEFAULT_REGION='us-east-1'
 export AWS_REGION='us-east-1'
