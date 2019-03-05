@@ -1,15 +1,12 @@
 # SOURCE ZSH FILES
 export DOTFILES=$HOME
+export CODE_DIR=$HOME/code
 export ZSH=$HOME/.config/zsh
 if [[ "$OSTYPE" == darwin* && -d $HOME/.zplug ]]; then
   export ZPLUGHOME=$HOME/.zplug
   source $HOME/.config/zsh/zplug.sh
 fi
 
-if [[ ! -d $HOME/code ]]; then
-	mkdir $HOME/code
-fi
-export CODE_DIR=$HOME/code
 
 if [[ "$OSTYPE" == darwin* ]]; then
   test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -78,8 +75,9 @@ export GOPROXY=http://127.0.0.1:3000
 
 # NODEJS
 if [ -d "$HOME/.fnm" ]; then
-  export PATH=$HOME/.fnm:./node_modules/.bin:$PATH
+  export PATH=$HOME/.fnm:$HOME/.fnm/current/bin:node_modules/.bin:$PATH
   eval `fnm env`
+  fnm use v11.10.1
 fi
 
 export AWS_DEFAULT_REGION='us-east-1'
