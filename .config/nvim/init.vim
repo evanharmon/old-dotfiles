@@ -11,7 +11,7 @@ set shell=/bin/zsh
 
 let g:python_host_prog=expand('$HOME/.pyenv/versions/neovim2/bin/python')
 let g:python3_host_prog=expand('$HOME/.pyenv/versions/neovim3/bin/python')
-let g:ruby_host_prog=expand('$HOME/.gem/ruby/2.3.0/bin/neovim-ruby-host')
+let g:ruby_host_prog=expand('$HOME/.gem/ruby/2.6.0/bin/neovim-ruby-host')
 
 autocmd VimEnter *
   \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
