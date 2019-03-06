@@ -57,6 +57,7 @@ if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
   source /usr/local/opt/fzf/shell/key-bindings.zsh
   source /usr/local/opt/fzf/shell/completion.zsh
 fi
+[[ -s "$HOME/.local/share/marker/marker.sh" ]] && source "$HOME/.local/share/marker/marker.sh"
 
 ## AWS
 if [ -e /usr/local/bin/aws_completer ]; then
@@ -86,3 +87,6 @@ export PATH=$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
 
 export AWS_DEFAULT_REGION='us-east-1'
 export AWS_REGION='us-east-1'
+
+# MUST BE LAST
+source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

@@ -28,6 +28,11 @@ if ! [ -x "$(command -v fzf)" ]; then
     /usr/local/opt/fzf/install
 fi
 
+if ! [ "$(command -v marker)" ]; then
+    rm -rf $HOME/.marker
+    git clone --depth=1 https://github.com/pindexis/marker $HOME/.marker && $HOME/.marker/install.py
+fi
+
 if ! [ -x "$(command -v jq)" ]; then
     brew install jq
 fi

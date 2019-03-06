@@ -1,5 +1,7 @@
 # make mv easier
 autoload -U zmv
+autoload -U promptinit; promptinit
+prompt pure
 
 autoload colors zsh/terminfo
 colors
@@ -33,13 +35,11 @@ bindkey '^[^[[C' forward-word
 bindkey '^[[5D' beginning-of-line
 bindkey '^[[5C' end-of-line
 bindkey '^[[3~' delete-char
-bindkey '^[^N' newtab
+# bindkey '^[^N' newtab
 bindkey '^?' backward-delete-char
 
-if [[ "$OS_TYPE" == darwin* ]]; then
-  # BINDS
-  bindkey '^[[A' history-substring-search-up
-  bindkey '^[[B' history-substring-search-down
-  bindkey -M vicmd 'k' history-substring-search-up
-  bindkey -M vicmd 'j' history-substring-search-down
-fi
+# BINDS
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down

@@ -122,6 +122,7 @@ let g:NERDCustomDelimiters={ 'conf': { 'left': '#' } }
 let g:NERDCustomDelimiters={ 'javascript': { 'left': '{/*', 'right': '*/}', 'leftAlt': '//' } }
 let g:NERDSpaceDelims=1
 let g:NERDDefaultAlign='left'
+let g:NERDCommentEmptyLines=0
 let g:fzf_buffers_jump=1
 let g:fzf_history_dir='~/.local/share/fzf-history'
 let g:fzf_tags_command='fd | ctags --links=no -L-'

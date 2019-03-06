@@ -13,6 +13,10 @@ if ! [ -x "$(command -v brew)" ]; then
         "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+# Will Prompt For SUDO
+brew install bash
+sudo -- sh -c "echo '/usr/local/bin/bash' >> /etc/shells"
+
 # ZSH
 if ! [[ $SHELL =~ .*zsh.* ]]; then
     brew install zsh
