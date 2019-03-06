@@ -132,7 +132,7 @@ RUN /bin/sh -c 'rbenv install $RBENV_VERSION; rbenv global $RBENV_VERSION; gem i
 
 # DOTFILES
 RUN rm $HOME/.bashrc
-RUN echo "dotfiles commit ba65fca"
+RUN echo "dotfiles commit 2677aba"
 RUN git init --bare $HOME/.dotfiles
 RUN /bin/sh -c "\
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no; \
