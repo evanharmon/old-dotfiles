@@ -3,6 +3,7 @@
 # Don't set -e as nvm install will then fail while multiple curls
 set -x
 
+set NODE_VERSION=11.11.1
 # Node Manager
 if ! [ -d "$HOME/.fnm" ]; then
     curl https://raw.githubusercontent.com/Schniz/fnm/master/.ci/install.sh | bash
@@ -10,10 +11,10 @@ fi
 
 if [ -d "$HOME/.fnm" ]; then
     echo "install node via fnm"
-    fnm install latest
+    fnm install $NODE_VERSION
     export PATH=$HOME/.fnm:$PATH
     eval `fnm env`
-    fnm use latest
+    fnm use $NODE_VERSION
 fi
 
 if ! [ -x "$(command -v yarn)" ]; then
@@ -26,7 +27,6 @@ npm install -g add neovim \
   typescript \
   bash-language-server \
   javascript-typescript-langserver \
-  serverless \
   dockerfile-language-server-nodejs
 
 echo "Finished. Remember to source .zshrc before continuing"
