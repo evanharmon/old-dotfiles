@@ -2,13 +2,20 @@
 
 set -xe
 
-if [[ "$OS_TYPE" != darwin* ]]; then
+# Should match $HOME/.zshrc in dotfiles
+PYENV_ROOT="${PYENV_ROOT:-$HOME/.pyenv}"
+PYENV2_NAME="${PYENV2_NAME:-v2}"
+PYENV3_NAME="${PYENV3_NAME:-v3}"
+PYENV_VERSION="${PYENV_VERSION:-2.7.14}"
+PYENV_VERSION3="${PYENV_VERSION3:-3.5.5}"
+
+if [[ "$(uname -a)" != Darwin* ]]; then
     echo "This script only supports Mac"
     exit 1
 fi
 
 # EXPORTS
-export PATH="$HOME/.pyenv/bin:$PATH"
+export PATH="$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
@@ -20,18 +27,18 @@ if ! brew list editorconfig; then
     brew install editorconfig
 fi
 
-if [ ! -L $HOME/.pyenv/versions/neovim2 ]; then
-    pyenv install --skip-existing 2.7.11
-    pyenv virtualenv 2.7.11 neovim2
-    pyenv activate neovim2
+if [ ! -L $PYENV_ROOT/versions/$PYENV2_NAME ]; then
+    pyenv install --skip-existing $PYENV_VERSION
+    pyenv virtualenv $PYENV_VERSION $PYENV2_NAME
+    pyenv activate $PYENV2_NAME
     pip install --upgrade pip
     pip install neovim
 fi
 
-if [ ! -L $HOME/.pyenv/versions/neovim3 ]; then
-    pyenv install --skip-existing 3.5.5
-    pyenv virtualenv 3.5.5 neovim3
-    pyenv activate neovim3
+if [ ! -L $PYENV_ROOT/versions/$PYENV3_NAME ]; then
+    pyenv install --skip-existing $PYENV_VERSION3
+    pyenv virtualenv $PYENV_VERSION3 $PYENV3_NAME
+    pyenv activate $PYENV3_NAME
     pip install --upgrade pip
     pip install neovim
 fi

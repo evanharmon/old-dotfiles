@@ -9,8 +9,8 @@ set path+=**  " Recursive find
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/dist/*	" OSX/Linux
 set shell=/bin/zsh
 
-let g:python_host_prog=expand('$HOME/.pyenv/versions/neovim2/bin/python')
-let g:python3_host_prog=expand('$HOME/.pyenv/versions/neovim3/bin/python')
+let g:python_host_prog=expand('$PYENV_ROOT/versions/$PYENV_VERSION/bin/python')
+let g:python3_host_prog=expand('$PYENV_ROOT/versions/$PYENV_VERSION3/bin/python')
 let g:ruby_host_prog=expand('$HOME/.rbenv/shims/neovim-ruby-host')
 
 autocmd VimEnter *
@@ -131,6 +131,8 @@ let g:indentLine_char="•"
 let g:indentLine_color_term=239
 let g:indentLine_enabled=1
 let g:sneak#s_next=1
+let g:mkdp_auto_start=1
+let g:mkdp_auto_close=1
 
 " JAVASCRIPT
 let g:prettier#config#print_width=80

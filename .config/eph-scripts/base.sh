@@ -2,7 +2,7 @@
 
 set -xe
 
-if [[ "$OS_TYPE" != darwin* ]]; then
+if [[ "$(uname -a)" != Darwin* ]]; then
     echo "This script only supports Mac"
     exit 1
 fi
@@ -31,6 +31,10 @@ fi
 if ! [ -d $HOME/.zplug ]; then
     echo "installing zplug, a plugin manager for zsh - http://zplug.sh"
     git clone https://github.com/zplug/zplug $HOME/.zplug
+fi
+
+if ! [ -d $HOME/zsh-syntax-highlighting ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 fi
 
 if ! [ -d /Applications/iTerm.app ]; then

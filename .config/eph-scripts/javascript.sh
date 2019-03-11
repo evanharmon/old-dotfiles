@@ -3,7 +3,12 @@
 # Don't set -e as nvm install will then fail while multiple curls
 set -x
 
-set NODE_VERSION=11.11.1
+if [[ "$(uname -a)" != Darwin* ]]; then
+    echo "This script only supports Mac"
+    exit 1
+fi
+
+NODE_VERSION="{NODE_VERSION:-11.11.1}"
 # Node Manager
 if ! [ -d "$HOME/.fnm" ]; then
     curl https://raw.githubusercontent.com/Schniz/fnm/master/.ci/install.sh | bash

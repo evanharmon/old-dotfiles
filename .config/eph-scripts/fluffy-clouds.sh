@@ -1,6 +1,12 @@
 #!/bin/bash
 
 set -e
+
+if [[ "$(uname -a)" != Darwin* ]]; then
+    echo "This script only supports Mac"
+    exit 1
+fi
+
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 

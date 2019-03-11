@@ -2,7 +2,7 @@
 
 set -xe
 
-if [[ "$OS_TYPE" != darwin* ]]; then
+if [[ "$(uname -a)" != Darwin* ]]; then
     echo "Only supports Mac"
     exit 1
 fi

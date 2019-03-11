@@ -1,5 +1,10 @@
 #!/bin/bash -xe
 
+if [[ "$(uname -a)" != Darwin* ]]; then
+    echo "This script only supports Mac"
+    exit 1
+fi
+
 CACHE=$HOME/.cache
 
 # DOWNLOAD RUSTUP
@@ -23,4 +28,3 @@ fi
 if [ "$(command -v rustup)" ]; then
     rustup component add rustfmt rls-preview rust-analysis rust-src
 fi
-

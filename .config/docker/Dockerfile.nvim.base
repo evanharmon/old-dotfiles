@@ -6,8 +6,6 @@ FROM eph-python/base:latest as python
 
 # BASE NEOVIM
 FROM amazonlinux
-COPY --from=bins /root/bin /root/bin
-COPY --from=python /root/.pyenv /root/.pyenv
 
 ENV HOME /root
 ENV PYENV_ROOT=$HOME/.pyenv PYENV_VERSION='2.7.14' PYENV_VERSION3='3.5.5' PYENV2_NAME=v2 PYENV3_NAME=v3
@@ -18,7 +16,7 @@ ENV TERM=xterm-256color
 RUN mkdir $HOME/.local
 RUN mkdir $HOME/.cache
 
-# DOTFILES
+# Dependencies
 WORKDIR /root
 RUN yum groupinstall -y 'Development Tools'
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
@@ -27,10 +25,14 @@ RUN yum install -y tree readline-devel bzip2-devel sqlite-devel openssl-devel \
 
 RUN amazon-linux-extras install golang1.11 rust1 vim
 
+COPY --from=bins /root/bin /root/bin
+COPY --from=python /root/.pyenv /root/.pyenv
+
 # ZSH SETUP
 RUN yum install -y zsh
 ENV ZSH=$HOME/.config/zsh
 RUN git clone git://github.com/zsh-users/zsh-completions.git $HOME/zsh-completions
+RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 
 # NEOVIM
 ARG NVIM_VERSION='nvim-linux64'
@@ -76,7 +78,7 @@ RUN /bin/sh -c 'rbenv install $RBENV_VERSION; rbenv global $RBENV_VERSION; gem i
 
 # DOTFILES
 RUN rm $HOME/.bashrc
-RUN echo "dotfiles commit 03a03ed"
+RUN echo "dotfiles commit 3fc67af"
 RUN git init --bare $HOME/.dotfiles
 RUN /bin/sh -c "\
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no; \

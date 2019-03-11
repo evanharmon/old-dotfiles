@@ -1,6 +1,12 @@
 #!/bin/bash
 
 set -xe
+
+if [[ "$(uname -a)" != Darwin* ]]; then
+    echo "This script only supports Mac"
+    exit 1
+fi
+
 CACHE=$HOME/.cache
 GOLANG_VERSION='1.11'
 GOLANG_DOWNLOAD=''
