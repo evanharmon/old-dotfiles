@@ -32,7 +32,7 @@ if [ ! -L $PYENV_ROOT/versions/$PYENV2_NAME ]; then
     pyenv virtualenv $PYENV_VERSION $PYENV2_NAME
     pyenv activate $PYENV2_NAME
     pip install --upgrade pip
-    pip install neovim
+    pip install neovim pynvim
 fi
 
 if [ ! -L $PYENV_ROOT/versions/$PYENV3_NAME ]; then
@@ -40,7 +40,7 @@ if [ ! -L $PYENV_ROOT/versions/$PYENV3_NAME ]; then
     pyenv virtualenv $PYENV_VERSION3 $PYENV3_NAME
     pyenv activate $PYENV3_NAME
     pip install --upgrade pip
-    pip install neovim
+    pip install neovim pynvim
 fi
 
 if ! [ -x "$(gem list neovim -i)" ]; then

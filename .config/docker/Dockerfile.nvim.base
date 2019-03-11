@@ -8,7 +8,7 @@ FROM eph-python/base:latest as python
 FROM amazonlinux
 
 ENV HOME /root
-ENV PYENV_ROOT=$HOME/.pyenv PYENV_VERSION='2.7.14' PYENV_VERSION3='3.5.5' PYENV2_NAME=v2 PYENV3_NAME=v3
+ENV PYENV_ROOT=$HOME/.pyenv PYENV_VERSION='2.7.14' PYENV_VERSION3='3.5.5' PYENV2_NAME=v2 PYENV3_NAME=v3 PYENV_VIRTUALENV_DISABLE_PROMPT=1
 ENV PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 ENV TERM=xterm-256color
 
@@ -78,7 +78,7 @@ RUN /bin/sh -c 'rbenv install $RBENV_VERSION; rbenv global $RBENV_VERSION; gem i
 
 # DOTFILES
 RUN rm $HOME/.bashrc
-RUN echo "dotfiles commit bf8a7c3"
+RUN echo "dotfiles commit 37f3e8eb6abc49e5f983a507fa9d1a33defa8b07"
 RUN git init --bare $HOME/.dotfiles
 RUN /bin/sh -c "\
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no; \
