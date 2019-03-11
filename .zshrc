@@ -28,7 +28,6 @@ fi
 export PAGER='less'
 
 # PATHS
-export PATH=$HOME/.pyenv/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.protoc/bin:$PATH
 export PATH=$HOME/bin:/usr/local/sbin:$PATH
@@ -36,6 +35,9 @@ export PATH=$HOME/bin:/usr/local/sbin:$PATH
 # PY
 if [ -d "$HOME/.pyenv" ]; then
   export PYENV_ROOT="$HOME/.pyenv"
+  export PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
+	export PYENV2_NAME=v2
+	export PYENV3_NAME=v3
   export PYENV_VERSION='2.7.14'
   export PYENV_VIRTUALENV_DISABLE_PROMPT=1
   export PYENV_SHELL=zsh

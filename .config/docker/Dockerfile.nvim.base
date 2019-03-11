@@ -1,74 +1,31 @@
+# BINARIES
+FROM eph-bin/base:latest as bins
+
+# PYTHON VERSIONS
+FROM eph-python/base:latest as python
+
 # BASE NEOVIM
 FROM amazonlinux
+COPY --from=bins /root/bin /root/bin
+COPY --from=python /root/.pyenv /root/.pyenv
 
 ENV HOME /root
-ENV CODE_DIR=$HOME/code
+ENV PYENV_ROOT=$HOME/.pyenv PYENV_VERSION='2.7.14' PYENV_VERSION3='3.5.5' PYENV2_NAME=v2 PYENV3_NAME=v3
+ENV PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 ENV TERM=xterm-256color
 
 # Home Directories
 RUN mkdir $HOME/.local
 RUN mkdir $HOME/.cache
-RUN mkdir $HOME/bin
-RUN mkdir $HOME/code
-RUN mkdir $HOME/plugins
 
 # DOTFILES
 WORKDIR /root
 RUN yum groupinstall -y 'Development Tools'
-
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum install -y tree readline-devel bzip2-devel sqlite-devel openssl-devel \
   awscli nodejs
 
 RUN amazon-linux-extras install golang1.11 rust1 vim
-
-# BAT
-ARG BAT_VERSION='bat-v0.10.0-x86_64-unknown-linux-gnu'
-RUN curl -Lo $HOME/.cache/$BAT_VERSION.tar.gz \
-        https://github.com/sharkdp/bat/releases/download/v0.10.0/$BAT_VERSION.tar.gz && \
-    tar -xzf $HOME/.cache/$BAT_VERSION.tar.gz -C $HOME/.cache && \
-    cp $HOME/.cache/$BAT_VERSION/bat $HOME/bin/ && \
-    rm -rf $HOME/.cache/$BAT_VERSION
-
-# FZF
-RUN git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf && $HOME/.fzf/install
-
-# JQ
-ARG JQ_VERSION='https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64'
-RUN curl -qL -o jq $JQ_VERSION && chmod +x ./jq && mv jq $HOME/bin
-
-# FD
-ARG FD_VERSION='fd-v7.3.0-x86_64-unknown-linux-gnu'
-RUN curl -Lo $HOME/.cache/$FD_VERSION.tar.gz \
-        https://github.com/sharkdp/fd/releases/download/v7.3.0/$FD_VERSION.tar.gz && \
-    tar -xzf $HOME/.cache/$FD_VERSION.tar.gz -C $HOME/.cache && \
-    cp $HOME/.cache/$FD_VERSION/fd $HOME/bin && \
-    rm -rf $HOME/.cache/$FD_VERSION
-
-
-# PYENV / virtualenv
-ENV PYENV_ROOT $HOME/.pyenv
-ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
-ENV PYENV_VERSION '2.7.14'
-ENV PYENV_VERSION3 '3.5.5'
-RUN git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT
-RUN git clone https://github.com/pyenv/pyenv-virtualenv.git $PYENV_ROOT/plugins/pyenv-virtualenv
-
-# Neovim2 Environment
-RUN pyenv install --skip-existing $PYENV_VERSION
-RUN /bin/bash -c 'eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)"; \
-    pyenv virtualenv $PYENV_VERSION neovim2; \
-    pyenv activate neovim2; \
-    pip install --upgrade pip; \
-    pip install neovim;'
-
-RUN pyenv install --skip-existing $PYENV_VERSION3
-RUN /bin/bash -c 'eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)"; \
-    pyenv install --skip-existing 3.5.5; \
-    pyenv virtualenv 3.5.5 neovim3; \
-    pyenv activate neovim3; \
-    pip install --upgrade pip; \
-    pip install neovim;'
 
 # ZSH SETUP
 RUN yum install -y zsh
@@ -105,19 +62,6 @@ RUN npm install --global --allow-root --unsafe-perm=true \
 RUN go get -u github.com/saibing/bingo && \
     go get -u github.com/derekparker/delve/cmd/dlv
 
-# TERRAFORM
-ARG TF_DOWNLOAD_LINK="https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip"
-ARG TF_SHA256="94504f4a67bad612b5c8e3a4b7ce6ca2772b3c1559630dfd71e9c519e3d6149c"
-ARG TF_AWS="terraform-provider-aws_1.58.0_linux_amd64.zip"
-ARG TF_AWS_DOWNLOAD_LINK="https://releases.hashicorp.com/terraform-provider-aws/1.58.0/terraform-provider-aws_1.58.0_linux_amd64.zip"
-ARG TF_AWS_SHA256="788635cd3e923ba601b238f9ec988fa5237696b2d0688d89027e8cdc31e5c3c6"
-
-RUN curl -o terraform.zip $TF_DOWNLOAD_LINK && \
-  echo "$TF_SHA256 terraform.zip" | sha256sum -c && \
-  unzip terraform.zip && mv ./terraform /root/bin
-RUN curl -o $TF_AWS $TF_AWS_DOWNLOAD_LINK && \
-  echo "$TF_AWS_SHA256 $TF_AWS" | sha256sum -c && unzip $TF_AWS -d /root/plugins
-
 # RUST
 ENV PATH $HOME/.cargo/bin:$PATH
 RUN curl -Lo $CACHE/rustup.sh https://sh.rustup.rs -sSf && cat $CACHE/rustup.sh | sh -s -- -y
@@ -132,7 +76,7 @@ RUN /bin/sh -c 'rbenv install $RBENV_VERSION; rbenv global $RBENV_VERSION; gem i
 
 # DOTFILES
 RUN rm $HOME/.bashrc
-RUN echo "dotfiles commit 8031f0c"
+RUN echo "dotfiles commit 03a03ed"
 RUN git init --bare $HOME/.dotfiles
 RUN /bin/sh -c "\
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no; \
