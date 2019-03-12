@@ -11,3 +11,5 @@ RUN yum install -y tree readline-devel bzip2-devel sqlite-devel openssl-devel \
   awscli nodejs which
 
 RUN amazon-linux-extras install golang1.11 rust1 vim
+
+RUN yum install -y rsync
