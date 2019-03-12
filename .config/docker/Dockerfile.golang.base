@@ -1,0 +1,29 @@
+FROM eph-amazonlinux/devtools:latest
+
+ENV HOME=/root GOPATH=$HOME/go GO111MODULE=off GOPROXY=http://127.0.0.1:3000
+ENV PATH=$GOPATH/bin:$PATH
+
+WORKDIR /root
+
+# Dependencies for vim-go
+RUN go get -u github.com/saibing/bingo
+RUN go get -u github.com/derekparker/delve/cmd/dlv
+RUN go get -u github.com/zmb3/gogetdoc
+RUN go get -u golang.org/x/tools/cmd/guru
+RUN go get -u golang.org/x/tools/cmd/gopls
+RUN go get -u github.com/davidrjenni/reftools/cmd/fillstruct
+RUN go get -u github.com/rogpeppe/godef
+RUN go get -u github.com/fatih/motion
+RUN go get -u github.com/kisielk/errcheck
+RUN go get -u github.com/mdempsky/gocode
+RUN go get -u github.com/josharian/impl
+RUN go get -u github.com/koron/iferr
+RUN go get -u github.com/jstemmer/gotags
+RUN go get -u golang.org/x/tools/cmd/gorename
+RUN go get -u golang.org/x/tools/cmd/goimports
+RUN go get -u github.com/stamblerre/gocode
+RUN go get -u github.com/fatih/gomodifytags
+RUN go get -u honnef.co/go/tools/cmd/keyify
+RUN go get -u golang.org/x/lint/golint
+RUN go get -u github.com/klauspost/asmfmt/cmd/asmfmt
+RUN go get -u github.com/alecthomas/gometalinter

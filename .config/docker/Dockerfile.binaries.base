@@ -1,0 +1,54 @@
+FROM ubuntu:disco
+
+ENV HOME /root
+ENV BIN_DIR $HOME/bin
+ENV CACHE_DIR $HOME/.cache
+ENV PLUGINS_DIR $HOME/bin/terraform/plugins
+RUN mkdir $BIN_DIR
+RUN mkdir $CACHE_DIR
+RUN mkdir -p $PLUGINS_DIR
+
+WORKDIR /root
+
+# Dependencies
+RUN apt-get update -y
+RUN apt-get install -y curl tar git unzip
+
+# BAT
+ARG BAT_VERSION='bat-v0.10.0-x86_64-unknown-linux-gnu'
+RUN curl -Lo $CACHE_DIR/$BAT_VERSION.tar.gz \
+    https://github.com/sharkdp/bat/releases/download/v0.10.0/$BAT_VERSION.tar.gz && \
+    tar -xzf $CACHE_DIR/$BAT_VERSION.tar.gz -C $CACHE_DIR && \
+    mv $CACHE_DIR/$BAT_VERSION/bat $BIN_DIR/
+
+# FZF
+RUN git clone --depth 1 https://github.com/junegunn/fzf.git $BIN_DIR/.fzf
+RUN $BIN_DIR/.fzf/install --no-update-rc --no-fish --no-bash
+
+# JQ
+ARG JQ_VERSION='https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64'
+RUN curl -qLo $CACHE_DIR/jq $JQ_VERSION && \
+  chmod +x $CACHE_DIR/jq && \
+  mv $CACHE_DIR/jq $BIN_DIR
+
+# FD
+ARG FD_VERSION='fd-v7.3.0-x86_64-unknown-linux-gnu'
+RUN curl -Lo $CACHE_DIR/$FD_VERSION.tar.gz \
+    https://github.com/sharkdp/fd/releases/download/v7.3.0/$FD_VERSION.tar.gz && \
+    tar -xzf $CACHE_DIR/$FD_VERSION.tar.gz -C $CACHE_DIR && \
+    mv $CACHE_DIR/$FD_VERSION/fd $BIN_DIR
+
+# TERRAFORM
+ARG TF_DOWNLOAD_LINK="https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip"
+ARG TF_SHA256="94504f4a67bad612b5c8e3a4b7ce6ca2772b3c1559630dfd71e9c519e3d6149c"
+ARG TF_AWS="terraform-provider-aws_1.58.0_linux_amd64.zip"
+ARG TF_AWS_DOWNLOAD_LINK="https://releases.hashicorp.com/terraform-provider-aws/1.58.0/terraform-provider-aws_1.58.0_linux_amd64.zip"
+ARG TF_AWS_SHA256="788635cd3e923ba601b238f9ec988fa5237696b2d0688d89027e8cdc31e5c3c6"
+
+RUN curl -Lo $CACHE_DIR/terraform.zip $TF_DOWNLOAD_LINK && \
+  echo "$TF_SHA256 $CACHE_DIR/terraform.zip" | sha256sum -c && \
+  unzip $CACHE_DIR/terraform.zip -d $CACHE_DIR
+
+RUN curl -Lo $CACHE_DIR/$TF_AWS $TF_AWS_DOWNLOAD_LINK && \
+  echo "$TF_AWS_SHA256 $CACHE_DIR/$TF_AWS" | sha256sum -c && \
+  unzip $CACHE_DIR/$TF_AWS -d $PLUGINS_DIR

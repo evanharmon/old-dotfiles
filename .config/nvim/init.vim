@@ -39,7 +39,7 @@ Plug 'mhinz/vim-grepper'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 " Plug 'rust-lang/rust.vim', { 'do': 'rustup component add rls rust-analysis rust-src' }
 Plug 'rust-lang/rust.vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go'
 Plug 'sebdah/vim-delve'
 
 Plug 'majutsushi/tagbar'
@@ -131,8 +131,8 @@ let g:indentLine_char="•"
 let g:indentLine_color_term=239
 let g:indentLine_enabled=1
 let g:sneak#s_next=1
-let g:mkdp_auto_start=1
-let g:mkdp_auto_close=1
+let g:mkdp_auto_start=0
+let g:mkdp_auto_close=0
 
 " JAVASCRIPT
 let g:prettier#config#print_width=80

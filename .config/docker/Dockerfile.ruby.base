@@ -1,0 +1,9 @@
+FROM eph-amazonlinux/devtools:latest
+
+ENV HOME=/root RBENV_VERSION=2.6.0
+ENV PATH=$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
+
+WORKDIR /root
+
+RUN curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash
+RUN /bin/sh -c 'rbenv install $RBENV_VERSION; rbenv global $RBENV_VERSION; gem install neovim'

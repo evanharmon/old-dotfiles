@@ -86,6 +86,7 @@ if [ -d "$HOME/.fnm" ]; then
 fi
 
 # RUBY
+export RBENV_VERSION=2.6.0
 export PATH=$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
 
 export AWS_DEFAULT_REGION='us-east-1'
