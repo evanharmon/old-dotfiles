@@ -1,4 +1,5 @@
 # SOURCE ZSH FILES
+export SHELL=zsh
 export DOTFILES=$HOME
 export CODE_DIR=$HOME/code
 export ZSH=$HOME/.config/zsh

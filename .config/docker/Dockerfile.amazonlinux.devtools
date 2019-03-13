@@ -12,4 +12,4 @@ RUN yum install -y tree readline-devel bzip2-devel sqlite-devel openssl-devel \
 
 RUN amazon-linux-extras install golang1.11 rust1 vim
 
-RUN yum install -y rsync
+RUN yum install -y rsync bash-completion
