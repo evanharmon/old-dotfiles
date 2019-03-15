@@ -160,7 +160,6 @@ alias glb='git log --topo-order --pretty=format:"${_git_log_brief_format}"'
 alias glc='git shortlog --summary --numbered'
 
 # Merge (m)
-alias gm='git merge'
 alias gmC='git merge --no-commit'
 alias gmF='git merge --no-ff'
 alias gma='git merge --abort'
@@ -177,7 +176,6 @@ alias gpc='git push --set-upstream origin "$(git-branch-current 2> /dev/null)"'
 alias gpp='git pull origin "$(git-branch-current 2> /dev/null)" && git push origin "$(git-branch-current 2> /dev/null)"'
 
 # Rebase (r)
-alias gr='git rebase'
 alias gra='git rebase --abort'
 alias grc='git rebase --continue'
 alias gri='git rebase --interactive'
@@ -195,7 +193,6 @@ alias gRs='git remote show'
 alias gRb='git-hub-browse'
 
 # Stash (s)
-alias gs='git stash'
 alias gsa='git stash apply'
 alias gsx='git stash drop'
 alias gsX='git-stash-clear-interactive'
@@ -209,7 +206,6 @@ alias gsS='git stash save --patch --no-keep-index'
 alias gsw='git stash save --include-untracked --keep-index'
 
 # Submodule (S)
-alias gS='git submodule'
 alias gSa='git submodule add'
 alias gSf='git submodule foreach'
 alias gSi='git submodule init'

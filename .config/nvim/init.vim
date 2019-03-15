@@ -48,6 +48,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'eval `fnm env` & cd app & npm inst
 Plug 'hashivim/vim-terraform'
 Plug 'juliosueiras/vim-terraform-completion'
 Plug 'Valloric/MatchTagAlways'
+Plug 'jparise/vim-graphql'
 
 call plug#end()
 
@@ -81,7 +82,6 @@ set nojoinspaces
 set splitbelow
 set splitright
 set display+=lastline
-set updatetime=250
 set timeoutlen=500
 set shiftwidth=2
 set expandtab
@@ -91,6 +91,10 @@ set conceallevel=1
 set undolevels=100
 set nowrap
 set autowrite
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
 
 " for vim 7
 set t_Co=256
@@ -207,21 +211,9 @@ let g:ale_fixers={
 \ 'yaml': ['prettier'],
 \}
 
-" run :GoBuild or :GoTestCompile based on the go file
-function! s:build_go_files()
-  let l:file=expand('%')
-  if l:file=~#'^\f\+_test\.go$'
-    call go#cmd#Test(0, 1)
-  elseif l:file=~#'^\f\+\.go$'
-    call go#cmd#Build(0)
-  endif
-endfunction
-
-" COMPLETION
-set cmdheight=2
-set updatetime=300
-set shortmess+=c
-set signcolumn=yes
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+" Use `:Format` for format current buffer
+command! -nargs=0 Format :call CocAction('format')
 
 " tab triggers completion
 inoremap <silent><expr> <TAB>
@@ -240,10 +232,6 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` breaks undo chain
 inoremap <expr> <cr> pumvisible() ? "\<C-y" : "\<C-g>u\<CR>"
-
-" Use `[c` and `]c` for navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -267,14 +255,6 @@ if exists(':CocActionAsync')
   autocmd CursorHold * silent call CocActionAsync('highlight')
 endif
 
-" Remap for rename current word
-" nmap <leader>rn <Plug>(coc-rename)
-
-" NOTE: This would conflict with Sneak?
-" Remap for format selected region
-" vmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
-
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -292,12 +272,14 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 
-" Use `:Format` for format current buffer
-command! -nargs=0 Format :call CocAction('format')
-
-" Use `:Fold` for fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
+" Use <C-l> to trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+" Use <C-j> to select text for visual text of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+" Use <C-j> to jump to forward placeholder, which is default
+let g:coc_snippet_next = '<c-j>'
+" Use <C-k> to jump to backward placeholder, which is default
+let g:coc_snippet_prev = '<c-k>'
 
 " Add diagnostic info for https://github.com/itchyny/lightline.vim
 let g:lightline ={
@@ -311,23 +293,15 @@ let g:lightline ={
       \ },
       \ }
 
-" Using CocList
-" Show all diagnostics
-" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" " Manage extensions
-" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" " Show commands
-" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" " Find symbol of current document
-" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" " Search workspace symbols
-" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" " Do default action for next item.
-" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" " Do default action for previous item.
-" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" " Resume latest coc list
-" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file=expand('%')
+  if l:file=~#'^\f\+_test\.go$'
+    call go#cmd#Test(0, 1)
+  elseif l:file=~#'^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
 
 
 " GENERAL KEY MAPPINGS

@@ -1,5 +1,16 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["css", "javascript", "Markdown"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "graphql",
+    "html",
+    "javascript",
+    "javascript.jsx",
+    "json",
+    "less",
+    "Markdown",
+    "scss",
+    "yaml"
+  ],
   "languageserver": {
     "bash": {
       "command": "bash-language-server",
@@ -17,5 +28,9 @@
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
       "filetypes": ["go"]
     }
+  },
+  "snippets.extends": {
+    "cpp": ["c"],
+    "javascriptreact": ["javascript"]
   }
 }
