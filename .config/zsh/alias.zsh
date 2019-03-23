@@ -58,5 +58,11 @@ alias canary="/Applications/Google\\ Chrome\\ Canary.app/Contents/MacOS/Google\\
 alias lol=log --graph --decorate --pretty=oneline --abbrev-commit
 alias lola=log --graph --decorate --pretty=oneline --abbrev-commit --all
 
-# ripgrep defaults
-# alias rg=rg -S
+alias rg='rg -S'
+# TERRAFORM
+alias tf='terraform'
+alias tfp='terraform plan -out=tfplan'
+# Dotfiles
+alias dws='dotfiles status --short'
+alias dwS='dotfiles status'
+alias dia='git add'

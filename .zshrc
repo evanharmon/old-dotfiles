@@ -93,5 +93,10 @@ export PATH=$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
 export AWS_DEFAULT_REGION='us-east-1'
 export AWS_REGION='us-east-1'
 
+# TERRAFORM
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /Users/eharmon/bin/terraform terraform
+
 # MUST BE LAST
 source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+

@@ -26,4 +26,3 @@ if [ -d "$HOME/.fnm" ]; then
     export PATH=$HOME/.fnm:./node_modules/.bin:$PATH
     eval `fnm env`
 fi
-

@@ -1,23 +1,17 @@
 # SOREN's git alias
-alias g='git'
 # Branch (b)
 alias gb='git branch'
 alias gba='git branch --all --verbose'
 alias gbc='git checkout -b'
 alias gbd='git branch --delete'
 alias gbD='git branch --delete --force'
-alias gbl='git branch --verbose'
 alias gbL='git branch --all --verbose'
 alias gbm='git branch --move'
 alias gbM='git branch --move --force'
-alias gbr='git branch --move'
-alias gbR='git branch --move --force'
 alias gbs='git show-branch'
 alias gbS='git show-branch --all'
 alias gbv='git branch --verbose'
 alias gbV='git branch --verbose --verbose'
-alias gbx='git branch --delete'
-alias gbX='git branch --delete --force'
 
 # Commit (c)
 alias gc='git commit --verbose'
@@ -64,7 +58,6 @@ alias gfa='git fetch --all'
 alias gfc='git clone'
 alias gfcr='git clone --recurse-submodules'
 alias gfm='git pull'
-alias gfr='git pull --rebase'
 
 # Flow (F)
 alias gFi='git flow init'
@@ -145,10 +138,6 @@ alias gid='git diff --no-ext-diff --cached'
 alias giD='git diff --no-ext-diff --cached --word-diff'
 alias gii='git update-index --assume-unchanged'
 alias giI='git update-index --no-assume-unchanged'
-alias gir='git reset'
-alias giR='git reset --patch'
-alias gix='git rm -r --cached'
-alias giX='git rm -rf --cached'
 
 # Log (l)
 alias gl='git log --topo-order --pretty=format:"${_git_log_medium_format}"'
@@ -159,12 +148,6 @@ alias glg='git log --topo-order --all --graph --pretty=format:"%Cred%h%Creset -%
 alias glb='git log --topo-order --pretty=format:"${_git_log_brief_format}"'
 alias glc='git shortlog --summary --numbered'
 
-# Merge (m)
-alias gmC='git merge --no-commit'
-alias gmF='git merge --no-ff'
-alias gma='git merge --abort'
-alias gmt='git mergetool'
-
 # Push (p)
 alias gp='git push'
 alias gpf='git push --force-with-lease'
@@ -174,12 +157,6 @@ alias gpA='git push --all && git push --tags'
 alias gpt='git push --tags'
 alias gpc='git push --set-upstream origin "$(git-branch-current 2> /dev/null)"'
 alias gpp='git pull origin "$(git-branch-current 2> /dev/null)" && git push origin "$(git-branch-current 2> /dev/null)"'
-
-# Rebase (r)
-alias gra='git rebase --abort'
-alias grc='git rebase --continue'
-alias gri='git rebase --interactive'
-alias grs='git rebase --skip'
 
 # Remote (R)
 alias gR='git remote'

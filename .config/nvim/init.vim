@@ -49,6 +49,8 @@ Plug 'hashivim/vim-terraform'
 Plug 'juliosueiras/vim-terraform-completion'
 Plug 'Valloric/MatchTagAlways'
 Plug 'jparise/vim-graphql'
+Plug 'jph00/swift-apple'
+Plug 'lepture/vim-velocity'
 
 call plug#end()
 
@@ -118,7 +120,7 @@ hi Type    cterm=italic
 highlight Pmenu guibg=#161616
 
 " FORMATTING
-au FileType go,c,asm,python,sh setlocal sw=4 ts=4 sts=4 expandtab
+au FileType go,c,cpp,asm,python,sh,swift setlocal sw=4 ts=4 sts=4 expandtab
 au FileType make setlocal sw=4 ts=4 sts=4 noexpandtab
 
 " GENERAL LETS
@@ -134,7 +136,7 @@ let g:gitgutter_enabled=0
 let g:indentLine_char="•"
 let g:indentLine_color_term=239
 let g:indentLine_enabled=1
-let g:sneak#s_next=1
+let g:sneak#label=1
 let g:mkdp_auto_start=0
 let g:mkdp_auto_close=0
 
@@ -183,6 +185,8 @@ let g:ale_linters_explicit=1
 let g:ale_fix_on_save=1
 let g:ale_linters={
 \ 'css': ['prettier'],
+\ 'c': ['clangtidy'],
+\ 'cpp': ['clangtidy', 'cppcheck'],
 \ 'go': ['gofmt'],
 \ 'graphql': ['prettier'],
 \ 'html': ['prettier'],
@@ -194,6 +198,7 @@ let g:ale_linters={
 \ 'rust': ['rustfmt'],
 \ 'scss': ['prettier'],
 \ 'sh': ['language_server'],
+\ 'swift': ['swiftlint'],
 \ 'terraform': ['fmt'],
 \ 'xml': ['xmllint'],
 \ 'yaml': ['prettier'],
@@ -315,13 +320,6 @@ nnoremap <leader><leader> <c-^>
 " nnoremap <Tab> :bnext!<CR>
 " nnoremap <S-Tab> :bprev!<CR><Paste>
 nnoremap <bar> <C-w><bar>
-" xnoremap p pgvy
-nmap f <Plug>Sneak_f
-nmap F <Plug>Sneak_F
-xmap f <Plug>Sneak_f
-xmap F <Plug>Sneak_F
-omap f <Plug>Sneak_f
-omap F <Plug>Sneak_F
 
 
 " File Management
