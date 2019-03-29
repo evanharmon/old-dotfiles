@@ -32,5 +32,6 @@
   "snippets.extends": {
     "cpp": ["c"],
     "javascriptreact": ["javascript"]
-  }
+  },
+  "javascript.suggestionActions.enabled": false
 }
