@@ -89,7 +89,7 @@ set shiftwidth=2
 set expandtab
 set tabstop=2
 set softtabstop=2
-set conceallevel=1
+set conceallevel=2
 set undolevels=100
 set nowrap
 set autowrite
@@ -122,6 +122,7 @@ highlight Pmenu guibg=#161616
 " FORMATTING
 au FileType go,c,cpp,asm,python,sh,swift setlocal sw=4 ts=4 sts=4 expandtab
 au FileType make setlocal sw=4 ts=4 sts=4 noexpandtab
+au FileType markdown setlocal conceallevel=0
 
 " GENERAL LETS
 let g:NERDCustomDelimiters={ 'conf': { 'left': '#' } }
@@ -136,6 +137,7 @@ let g:gitgutter_enabled=0
 let g:indentLine_char="•"
 let g:indentLine_color_term=239
 let g:indentLine_enabled=1
+let g:indentLine_fileTypeExclude=['markdown']
 let g:sneak#label=1
 let g:mkdp_auto_start=0
 let g:mkdp_auto_close=0
