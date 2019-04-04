@@ -90,10 +90,14 @@ fi
 export RBENV_VERSION=2.6.0
 export PATH=$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
 
+# C
+if [ -d "/usr/local/opt/llvm/bin/clangd" ]; then
+  export PATH=/usr/local/opt/llvm/bin:$PATH
+fi
+
 # TERRAFORM
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /Users/eharmon/bin/terraform terraform
 
 # MUST BE LAST
 source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-

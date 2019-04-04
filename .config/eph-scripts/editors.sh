@@ -64,4 +64,9 @@ if ! [ -f $HOME/bin/tflint ];then
     unzip $HOME/.cache/$FNAME -d $HOME/bin
 fi
 
+# clangd install
+if ! brew list llvm; then
+    brew install llvm
+fi
+
 unset FNAME
