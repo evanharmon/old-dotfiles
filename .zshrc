@@ -115,6 +115,7 @@ if [ -d "/usr/local/opt/llvm/bin/clangd" ]; then
 fi
 
 # TERRAFORM
+terraform -install-autocomplete
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /Users/eharmon/bin/terraform terraform
 
