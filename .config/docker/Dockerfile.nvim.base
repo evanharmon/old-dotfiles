@@ -61,7 +61,7 @@ RUN curl -sL https://rpm.nodesource.com/setup_11.x | bash -
 
 # DOTFILES
 RUN rm $HOME/.bashrc
-RUN echo "dotfiles commit 43dbc0b"
+RUN echo "dotfiles commit 28d24fc"
 RUN git init --bare $HOME/.dotfiles
 RUN /bin/sh -c "\
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no; \
