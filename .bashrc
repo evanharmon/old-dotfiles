@@ -11,6 +11,9 @@ export PAGER='less'
 
 if [ -d "$HOME/.pyenv" ]; then
     export PYENV_ROOT="$HOME/.pyenv"
+    if [[ ":$PATH:" != *":$PYENV_ROOT/shims:$PYENV_ROOT/bin:"* ]]; then
+        export PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
+    fi
 	export PYENV2_NAME=v2
 	export PYENV3_NAME=v3
     export PYENV_VERSION='2.7.14'
@@ -23,6 +26,9 @@ if [ -d "$HOME/.pyenv" ]; then
 fi
 
 if [ -d "$HOME/.fnm" ]; then
-    export PATH=$HOME/.fnm:./node_modules/.bin:$PATH
+    if [[ ":$PATH:" != *":$HOME/.fnm:$HOME/.fnm/current/bin:node_modules/.bin:"* ]]; then
+        export PATH=$HOME/.fnm:$HOME/.fnm/current/bin:node_modules/.bin:$PATH
+    fi
     eval `fnm env`
+    fnm use v11.10.1
 fi

@@ -120,7 +120,7 @@ hi Type    cterm=italic
 highlight Pmenu guibg=#161616
 
 " FORMATTING
-au FileType go,c,cpp,asm,python,sh,swift setlocal sw=4 ts=4 sts=4 expandtab
+au FileType go,c,cpp,asm,python,sh,swift,sh,zsh setlocal sw=4 ts=4 sts=4 expandtab
 au FileType make setlocal sw=4 ts=4 sts=4 noexpandtab
 au FileType markdown setlocal conceallevel=0
 
