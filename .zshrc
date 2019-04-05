@@ -54,7 +54,6 @@ if [ -d "$HOME/.pyenv" ]; then
     export PYENV_VIRTUALENV_DISABLE_PROMPT=1
     export PYENV_SHELL=zsh
     eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
 fi
 
 if [ -d "$PYENV_ROOT/completions" ]; then

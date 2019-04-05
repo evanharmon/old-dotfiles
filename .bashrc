@@ -20,7 +20,6 @@ if [ -d "$HOME/.pyenv" ]; then
     export PYENV_VERSION3='3.5.5'
     export PYENV_VIRTUALENV_DISABLE_PROMPT=1
     export PYENV_SHELL=bash
-    # prefer auto virtualenv activations only in ZSH eval "$(pyenv virtualenv-init -)"
     eval "$(pyenv init -)"
     source $PYENV_ROOT/completions/pyenv.bash
 fi
