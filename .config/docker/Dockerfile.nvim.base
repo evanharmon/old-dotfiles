@@ -27,7 +27,6 @@ RUN yum install -y zsh
 ENV ZSH=$HOME/.config/zsh
 RUN git clone git://github.com/zsh-users/zsh-completions.git $HOME/zsh-completions
 RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-RUN terraform -install-autocomplete
 
 # NEOVIM
 ARG NVIM_VERSION='nvim-linux64'
