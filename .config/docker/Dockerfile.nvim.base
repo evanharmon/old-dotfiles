@@ -2,6 +2,7 @@ FROM eph-bin/base:latest as bins
 FROM eph-python/base:latest as python
 FROM eph-ruby/base:latest as ruby
 FROM eph-golang/base:latest as go
+
 FROM eph-amazonlinux/devtools
 COPY --from=bins /root/bin /root/bin
 COPY --from=python /root/.pyenv /root/.pyenv
@@ -26,6 +27,7 @@ RUN yum install -y zsh
 ENV ZSH=$HOME/.config/zsh
 RUN git clone git://github.com/zsh-users/zsh-completions.git $HOME/zsh-completions
 RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+RUN terraform -install-autocomplete
 
 # NEOVIM
 ARG NVIM_VERSION='nvim-linux64'
