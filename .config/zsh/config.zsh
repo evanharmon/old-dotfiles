@@ -2,6 +2,8 @@
 autoload -U zmv
 autoload -U promptinit; promptinit
 prompt pure
+# Timestamp and Terraform workspace
+PROMPT='%F{green}%* $(tf_prompt_info) '$PROMPT
 
 autoload colors zsh/terminfo
 colors
