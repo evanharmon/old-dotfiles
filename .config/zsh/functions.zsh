@@ -62,7 +62,7 @@ function aws-assume-role-env () {
     echo $mfa_token
 
     local creds_json
-    creds_json=$(aws --profile $profile --output json sts assume-role --duration 86400 --role-arn $role_arn --role-session-name $role_name --serial-number $serial_number --token-code $mfa_token)
+    creds_json=$(aws --profile $profile --output json sts assume-role --duration 3600 --role-arn $role_arn --role-session-name $role_name --serial-number $serial_number --token-code $mfa_token)
     rv="$?"
     if [[ $rv -ne 0 || ! $creds_json ]]; then
         echo "$pkg: failed to get credentials for user '$iam_user' account '$account_id': $creds_json" 1>&2
