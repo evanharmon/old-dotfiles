@@ -19,7 +19,8 @@ autocmd VimEnter *
   \| endif
 
 call plug#begin(expand('$HOME/.local/share/nvim/plugged'))
-Plug 'mhartington/oceanic-next'
+Plug 'chriskempson/base16-vim'
+" Plug 'mhartington/oceanic-next'
 Plug 'airblade/vim-gitgutter'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -108,9 +109,9 @@ endif
 " APPEARANCE
 set background=dark
 syntax on
-silent! colorscheme OceanicNext
-let g:oceanic_next_terminal_bold=1
-let g:oceanic_next_terminal_italic=1
+colorscheme base16-default-dark
+" let g:oceanic_next_terminal_bold=1
+" let g:oceanic_next_terminal_italic=1
 hi htmlArg gui=italic
 hi Comment gui=italic
 hi Type    gui=italic
