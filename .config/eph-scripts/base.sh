@@ -42,14 +42,6 @@ if ! [ -d /Applications/iTerm.app ]; then
   brew cask install iterm2
 fi
 
-if ! [ -f $HOME/.cache/hss-fonts/README.md ]; then
-    echo "installing fonts"
-    git clone \
-        https://git-codecommit.us-east-1.amazonaws.com/v1/repos/hss-fonts \
-        $HOME/.cache/hss-fonts
-    cp $HOME/.cache/hss-fonts/*.otf $HOME/Library/Fonts/
-fi
-
 if git config --global user.name != "Evan Harmon"; then
     git config --global user.name "Evan Harmon"
 fi

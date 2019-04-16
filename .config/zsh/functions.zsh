@@ -55,11 +55,6 @@ function aws-assume-role-env () {
     fi
     target_account_id=$4
     role_arn="arn:aws:iam::${target_account_id}:role/$role_name"
-    echo $profile
-    echo $role_arn
-    echo $role_name
-    echo $serial_number
-    echo $mfa_token
 
     local creds_json
     creds_json=$(aws --profile $profile --output json sts assume-role --duration 3600 --role-arn $role_arn --role-session-name $role_name --serial-number $serial_number --token-code $mfa_token)
