@@ -20,7 +20,6 @@ autocmd VimEnter *
 
 call plug#begin(expand('$HOME/.local/share/nvim/plugged'))
 Plug 'chriskempson/base16-vim'
-" Plug 'mhartington/oceanic-next'
 Plug 'airblade/vim-gitgutter'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -99,6 +98,7 @@ set updatetime=300
 set shortmess+=c
 set signcolumn=yes
 
+autocmd BufEnter * silent! lcd %:p:h
 " for vim 7
 set t_Co=256
 " for vim 8
@@ -109,9 +109,8 @@ endif
 " APPEARANCE
 set background=dark
 syntax on
-colorscheme base16-default-dark
-" let g:oceanic_next_terminal_bold=1
-" let g:oceanic_next_terminal_italic=1
+colorscheme base16-harmonic-dark
+" colorscheme base16-oceanicnext
 hi htmlArg gui=italic
 hi Comment gui=italic
 hi Type    gui=italic
