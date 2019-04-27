@@ -31,6 +31,7 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt INC_APPEND_HISTORY
 setopt APPEND_HISTORY
 
+bindkey -v
 # make terminal command navigation sane again
 bindkey '^[^[[D' backward-word
 bindkey '^[^[[C' forward-word
@@ -45,3 +46,6 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
+
+# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
+export KEYTIMEOUT=1
