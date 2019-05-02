@@ -2,12 +2,14 @@ FROM eph-bin/base:latest as bins
 FROM eph-python/base:latest as python
 FROM eph-ruby/base:latest as ruby
 FROM eph-golang/base:latest as go
+FROM eph-aws-sdks/base:latest as aws-sdks
 
 FROM eph-amazonlinux/devtools
 COPY --from=bins /root/bin /root/bin
 COPY --from=python /root/.pyenv /root/.pyenv
 COPY --from=ruby /root/.rbenv /root/.rbenv
 COPY --from=go /root/go /root/go
+COPY --from=aws-sdks /root/install /root/install
 
 ENV HOME /root
 ENV PYENV_ROOT=$HOME/.pyenv PYENV_VERSION='2.7.14' PYENV_VERSION3='3.5.5' PYENV2_NAME=v2 PYENV3_NAME=v3 PYENV_VIRTUALENV_DISABLE_PROMPT=1
@@ -62,7 +64,7 @@ RUN curl -sL https://rpm.nodesource.com/setup_11.x | bash -
 
 # DOTFILES
 RUN rm $HOME/.bashrc
-RUN echo "dotfiles commit 542385d"
+RUN echo "dotfiles commit 04431f4"
 RUN git init --bare $HOME/.dotfiles
 RUN /bin/sh -c "\
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no; \
