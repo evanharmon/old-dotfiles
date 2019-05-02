@@ -13,3 +13,8 @@ RUN yum install -y tree readline-devel bzip2-devel sqlite-devel openssl-devel \
 RUN amazon-linux-extras install golang1.11 rust1 vim
 
 RUN yum install -y rsync bash-completion cmake3 libcurl-devel
+RUN yum install -y clang-tools-extra.x86_64
+RUN yum install -y yum-utils
+RUN debuginfo-install -y \
+  libgcc-7.3.1-5.amzn2.0.2.x86_64 \
+  libstdc++-7.3.1-5.amzn2.0.2.x86_64

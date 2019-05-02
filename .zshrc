@@ -114,5 +114,8 @@ if [ -d "/usr/local/opt/llvm/bin/clangd" ]; then
     fi
 fi
 
+# Android
+export PATH=$PATH:~/Library/Android/sdk/platform-tools # support for `adb devices` command
+
 # MUST BE LAST
 source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
