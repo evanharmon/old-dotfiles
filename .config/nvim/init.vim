@@ -98,7 +98,7 @@ set updatetime=300
 set shortmess+=c
 set signcolumn=yes
 
-autocmd BufEnter * silent! lcd %:p:h
+" autocmd BufEnter * silent! lcd %:p:h
 " for vim 7
 set t_Co=256
 " for vim 8
