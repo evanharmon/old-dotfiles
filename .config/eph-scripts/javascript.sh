@@ -27,11 +27,14 @@ if ! [ -x "$(command -v yarn)" ]; then
 fi
 
 # Idempotent
-npm install -g add neovim \
-  prettier \
-  typescript \
-  bash-language-server \
-  javascript-typescript-langserver \
-  dockerfile-language-server-nodejs
+npm install -g \
+    add \
+    pure-prompt \
+    neovim \
+    prettier \
+    typescript \
+    bash-language-server \
+    javascript-typescript-langserver \
+    dockerfile-language-server-nodejs
 
 echo "Finished. Remember to source .zshrc before continuing"

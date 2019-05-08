@@ -19,6 +19,7 @@ for config ($ZSH/**/*.zsh) source $config
 
 # OS SHELL SETTINGS
 export TERM=xterm-256color
+export PATH="$HOME/nvim-osx64/bin:$PATH"
 if ! [ "$(command -v nvim)" ]; then
     export EDITOR='vim'
     export VISUAL='vim'
@@ -98,7 +99,7 @@ if [ -d "$HOME/.fnm" ]; then
         export PATH=$HOME/.fnm:$HOME/.fnm/current/bin:node_modules/.bin:$PATH
     fi
     eval `fnm env`
-    fnm use v11.10.1
+    fnm use v11.9.0
 fi
 
 # RUBY

@@ -47,15 +47,16 @@ if ! [ -x "$(gem list neovim -i)" ]; then
     gem install neovim --user-install
 fi
 
+# Always Grab Nightly
 if ! [ -x "$(command -v nvim)" ]; then
-    brew tap neovim/neovim
-    brew install --HEAD neovim
+    FNAME='nvim-macos.tar.gz'
+    curl -Lo $HOME/.cache/$FNAME "https://github.com/neovim/neovim/releases/download/nightly/$FNAME"
+    tar xzvf $HOME/.cache/$FNAME -C $HOME
 fi
 
-if [ ! -d $HOME/.local/share/nvim/site/autoload/plug.vim ]; then
-    curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-fi
+# Always Grab Latest Version
+curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 if ! [ -f $HOME/bin/tflint ];then
     FNAME='tflint_darwin_amd64.zip'
