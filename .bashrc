@@ -31,3 +31,5 @@ if [ -d "$HOME/.fnm" ]; then
     eval `fnm env`
     fnm use v11.10.1
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

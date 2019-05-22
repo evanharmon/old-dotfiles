@@ -33,6 +33,7 @@ npm install -g \
     neovim \
     prettier \
     typescript \
+    coc.nvim \
     bash-language-server \
     javascript-typescript-langserver \
     dockerfile-language-server-nodejs

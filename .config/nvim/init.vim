@@ -36,7 +36,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-grepper'
 
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
 " Plug 'rust-lang/rust.vim', { 'do': 'rustup component add rls rust-analysis rust-src' }
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go'
@@ -218,6 +219,9 @@ let g:ale_fixers={
 \ 'yaml': ['prettier'],
 \}
 
+" COC SETUP
+"
+autocmd FileType json syntax match Comment +\/\/.\+$+
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 " Use `:Format` for format current buffer
 command! -nargs=0 Format :call CocAction('format')
