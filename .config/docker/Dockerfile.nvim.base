@@ -41,7 +41,7 @@ RUN curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # FNM & NPMS
-ENV DK_NODE_VERSION "v11.10.1"
+ENV DK_NODE_VERSION "v11.9.0"
 ENV PATH $HOME/.fnm:$HOME/.fnm/current/bin:$HOME/.fnm/node-versions/$DK_NODE_VERSION/installation/bin:$PATH
 RUN curl -fsSL https://github.com/Schniz/fnm/raw/master/.ci/install.sh | bash -s -- --install-dir "./.fnm" --skip-shell
 RUN /bin/bash -c 'export PATH=$HOME/.fnm:$PATH; eval `fnm env --multi`; \
@@ -60,10 +60,10 @@ RUN npm install --global --allow-root --unsafe-perm=true \
 ENV PATH $HOME/.cargo/bin:$PATH
 RUN curl -Lo $CACHE/rustup.sh https://sh.rustup.rs -sSf && cat $CACHE/rustup.sh | sh -s -- -y
 RUN rustup component add rustfmt rls-preview rust-analysis rust-src
-RUN curl -sL https://rpm.nodesource.com/setup_11.x | bash -
+# RUN curl -sL https://rpm.nodesource.com/setup_11.x | bash -
 
 # DOTFILES
-RUN rm $HOME/.bashrc
+# RUN rm $HOME/.bashrc
 RUN echo "dotfiles commit b5f90f9838c40f802165d227738a54a412446eb5"
 RUN git init --bare $HOME/.dotfiles
 RUN /bin/sh -c "\

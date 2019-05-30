@@ -57,5 +57,14 @@ RUN curl -Lo $CACHE_DIR/$NINJA_VERSION.zip \
   https://github.com/ninja-build/ninja/releases/download/v1.9.0/$NINJA_VERSION.zip && \
   unzip $CACHE_DIR/$NINJA_VERSION.zip -d $BIN_DIR && chmod +x $BIN_DIR/ninja
 
+# RIPGREP
+ARG RG_VERSION="11.0.1"
+ARG RG_TAR_NAME="ripgrep-$RG_VERSION-x86_64-unknown-linux-musl"
+ARG RG_DOWNLOAD_LINK="https://github.com/BurntSushi/ripgrep/releases/download/$RG_VERSION/$RG_TAR_NAME.tar.gz"
+RUN curl -Lo $CACHE_DIR/$RG_TAR_NAME.tar.gz \
+    "$RG_DOWNLOAD_LINK" && \
+    tar -xzf $CACHE_DIR/$RG_TAR_NAME.tar.gz -C $CACHE_DIR && \
+    mv $CACHE_DIR/$RG_TAR_NAME/rg $BIN_DIR
+
 # Ensure ownership of binaries
 RUN chown -R root:root $BIN_DIR
