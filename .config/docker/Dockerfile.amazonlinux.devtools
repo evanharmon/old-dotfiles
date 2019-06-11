@@ -8,9 +8,9 @@ RUN yum update -y
 RUN yum groupinstall -y 'Development Tools'
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum install -y tree readline-devel bzip2-devel sqlite-devel openssl-devel \
-  awscli nodejs which
+  awscli nodejs which wget
 
-RUN amazon-linux-extras install golang1.11 rust1 vim
+RUN amazon-linux-extras install rust1 vim
 
 RUN yum install -y rsync bash-completion cmake3 libcurl-devel
 RUN yum install -y clang-tools-extra.x86_64
@@ -18,3 +18,6 @@ RUN yum install -y yum-utils
 RUN debuginfo-install -y \
   libgcc-7.3.1-5.amzn2.0.2.x86_64 \
   libstdc++-7.3.1-5.amzn2.0.2.x86_64
+
+# Audio Libraries
+RUN yum install -y lame lame-devel

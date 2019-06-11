@@ -51,7 +51,6 @@ Plug 'juliosueiras/vim-terraform-completion'
 Plug 'Valloric/MatchTagAlways'
 Plug 'jparise/vim-graphql'
 Plug 'jph00/swift-apple'
-Plug 'lepture/vim-velocity'
 
 call plug#end()
 
@@ -124,6 +123,8 @@ highlight Pmenu guibg=#161616
 au FileType go,c,cpp,asm,python,sh,swift,sh,zsh setlocal sw=4 ts=4 sts=4 expandtab
 au FileType make setlocal sw=4 ts=4 sts=4 noexpandtab
 au FileType markdown setlocal conceallevel=0
+au BufRead,BufNewFile Dockerfile* set filetype=Dockerfile
+au BufRead,BufNewFile Dockerfile* set syntax=Dockerfile
 
 " GENERAL LETS
 let g:NERDCustomDelimiters={ 'conf': { 'left': '#' } }
