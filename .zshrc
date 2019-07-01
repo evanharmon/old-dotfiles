@@ -87,8 +87,7 @@ export GOPATH=$HOME/go
 if [[ ":$PATH:" != *":/usr/local/go/bin:$GOPATH/bin:"* ]]; then
     export PATH=/usr/local/go/bin:$GOPATH/bin:$PATH
 fi
-export GO111MODULE=off
-export GOPROXY=http://127.0.0.1:3000
+export GO111MODULE=on
 
 # NODEJS
 if [[ ":$PATH:" != *":$HOME/.yarn/bin:"* ]]; then

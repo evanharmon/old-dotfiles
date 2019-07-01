@@ -36,6 +36,7 @@ npm install -g \
     coc.nvim \
     bash-language-server \
     javascript-typescript-langserver \
-    dockerfile-language-server-nodejs
+    dockerfile-language-server-nodejs \
+    dotenv-cli
 
 echo "Finished. Remember to source .zshrc before continuing"

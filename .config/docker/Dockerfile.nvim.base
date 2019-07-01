@@ -48,14 +48,17 @@ RUN curl -fsSL https://github.com/Schniz/fnm/raw/master/.ci/install.sh | bash -s
 RUN /bin/bash -c 'export PATH=$HOME/.fnm:$PATH; eval `fnm env --multi`; \
   fnm install $DK_NODE_VERSION; $HOME/.fnm/fnm use $DK_NODE_VERSION;'
 RUN npm install --global --allow-root --unsafe-perm=true \
+    add \
     pure-prompt \
-    add neovim vim-node-rpc \
+    neovim \
+    vim-node-rpc \
     prettier \
     typescript \
+    coc.nvim \
     bash-language-server \
     javascript-typescript-langserver \
-    serverless \
-    dockerfile-language-server-nodejs
+    dockerfile-language-server-nodejs \
+    dotenv-cli
 
 # RUST
 ENV PATH $HOME/.cargo/bin:$PATH
