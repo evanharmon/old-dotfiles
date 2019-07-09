@@ -69,7 +69,7 @@ ENV PATH /usr/local/go/bin:$PATH
 
 # DOTFILES
 # RUN rm $HOME/.bashrc
-RUN echo "dotfiles commit 231588014a04e67247f53f40e03eae5923d46571" && \
+RUN echo "dotfiles commit 854ec66" && \
   git init --bare $HOME/.dotfiles
 RUN /bin/sh -c "\
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no; \
