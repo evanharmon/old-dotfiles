@@ -64,8 +64,12 @@ fi
 [[ -s "$HOME/.local/share/marker/marker.sh" ]] && source "$HOME/.local/share/marker/marker.sh"
 
 ## AWS
-export AWS_PROFILE="$(whoami)" AWS_REGION='us-east-1' AWS_DEFAULT_REGION='us-east-1'
-export AWS_ACCOUNT_ID="$(aws sts get-caller-identity --query Account --output text)"
+if [[ "$OSTYPE" == darwin* ]]; then
+    # don't pollute docker containers
+    export AWS_PROFILE="$(whoami)" AWS_REGION='us-east-1' AWS_DEFAULT_REGION='us-east-1'
+    export AWS_ACCOUNT_ID="$(aws sts get-caller-identity --query Account --output text)"
+fi
+
 if [ -e /usr/local/bin/aws_completer ]; then
     source /usr/local/bin/aws_zsh_completer.sh
 fi
