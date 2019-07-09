@@ -66,5 +66,20 @@ RUN curl -Lo $CACHE_DIR/$RG_TAR_NAME.tar.gz \
     tar -xzf $CACHE_DIR/$RG_TAR_NAME.tar.gz -C $CACHE_DIR && \
     mv $CACHE_DIR/$RG_TAR_NAME/rg $BIN_DIR
 
+# KUBECTL
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+RUN chmod +x ./kubectl
+RUN mv ./kubectl $BIN_DIR/kubectl
+
+# HELM / TILLER
+ARG HELM_ARCH='linux-amd64'
+ARG HELM_VERSION="v2.14.1"
+ARG HELM_TAR_NAME="helm-${HELM_VERSION}-${HELM_ARCH}.tar.gz"
+RUN curl -Lo $CACHE_DIR/$HELM_TAR_NAME https://get.helm.sh/$HELM_TAR_NAME && \
+    tar -zxf $CACHE_DIR/$HELM_TAR_NAME -C $CACHE_DIR && \
+    mv $CACHE_DIR/$HELM_ARCH/helm $BIN_DIR && \
+    mv $CACHE_DIR/$HELM_ARCH/tiller $BIN_DIR
+
 # Ensure ownership of binaries
 RUN chown -R root:root $BIN_DIR
+

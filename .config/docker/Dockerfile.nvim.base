@@ -12,18 +12,16 @@ COPY --from=ruby /root/.rbenv /root/.rbenv
 COPY --from=go /usr/local/go /usr/local/go
 COPY --from=aws-sdks /root/install /root/install
 
-ENV HOME /root
+ENV HOME="/root" TERM=xterm-256color
 ENV PYENV_ROOT=$HOME/.pyenv PYENV_VERSION='2.7.14' PYENV_VERSION3='3.5.5' PYENV2_NAME=v2 PYENV3_NAME=v3 PYENV_VIRTUALENV_DISABLE_PROMPT=1
 ENV PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
-ENV TERM=xterm-256color
 
 # Home Directories
-RUN mkdir $HOME/.local
-RUN mkdir $HOME/.cache
+RUN mkdir -p $HOME/.local && \
+  mkdir -p $HOME/.cache
 
 # Dependencies
 WORKDIR /root
-
 
 # ZSH SETUP
 RUN yum install -y zsh
@@ -66,10 +64,13 @@ RUN curl -Lo $CACHE/rustup.sh https://sh.rustup.rs -sSf && cat $CACHE/rustup.sh 
 RUN rustup component add rustfmt rls-preview rust-analysis rust-src
 # RUN curl -sL https://rpm.nodesource.com/setup_11.x | bash -
 
+# GOLANG
+ENV PATH /usr/local/go/bin:$PATH
+
 # DOTFILES
 # RUN rm $HOME/.bashrc
-RUN echo "dotfiles commit 231588014a04e67247f53f40e03eae5923d46571"
-RUN git init --bare $HOME/.dotfiles
+RUN echo "dotfiles commit 231588014a04e67247f53f40e03eae5923d46571" && \
+  git init --bare $HOME/.dotfiles
 RUN /bin/sh -c "\
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no; \
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME remote add origin https://github.com/evanharmon/dotfiles.git; \
@@ -80,5 +81,6 @@ RUN git config --global user.name "Evan Harmon" && \
 
 # Lastly, install plugins for editors
 RUN nvim --headless +PlugInstall +UpdateRemotePlugins +qall
+RUN nvim --headless +GoInstallBinaries +qall
 
 CMD ["zsh", "-l"]

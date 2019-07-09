@@ -1,47 +1,32 @@
 FROM eph-amazonlinux/devtools:latest
+LABEL maintainer="Evan Harmon <evan.p.harmon@gmail.com>"
 
-# ENV HOME=/root GOROOT="/usr/local/go" GOPATH=$HOME/go GO111MODULE=on GOPROXY=http://127.0.0.1:3000
-ENV HOME=/root GOROOT="/usr/local/go" GOPATH=$HOME/go GO111MODULE=on
-ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+ARG DOWNLOAD_VERSION="go1.12.6.linux-amd64.tar.gz"
+ARG HOME="/root"
+ARG GOROOT="/usr/local/go"
+ARG GOPATH="$HOME/go"
+ENV DOWNLOAD_VERSION=$DOWNLOAD_VERSION HOME=$HOME GOROOT=$GOROOT GOPATH=$GOPATH PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 WORKDIR /root
 
 # Install Go
-RUN mkdir -p /root/go
-RUN wget https://dl.google.com/go/go1.12.2.linux-amd64.tar.gz
-RUN tar -xvf go1.12.2.linux-amd64.tar.gz
-RUN mv go /usr/local/
+RUN mkdir -p /root/go && \
+  wget https://dl.google.com/go/$DOWNLOAD_VERSION && \
+  tar -xvf $DOWNLOAD_VERSION && \
+  mv go /usr/local/
 
 # TOOLS
-RUN mkdir -p /root/go/src/github.com/saibing
-WORKDIR /root/go/src/github.com/saibing
-RUN git clone -b bingo https://github.com/saibing/tools.git
-RUN cd tools/cmd/gopls && go install
+## Bingo uses go modules, needs to be outside old gopath
+ENV GO111MODULE=on BINGO_PATH="/root/code/bingo"
+RUN mkdir -p $BINGO_PATH
+WORKDIR $BINGO_PATH
+RUN go get -v golang.org/x/tools/cmd/gopls
+RUN git clone -b bingo https://github.com/saibing/tools.git && \
+  cd tools/cmd/gopls && \
+  go install
 
 # DEBUGGER
+## Delve has not been updated for go modules, use old go path
 ENV GO111MODULE=off
 RUN go get -u github.com/derekparker/delve/cmd/dlv
-ENV GO111MODULE=on
-
-# Dependencies for vim-go
-# RUN go get -u github.com/saibing/bingo
-# RUN go get -u github.com/derekparker/delve/cmd/dlv
-# RUN go get -u github.com/zmb3/gogetdoc
-# RUN go get -u golang.org/x/tools/cmd/guru
-# RUN go get -u golang.org/x/tools/cmd/gopls
-# RUN go get -u github.com/davidrjenni/reftools/cmd/fillstruct
-# RUN go get -u github.com/rogpeppe/godef
-# RUN go get -u github.com/fatih/motion
-# RUN go get -u github.com/kisielk/errcheck
-# RUN go get -u github.com/mdempsky/gocode
-# RUN go get -u github.com/josharian/impl
-# RUN go get -u github.com/koron/iferr
-# RUN go get -u github.com/jstemmer/gotags
-# RUN go get -u golang.org/x/tools/cmd/gorename
-# RUN go get -u golang.org/x/tools/cmd/goimports
-# RUN go get -u github.com/stamblerre/gocode
-# RUN go get -u github.com/fatih/gomodifytags
-# RUN go get -u honnef.co/go/tools/cmd/keyify
-# RUN go get -u golang.org/x/lint/golint
-# RUN go get -u github.com/klauspost/asmfmt/cmd/asmfmt
-# RUN go get -u github.com/alecthomas/gometalinter
+ENV GO111MODULE=auto

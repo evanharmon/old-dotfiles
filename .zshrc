@@ -1,8 +1,5 @@
 # SOURCE ZSH FILES
-export SHELL=zsh
-export DOTFILES=$HOME
-export CODE_DIR=$HOME/code
-export ZSH=$HOME/.config/zsh
+export SHELL=zsh DOTFILES=$HOME CODE_DIR=$HOME/code ZSH=$HOME/.config/zsh
 if [[ "$OSTYPE" == darwin* && -d $HOME/.zplug ]]; then
     export ZPLUGHOME=$HOME/.zplug
     source $HOME/.config/zsh/zplug.sh
@@ -21,11 +18,9 @@ for config ($ZSH/**/*.zsh) source $config
 export TERM=xterm-256color
 export PATH="$HOME/nvim-osx64/bin:$PATH"
 if ! [ "$(command -v nvim)" ]; then
-    export EDITOR='vim'
-    export VISUAL='vim'
+    export EDITOR='vim' VISUAL='vim'
 else
-    export EDITOR='nvim'
-    export VISUAL='nvim'
+    export EDITOR='nvim' VISUAL='nvim'
 fi
 export PAGER='less'
 
@@ -48,12 +43,9 @@ if [ -d "$HOME/.pyenv" ]; then
     if [[ ":$PATH:" != *":$PYENV_ROOT/shims:$PYENV_ROOT/bin:"* ]]; then
         export PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
     fi
-    export PYENV2_NAME=v2
-    export PYENV3_NAME=v3
-    export PYENV_VERSION='2.7.14'
-    export PYENV_VERSION3='3.5.5'
-    export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-    export PYENV_SHELL=zsh
+    export PYENV2_NAME=v2 PYENV3_NAME=v3
+    export PYENV_VERSION='2.7.14' PYENV_VERSION3='3.5.5'
+    export PYENV_VIRTUALENV_DISABLE_PROMPT=1 PYENV_SHELL=zsh
     eval "$(pyenv init -)"
 fi
 
@@ -64,9 +56,7 @@ fi
 # TOOLS
 ## FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND="fd . $CODE_DIR"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+export FZF_DEFAULT_COMMAND="fd . $CODE_DIR" FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND" FZF_ALT_C_COMMAND="fd -t d . $HOME"
 if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
     source /usr/local/opt/fzf/shell/key-bindings.zsh
     source /usr/local/opt/fzf/shell/completion.zsh
@@ -74,6 +64,8 @@ fi
 [[ -s "$HOME/.local/share/marker/marker.sh" ]] && source "$HOME/.local/share/marker/marker.sh"
 
 ## AWS
+export AWS_PROFILE="$(whoami)" AWS_REGION='us-east-1' AWS_DEFAULT_REGION='us-east-1'
+export AWS_ACCOUNT_ID="$(aws sts get-caller-identity --query Account --output text)"
 if [ -e /usr/local/bin/aws_completer ]; then
     source /usr/local/bin/aws_zsh_completer.sh
 fi

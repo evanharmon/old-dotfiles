@@ -77,3 +77,11 @@ fi
 if ! [ "$(command -v ansible)" ]; then
   brew install ansible
 fi
+
+if ! [ -x "$(command -v helm)" ]; then
+    HELM_VERSION='helm-v2.14.1-darwin-amd64.tar.gz'
+    curl -Lo $HOME/.cache/$HELM_VERSION https://get.helm.sh/$HELM_VERSION
+    tar -zxf $HOME/.cache/$HELM_VERSION -C $HOME/.cache
+    mv $HOME/.cache/darwin-amd64/helm $HOME/bin
+    mv $HOME/.cache/darwin-amd64/tiller $HOME/bin
+fi

@@ -91,6 +91,7 @@ set tabstop=2
 set softtabstop=2
 set conceallevel=2
 set undolevels=100
+set undodir=~/.config/nvim/undodir
 set nowrap
 set autowrite
 set cmdheight=2
@@ -110,7 +111,6 @@ endif
 set background=dark
 syntax on
 colorscheme base16-harmonic-dark
-" colorscheme base16-oceanicnext
 hi htmlArg gui=italic
 hi Comment gui=italic
 hi Type    gui=italic
@@ -252,7 +252,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K for show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR><Paste>
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if &filetype=='vim'
@@ -288,13 +288,12 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 imap <C-l> <Plug>(coc-snippets-expand)
 " Use <C-j> to select text for visual text of snippet.
 vmap <C-j> <Plug>(coc-snippets-select)
-" Use <C-j> to jump to forward placeholder, which is default
-let g:coc_snippet_next = '<c-j>'
-" Use <C-k> to jump to backward placeholder, which is default
-let g:coc_snippet_prev = '<c-k>'
+
+let g:coc_snippet_next = '<c-j>' " Use <C-j> to jump to forward placeholder, which is default
+let g:coc_snippet_prev = '<c-k>' " Use <C-k> to jump to backward placeholder, which is default
 
 " Add diagnostic info for https://github.com/itchyny/lightline.vim
-let g:lightline ={
+let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
@@ -324,8 +323,6 @@ noremap <leader>w :w<CR>
 noremap <leader>q! :q!<CR>
 nnoremap <ESC> :noh<return><ESC>
 nnoremap <leader><leader> <c-^>
-" nnoremap <Tab> :bnext!<CR>
-" nnoremap <S-Tab> :bprev!<CR><Paste>
 nnoremap <bar> <C-w><bar>
 
 
@@ -335,11 +332,6 @@ nmap <Leader>f :GFiles<CR>
 nmap <Leader>F :Files<CR>
 nmap <Leader>t :Tags<CR>
 nmap <Leader>m :History<CR>
-" nmap gs <plug>(GrepperOperator)
-" xmap gs <plug>(GrepperOperator)
-" nnoremap <leader>* :Grepper -tool rg -cword -noprompt<cr>
-" nnoremap <leader>g :Grepper -tool rg<cr>
-" nnoremap <leader>G :Grepper -tool rg -buffers<cr>
 
 
 " WINDOWS
