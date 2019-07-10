@@ -29,11 +29,11 @@ ENV ZSH=$HOME/.config/zsh
 RUN git clone git://github.com/zsh-users/zsh-completions.git $HOME/zsh-completions
 RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 
-# NEOVIM
+# NEOVIM NIGHTLY
 ARG NVIM_VERSION='nvim-linux64'
 ENV PATH $HOME/bin/$NVIM_VERSION/bin:$PATH
 RUN curl -fLo $HOME/.cache/$NVIM_VERSION.tar.gz \
-  https://github.com/neovim/neovim/releases/download/v0.3.4/$NVIM_VERSION.tar.gz && \
+  https://github.com/neovim/neovim/releases/download/nightly/$NVIM_VERSION.tar.gz && \
     tar -xzf $HOME/.cache/$NVIM_VERSION.tar.gz -C $HOME/bin
 ## NEOVIM Plugins
 RUN curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
