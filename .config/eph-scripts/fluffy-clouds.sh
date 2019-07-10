@@ -27,6 +27,7 @@ if ! [ "$(command -v pyenv)" ]; then
   pyenv activate aws
 fi
 
+# AWS CLIs
 if ! [ "$(pyenv which aws)" ]; then
   curl \
     "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" \
@@ -34,6 +35,10 @@ if ! [ "$(pyenv which aws)" ]; then
   unzip $HOME/.cache/awscli-bundle.zip -d $HOME/.cache
   sudo $HOME/.cache/awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
   echo "Run aws configure afterwards"
+fi
+
+if ! [ "$(command -v aws-iam-authenticator)" ]; then
+    brew install aws-iam-authenticator
 fi
 
 ## AWS-SHELL
