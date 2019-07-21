@@ -80,6 +80,16 @@ RUN curl -Lo $CACHE_DIR/$HELM_TAR_NAME https://get.helm.sh/$HELM_TAR_NAME && \
     mv $CACHE_DIR/$HELM_ARCH/helm $BIN_DIR && \
     mv $CACHE_DIR/$HELM_ARCH/tiller $BIN_DIR
 
+# AWS CLIs
+## https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
+ARG AUTH_VERSION="1.13.7"
+ARG AUTH_DATE="2019-06-11"
+ARG AUTH_NAME="aws-iam-authenticator"
+ARG AUTH_DOWNLOAD_LINK="https://amazon-eks.s3-us-west-2.amazonaws.com/$AUTH_VERSION/$AUTH_DATE/bin/linux/amd64/$AUTH_NAME"
+RUN curl -Lo $CACHE_DIR/$AUTH_NAME "$AUTH_DOWNLOAD_LINK" && \
+    mv $CACHE_DIR/$AUTH_NAME $BIN_DIR && \
+    chmod +x $BIN_DIR/$AUTH_NAME
+
 # Ensure ownership of binaries
 RUN chown -R root:root $BIN_DIR
 

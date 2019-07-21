@@ -84,3 +84,59 @@ function aws-assume-role-env () {
 
     export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
 }
+
+# usage: aws-export-env MyProfileName
+function aws-export-env () {
+    local pkg=aws-export-env
+    local iam_user
+    iam_user=$(whoami)
+
+    local account_id profile
+    if [[ ! $1 ]]; then
+        echo "$pkg: missing required argument for profile" 1>&2
+        return 99
+    fi
+    profile=$1
+    account_id=$(aws --profile $profile --output text sts get-caller-identity --query Account)
+
+    rv="$?"
+    if [[ $rv -ne 0 || ! account_id ]]; then
+        echo "$pkg: failed to get account_id" 1>&2
+        return "$rv"
+    fi
+
+    local creds_json
+    creds_json=$(aws --profile $profile --output json sts get-session-token)
+    rv="$?"
+    if [[ $rv -ne 0 || ! $creds_json ]]; then
+        echo "$pkg: failed to get credentials for user '$iam_user' account '$account_id': $creds_json" 1>&2
+        return "$rv"
+    fi
+    local access_key secret_key session_token
+    access_key=$(echo "$creds_json" | jq --exit-status --raw-output '.Credentials.AccessKeyId')
+    rv="$?"
+    if [[ $rv -ne 0 || ! $access_key ]]; then
+        echo "$pkg: failed to parse output for AWS_ACCESS_KEY_ID: $creds_json" 1>&2
+        return "$rv"
+    fi
+    secret_key=$(echo "$creds_json" | jq --exit-status --raw-output '.Credentials.SecretAccessKey')
+    rv="$?"
+    if [[ $rv -ne 0 || ! $secret_key ]]; then
+        echo "$pkg: failed to parse output for AWS_SECRET_ACCESS_KEY: $creds_json" 1>&2
+        return "$rv"
+    fi
+    session_token=$(echo "$creds_json" | jq --exit-status --raw-output '.Credentials.SessionToken')
+    rv="$?"
+    if [[ $rv -ne 0 || ! $session_token ]]; then
+        echo "$pkg: failed to parse output for AWS_SESSION_TOKEN: $creds_json" 1>&2
+        return "$rv"
+    fi
+
+    # unset aws vars to be safe
+    unset AWS_DEFAULT_PROFILE AWS_PROFILE AWS_REGION AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_ACCOUNT_ID AWS_SHARED_CREDENTIALS_FILE
+    export AWS_DEFAULT_REGION='us-east-1' AWS_ACCESS_KEY_ID=$access_key AWS_SECRET_ACCESS_KEY=$secret_key AWS_SESSION_TOKEN=$session_token AWS_ACCOUNT_ID=$account_id
+}
+
+function aws-unset-env () {
+    unset AWS_DEFAULT_PROFILE AWS_PROFILE AWS_REGION AWS_ACCOUNT_ID AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_SHARED_CREDENTIALS_FILE
+}

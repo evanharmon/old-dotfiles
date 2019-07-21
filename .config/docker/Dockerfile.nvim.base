@@ -9,6 +9,7 @@ COPY --from=bins /root/bin /root/bin
 COPY --from=python /root/.pyenv /root/.pyenv
 COPY --from=ruby /root/.rbenv /root/.rbenv
 COPY --from=go /usr/local/go /usr/local/go
+COPY --from=go /root/go /root/go
 COPY --from=aws-sdks /root/install /root/install
 
 ENV HOME="/root" TERM=xterm-256color
@@ -78,6 +79,6 @@ RUN git config --global user.name "Evan Harmon" && \
 
 # Lastly, install plugins for editors
 RUN nvim --headless +PlugInstall +UpdateRemotePlugins +qall
-RUN nvim --headless +GoInstallBinaries +qall
+# RUN nvim --headless +GoInstallBinaries +qall
 
 CMD ["zsh", "-l"]
