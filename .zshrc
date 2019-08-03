@@ -64,7 +64,7 @@ fi
 [[ -s "$HOME/.local/share/marker/marker.sh" ]] && source "$HOME/.local/share/marker/marker.sh"
 
 ## AWS
-export AWS_DEFAULT_REGION='us-east-1'
+export AWS_DEFAULT_REGION='us-east-1' AWS_REGION='us-east-1'
 if [ -e /usr/local/bin/aws_completer ]; then
     source /usr/local/bin/aws_zsh_completer.sh
 fi
