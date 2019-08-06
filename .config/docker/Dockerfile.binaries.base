@@ -90,6 +90,12 @@ RUN curl -Lo $CACHE_DIR/$AUTH_NAME "$AUTH_DOWNLOAD_LINK" && \
     mv $CACHE_DIR/$AUTH_NAME $BIN_DIR && \
     chmod +x $BIN_DIR/$AUTH_NAME
 
-# Ensure ownership of binaries
-RUN chown -R root:root $BIN_DIR
+# K8s Tools
+ARG STERN_VERSION="1.10.0"
+ARG STERN_NAME="stern_linux_amd64"
+ARG STERN_DOWNLOAD_LINK="https://github.com/wercker/stern/releases/download/$STERN_VERSION/$STERN_NAME"
+RUN curl -LO "$CACHE_DIR/stern" "$STERN_DOWNLOAD_LINK" && \
+    mv "$CACHE_DIR/stern" $BIN_DIR
 
+# LAST Ensure ownership of binaries
+RUN chown -R root:root $BIN_DIR

@@ -98,6 +98,7 @@ set cmdheight=2
 set updatetime=300
 set shortmess+=c
 set signcolumn=yes
+set scrollback=100000
 
 " autocmd BufEnter * silent! lcd %:p:h
 " for vim 7
