@@ -36,9 +36,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-grepper'
 
-" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
-" Plug 'rust-lang/rust.vim', { 'do': 'rustup component add rls rust-analysis rust-src' }
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go'
 Plug 'sebdah/vim-delve'
@@ -51,6 +49,7 @@ Plug 'juliosueiras/vim-terraform-completion'
 Plug 'Valloric/MatchTagAlways'
 Plug 'jparise/vim-graphql'
 Plug 'jph00/swift-apple'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -221,30 +220,17 @@ let g:ale_fixers={
 \ 'yaml': ['prettier'],
 \}
 
-" COC SETUP
-"
+" COC SETUP BEGIN
 autocmd FileType json syntax match Comment +\/\/.\+$+
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 " Use `:Format` for format current buffer
 command! -nargs=0 Format :call CocAction('format')
 
-" tab triggers completion
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
+" What is this for????
 function! s:check_back_space() abort
   let col=col('.') - 1
   return !col || getline('.')[col - 1]=~# '\s'
 endfunction
-
-" Use <c-space> for trigger completion
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` breaks undo chain
-inoremap <expr> <cr> pumvisible() ? "\<C-y" : "\<C-g>u\<CR>"
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -284,7 +270,9 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
+" COC SETUP END
 
+" SNIPPETS BEGIN
 " Use <C-l> to trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
 " Use <C-j> to select text for visual text of snippet.
@@ -292,6 +280,22 @@ vmap <C-j> <Plug>(coc-snippets-select)
 
 let g:coc_snippet_next = '<c-j>' " Use <C-j> to jump to forward placeholder, which is default
 let g:coc_snippet_prev = '<c-k>' " Use <C-k> to jump to backward placeholder, which is default
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" Make <tab> used for trigger completion, completion confirm, snippet expand
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+let g:coc_snippet_next = '<tab>'
+" SNIPPETS END
 
 " Add diagnostic info for https://github.com/itchyny/lightline.vim
 let g:lightline = {
@@ -305,17 +309,6 @@ let g:lightline = {
       \ },
       \ }
 
-" run :GoBuild or :GoTestCompile based on the go file
-function! s:build_go_files()
-  let l:file=expand('%')
-  if l:file=~#'^\f\+_test\.go$'
-    call go#cmd#Test(0, 1)
-  elseif l:file=~#'^\f\+\.go$'
-    call go#cmd#Build(0)
-  endif
-endfunction
-
-
 " GENERAL KEY MAPPINGS
 let mapleader="\<SPACE>"
 nnoremap <leader>= <C-w>=
@@ -325,7 +318,6 @@ noremap <leader>q! :q!<CR>
 nnoremap <ESC> :noh<return><ESC>
 nnoremap <leader><leader> <c-^>
 nnoremap <bar> <C-w><bar>
-
 
 " File Management
 nmap <Leader>b :Buffers<CR>

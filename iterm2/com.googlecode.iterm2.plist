@@ -2264,7 +2264,7 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>617 471 796 486 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 24 1680 1003 0 0 1680 1027 </string>
+	<string>0 24 1920 1033 0 0 1920 1057 </string>
 	<key>NeverWarnAboutOverrides</key>
 	<true/>
 	<key>NeverWarnAboutOverrides_selection</key>
@@ -2924,7 +2924,7 @@
 			<key>Right Option Key Sends</key>
 			<integer>2</integer>
 			<key>Rows</key>
-			<integer>40</integer>
+			<integer>50</integer>
 			<key>Screen</key>
 			<integer>0</integer>
 			<key>Scrollback Lines</key>
@@ -3222,7 +3222,7 @@
 			<key>Visual Bell</key>
 			<false/>
 			<key>Window Type</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Working Directory</key>
 			<string></string>
 		</dict>
@@ -3254,7 +3254,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>F4BAEE68-36F9-4348-A57B-764B1F22788C</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>1</integer>
+	<integer>3</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -3970,6 +3970,10 @@
 		<key>Initial Directory</key>
 		<string>/Users/eharmon/Desktop</string>
 	</dict>
+	<key>NoSyncSearchHistory</key>
+	<array>
+		<string>previewUrl</string>
+	</array>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>562613790.88312602</real>
 	<key>OpenArrangementAtStartup</key>
@@ -4030,7 +4034,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-08-05T10:05:29Z</date>
+	<date>2019-08-06T13:13:44Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>

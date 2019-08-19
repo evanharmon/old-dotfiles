@@ -8,7 +8,7 @@ fi
 
 if [[ "$OSTYPE" == darwin* ]]; then
     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-    export BROWSER='open'
+    export BROWSER='none' ## avoid opening browsers on npm runs
 fi
 
 fpath=($HOME/zsh-completions/src $fpath)
