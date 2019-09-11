@@ -111,9 +111,9 @@ if [ ! -d $HOME/code/localstack ]; then
 fi
 
 if ! [ "$(command -v terraform)" ]; then
-  FNAME='terraform_0.11.8_darwin_amd64.zip'
+  FNAME='terraform_0.11.11_darwin_amd64.zip'
   curl -Lo $HOME/.cache/$FNAME \
-    https://releases.hashicorp.com/terraform/0.11.8/$FNAME
+    https://releases.hashicorp.com/terraform/0.11.11/$FNAME
   unzip $HOME/.cache/$FNAME -d $HOME/bin
 fi
 
@@ -124,6 +124,6 @@ if ! [ "$(command -v packer)" ]; then
   unzip $HOME/.cache/$FNAME -d $HOME/bin
 fi
 
-unset GCLOUD_SDK_VERSION
-unset K8S_VERSION
-unset FNAME
+if ! [ "$(command -v tfswitch)" ]; then
+    brew install warrensbox/tap/tfswitch
+fi

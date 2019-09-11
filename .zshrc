@@ -108,5 +108,8 @@ fi
 # Android
 export PATH=$PATH:~/Library/Android/sdk/platform-tools # support for `adb devices` command
 
+# DOCKER
+export DOCKER_BUILDKIT=1
+
 # MUST BE LAST
 source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
