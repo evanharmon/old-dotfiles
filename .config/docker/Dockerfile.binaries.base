@@ -94,8 +94,17 @@ RUN curl -Lo $CACHE_DIR/$AUTH_NAME "$AUTH_DOWNLOAD_LINK" && \
 ARG STERN_VERSION="1.10.0"
 ARG STERN_NAME="stern_linux_amd64"
 ARG STERN_DOWNLOAD_LINK="https://github.com/wercker/stern/releases/download/$STERN_VERSION/$STERN_NAME"
-RUN curl -LO "$CACHE_DIR/stern" "$STERN_DOWNLOAD_LINK" && \
+RUN curl -sLo "$CACHE_DIR/stern" "$STERN_DOWNLOAD_LINK" && \
     mv "$CACHE_DIR/stern" $BIN_DIR
+
+ARG SKAFFOLD_ARCH="skaffold-linux-amd64"
+ARG SKAFFOLD_DOWNLOAD_LINK="https://storage.googleapis.com/skaffold/releases/latest/$SKAFFOLD_ARCH"
+RUN curl -sLo "$CACHE_DIR/skaffold" "$SKAFFOLD_DOWNLOAD_LINK" && \
+    mv "$CACHE_DIR/skaffold" $BIN_DIR
+
+# TFSWITCH
+RUN curl -LO "https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh" && \
+    bash install.sh -b /root/bin
 
 # LAST Ensure ownership of binaries
 RUN chown -R root:root $BIN_DIR

@@ -7,11 +7,31 @@ WORKDIR /root
 RUN amazon-linux-extras install \
   rust1 \
   vim \
-  docker
+  docker \
+  python3
 
 RUN yum update -y && \
   yum groupinstall -y 'Development Tools' && \
-  yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+  yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
+  yum-config-manager --enable epel-debuginfo && \
+  yum install -y scl-utils && \
+
+yum install -y http://mirror.centos.org/centos/7/sclo/x86_64/rh/devtoolset-8/devtoolset-8-runtime-8.1-1.el7.x86_64.rpm && \
+yum install -y http://mirror.centos.org/centos/7/sclo/x86_64/rh/devtoolset-8/devtoolset-8-valgrind-3.14.0-16.el7.x86_64.rpm && \
+yum install -y http://mirror.centos.org/centos/7/sclo/x86_64/rh/devtoolset-8/devtoolset-8-systemtap-devel-3.3-2.el7.x86_64.rpm && \
+yum install -y http://mirror.centos.org/centos/7/sclo/x86_64/rh/devtoolset-8/devtoolset-8-systemtap-runtime-3.3-2.el7.x86_64.rpm
+yum install -y http://mirror.centos.org/centos/7/sclo/x86_64/rh/devtoolset-8/devtoolset-8-systemtap-client-3.3-2.el7.x86_64.rpm
+yum install -y http://mirror.centos.org/centos/7/sclo/x86_64/rh/devtoolset-8/devtoolset-8-systemtap-3.3-2.el7.x86_64.rpm
+yum install -y http://mirror.centos.org/centos/7/sclo/x86_64/rh/devtoolset-8/devtoolset-8-dyninst-9.3.2-6.el7.x86_64.rpm
+yum install -y http://mirror.centos.org/centos/7/sclo/x86_64/rh/devtoolset-8/devtoolset-8-oprofile-1.3.0-2.el7.x86_64.rpm
+yum install -y http://mirror.centos.org/centos/7/sclo/x86_64/rh/devtoolset-8/devtoolset-8-perftools-8.1-1.el7.x86_64.rpm
+yum install -y http://mirror.centos.org/centos/7/sclo/x86_64/rh/devtoolset-8/devtoolset-8-binutils-2.30-54.el7.x86_64.rpm
+yum install -y http://mirror.centos.org/centos/7/sclo/x86_64/rh/devtoolset-8/devtoolset-8-dwz-0.12-1.1.el7.x86_64.rpm
+
+yum install -y http://mirror.centos.org/centos/7/sclo/x86_64/rh/devtoolset-8/devtoolset-8-elfutils-0.176-1.el7.x86_64.rpm
+
+yum install -y http://mirror.centos.org/centos/7/sclo/x86_64/rh/devtoolset-8/devtoolset-8-toolchain-8.1-1.el7.x86_64.rpm
+
 RUN yum install -y tree \
   readline-devel \
   bzip2-devel \
