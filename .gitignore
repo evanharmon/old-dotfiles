@@ -9,7 +9,8 @@ Applications
 Desktop
 Documents
 Downloads
-Library
+!Library/Application\ Support/Anki2/evan/backups
+Library/*
 Movies
 Music
 Pictures
@@ -18,3 +19,4 @@ code
 eph-music
 go
 bin
+
