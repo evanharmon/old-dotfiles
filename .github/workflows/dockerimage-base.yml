@@ -3,12 +3,9 @@ name: Docker Image CI
 on: [push]
 
 jobs:
-
   build:
- 
     runs-on: ubuntu-latest
- 
     steps:
     - uses: actions/checkout@v1
     - name: Build the Base Docker image
-      run: cat .config/docker/Dockerfile.amazonlinux.devtools | docker build my-image-name:$(date +%s)
+      run: docker build -t eph-nvim/base:latest -f .config/docker/Dockerfile.nvim.base .
