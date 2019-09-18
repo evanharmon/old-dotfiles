@@ -127,3 +127,11 @@ fi
 if ! [ "$(command -v tfswitch)" ]; then
     brew install warrensbox/tap/tfswitch
 fi
+
+if ! [ "$(command -v skaffold)" ]; then
+    brew install skaffold
+fi
+
+if ! [ "$(command -v stern)" ]; then
+    brew install stern
+fi
