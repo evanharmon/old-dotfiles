@@ -1,4 +1,4 @@
-FROM eph-amazonlinux/devtools:latest
+FROM eph-amazonlinux:latest
 LABEL maintainer="Evan Harmon <evan.p.harmon@gmail.com>"
 
 ARG DOWNLOAD_VERSION="go1.12.6.linux-amd64.tar.gz"
@@ -32,8 +32,6 @@ RUN go get -u github.com/derekparker/delve/cmd/dlv
 ENV GO111MODULE=auto
 
 # VIM-GO BINARIES
-# vim-go: github.com/go-delve/delve/cmd/dlv
-# vim-go: gopls not found. Installing golang.org/x/tools/gopls@latest to folder /root/go/bin/
 RUN go get github.com/zmb3/gogetdoc && go install github.com/zmb3/gogetdoc && \
   go get golang.org/x/tools/cmd/guru && go install golang.org/x/tools/cmd/guru && \
   go get github.com/davidrjenni/reftools/cmd/fillstruct && go install github.com/davidrjenni/reftools/cmd/fillstruct && \

@@ -1,11 +1,14 @@
-name: Docker Image CI
-
+name: Base container
 on: [push]
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Build the Base Docker image
-      run: docker build -t eph-nvim/base:latest -f .config/docker/Dockerfile.nvim.base .
+      - uses: actions/docker/login@master
+      - name: Login to Docker Hub
+        env:
+          DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
+      - uses: actions/checkout@v1
+      - name: Build the Base Docker image
+        run: docker build -t eph-amazonlinux:latest -f .config/docker/Dockerfile.amazonlinux.base .

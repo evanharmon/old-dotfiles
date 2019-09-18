@@ -1,16 +1,16 @@
-FROM eph-bin/base:latest as bins
-FROM eph-python/base:latest as python
-FROM eph-ruby/base:latest as ruby
-FROM eph-golang/base:latest as go
-FROM eph-aws-sdks/base:latest as aws-sdks
+FROM eph-bin:latest as BINS
+FROM eph-python:latest as PYTHON
+FROM eph-ruby:latest as RUBY
+FROM eph-golang:latest as GOLANG
+FROM eph-aws-sdks:latest as AWS-SDKS
 
-FROM eph-amazonlinux/devtools
-COPY --from=bins /root/bin /root/bin
-COPY --from=python /root/.pyenv /root/.pyenv
-COPY --from=ruby /root/.rbenv /root/.rbenv
-COPY --from=go /usr/local/go /usr/local/go
-COPY --from=go /root/go /root/go
-COPY --from=aws-sdks /root/install /root/install
+FROM eph-amazonlinux:latest
+COPY --from=BINS /root/bin /root/bin
+COPY --from=PYTHON /root/.pyenv /root/.pyenv
+COPY --from=RUBY /root/.rbenv /root/.rbenv
+COPY --from=GOLANG /usr/local/go /usr/local/go
+COPY --from=GOLANG /root/go /root/go
+COPY --from=AWS-SDKS /root/install /root/install
 
 ENV HOME="/root" TERM=xterm-256color
 ENV PYENV_ROOT=$HOME/.pyenv PYENV_VERSION='2.7.14' PYENV_VERSION3='3.5.5' PYENV2_NAME=v2 PYENV3_NAME=v3 PYENV_VIRTUALENV_DISABLE_PROMPT=1

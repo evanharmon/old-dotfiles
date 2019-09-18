@@ -1,4 +1,5 @@
-FROM eph-amazonlinux/devtools:latest
+FROM eph-amazonlinux:latest
+LABEL maintainer="Evan Harmon <evan.p.harmon@gmail.com>"
 
 ENV HOME=/root RBENV_VERSION=2.6.0
 ENV PATH=$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
