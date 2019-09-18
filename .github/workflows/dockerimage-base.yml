@@ -20,4 +20,4 @@ jobs:
       - name: docker push
         uses: actions/docker/cli@master
         with:
-          args: push eph-amazonlinux:latest
+          args: push evanharmon/eph-amazonlinux:latest
