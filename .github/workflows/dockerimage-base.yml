@@ -1,14 +1,23 @@
 name: Base container
+
 on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Login to Docker Hub
+      - name: checkout
+        uses: actions/checkout@master
+      - name: docker build
+        uses: actions/docker/cli@master
+        with:
+          args: build -t eph-amazonlinux:latest -f .config/docker/Dockerfile.amazonlinux.devtools .
+      - name: docker login
         uses: actions/docker/login@master
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
-      - name: Build the Base Docker image
-        uses: actions/checkout@v1
-        run: docker build -t eph-amazonlinux:latest -f .config/docker/Dockerfile.amazonlinux.base .
+      - name: docker push
+        uses: actions/docker/cli@master
+        with:
+          args: push evanharmon/eph-amazonlinux:latest
