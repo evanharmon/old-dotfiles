@@ -11,7 +11,7 @@ jobs:
       - name: docker build
         uses: actions/docker/cli@master
         with:
-          args: build -t eph-amazonlinux:latest -f .config/docker/Dockerfile.amazonlinux.devtools .
+          args: build -t evanharmon/eph-amazonlinux:latest -f .config/docker/Dockerfile.amazonlinux.devtools .
       - name: docker login
         uses: actions/docker/login@master
         env:
