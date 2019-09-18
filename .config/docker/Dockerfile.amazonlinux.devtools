@@ -13,9 +13,7 @@ RUN amazon-linux-extras install \
 
 RUN yum update -y && \
   yum groupinstall -y 'Development Tools' && \
-  yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
-  yum-config-manager --enable epel-debuginfo && \
-  yum install -y scl-utils && \
+  yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
 RUN yum install -y tree \
   readline-devel \

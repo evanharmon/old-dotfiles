@@ -4,11 +4,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/docker/login@master
       - name: Login to Docker Hub
+        uses: actions/docker/login@master
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
-      - uses: actions/checkout@v1
       - name: Build the Base Docker image
+        uses: actions/checkout@v1
         run: docker build -t eph-amazonlinux:latest -f .config/docker/Dockerfile.amazonlinux.base .
