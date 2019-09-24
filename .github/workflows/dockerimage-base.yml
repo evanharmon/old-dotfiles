@@ -21,6 +21,11 @@ jobs:
         uses: actions/docker/cli@master
         with:
           args: push evanharmon/eph-amazonlinux:latest
+      - name: docker login
+        uses: actions/docker/login@master
+        env:
+          DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
       - name: docker build
         uses: actions/docker/cli@master
         with:
