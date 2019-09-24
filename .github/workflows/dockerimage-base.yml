@@ -8,16 +8,24 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@master
-      - name: docker build
-        uses: actions/docker/cli@master
-        with:
-          args: build -t evanharmon/eph-amazonlinux:latest -f .config/docker/Dockerfile.amazonlinux.devtools .
       - name: docker login
         uses: actions/docker/login@master
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
+      - name: docker build
+        uses: actions/docker/cli@master
+        with:
+          args: build -t evanharmon/eph-amazonlinux:latest -f .config/docker/Dockerfile.amazonlinux.devtools .
       - name: docker push
         uses: actions/docker/cli@master
         with:
           args: push evanharmon/eph-amazonlinux:latest
+      - name: docker build
+        uses: actions/docker/cli@master
+        with:
+          args: build -t evanharmon/eph-aws-sdks:latest -f .config/docker/Dockerfile.aws-sdks .
+      - name: docker push
+        uses: actions/docker/cli@master
+        with:
+          args: push evanharmon/eph-aws-sdks:latest
