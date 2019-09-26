@@ -1,4 +1,4 @@
-FROM eph-amazonlinux:latest
+FROM evanharmon/eph-amazonlinux:latest
 LABEL maintainer="Evan Harmon <evan.p.harmon@gmail.com>"
 
 ENV HOME=/root

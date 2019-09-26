@@ -1,4 +1,4 @@
-FROM eph-amazonlinux:latest
+FROM evanharmon/eph-amazonlinux:latest
 LABEL maintainer="Evan Harmon <evan.p.harmon@gmail.com>"
 
 ENV HOME /root
@@ -96,12 +96,14 @@ ARG STERN_VERSION="1.10.0"
 ARG STERN_NAME="stern_linux_amd64"
 ARG STERN_DOWNLOAD_LINK="https://github.com/wercker/stern/releases/download/$STERN_VERSION/$STERN_NAME"
 RUN curl -sLo "$CACHE_DIR/stern" "$STERN_DOWNLOAD_LINK" && \
-    mv "$CACHE_DIR/stern" $BIN_DIR
+    mv "$CACHE_DIR/stern" $BIN_DIR && \
+    chmod +x $BIN_DIR/stern
 
 ARG SKAFFOLD_ARCH="skaffold-linux-amd64"
 ARG SKAFFOLD_DOWNLOAD_LINK="https://storage.googleapis.com/skaffold/releases/latest/$SKAFFOLD_ARCH"
 RUN curl -sLo "$CACHE_DIR/skaffold" "$SKAFFOLD_DOWNLOAD_LINK" && \
-    mv "$CACHE_DIR/skaffold" $BIN_DIR
+    mv "$CACHE_DIR/skaffold" $BIN_DIR && \
+    chmod +x $BIN_DIR/skaffold
 
 # TFSWITCH
 RUN curl -LO "https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh" && \

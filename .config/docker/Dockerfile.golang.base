@@ -1,4 +1,4 @@
-FROM eph-amazonlinux:latest
+FROM evanharmon/eph-amazonlinux:latest
 LABEL maintainer="Evan Harmon <evan.p.harmon@gmail.com>"
 
 ARG DOWNLOAD_VERSION="go1.12.6.linux-amd64.tar.gz"
