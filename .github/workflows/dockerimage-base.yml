@@ -73,11 +73,11 @@ jobs:
       - name: docker build
         uses: actions/docker/cli@master
         with:
-          args: build -t evanharmon/eph-python:latest -f .config/docker/Dockerfile.python.base .
+          args: build -t evanharmon/eph-ruby:latest -f .config/docker/Dockerfile.ruby.base .
       - name: docker push
         uses: actions/docker/cli@master
         with:
-          args: push evanharmon/eph-python:latest
+          args: push evanharmon/eph-ruby:latest
       # GOLANG
       - name: docker login
         uses: actions/docker/login@master
@@ -101,8 +101,8 @@ jobs:
       - name: docker build
         uses: actions/docker/cli@master
         with:
-          args: build -t evanharmon/eph-nvim:latest -f .config/docker/Dockerfile.nvim.base .
+          args: build -t evanharmon/eph-golang:latest -f .config/docker/Dockerfile.golang.base .
       - name: docker push
         uses: actions/docker/cli@master
         with:
-          args: push evanharmon/eph-nvim:latest
+          args: push evanharmon/eph-golang:latest
