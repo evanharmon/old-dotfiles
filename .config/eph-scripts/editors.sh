@@ -48,26 +48,25 @@ if ! [ -x "$(gem list neovim -i)" ]; then
 fi
 
 # Always Grab Nightly
-if ! [ -x "$(command -v nvim)" ]; then
-    FNAME='nvim-macos.tar.gz'
-    curl -Lo $HOME/.cache/$FNAME "https://github.com/neovim/neovim/releases/download/nightly/$FNAME"
-    tar xzvf $HOME/.cache/$FNAME -C $HOME
-fi
+FNAME='nvim-macos.tar.gz'
+curl -Lo $HOME/.cache/$FNAME "https://github.com/neovim/neovim/releases/download/nightly/$FNAME"
+tar xzvf $HOME/.cache/$FNAME -C $HOME
 
 # Always Grab Latest Version
 curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-if ! [ -f $HOME/bin/tflint ];then
+if ! [ -f $HOME/bin/tflint ]; then
     FNAME='tflint_darwin_amd64.zip'
     curl -LO $HOME/.cache/$FNAME \
         "https://github.com/wata727/tflint/releases/download/v0.7.2/$FNAME"
     unzip $HOME/.cache/$FNAME -d $HOME/bin
 fi
 
-# clangd install
-if ! brew list llvm; then
-    brew install llvm
+# clangd
+if [ -d /usr/local/opt/llvm ]; then
+    ln -s "/usr/local/opt/llvm/bin/clangd" "/usr/local/bin/clangd"
+    ln -s "/usr/local/opt/llvm/bin/clang-tidy" "/usr/local/bin/clang-tidy"
 fi
 
 unset FNAME
