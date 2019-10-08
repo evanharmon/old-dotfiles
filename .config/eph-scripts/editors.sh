@@ -69,4 +69,8 @@ if [ -d /usr/local/opt/llvm ]; then
     ln -s "/usr/local/opt/llvm/bin/clang-tidy" "/usr/local/bin/clang-tidy"
 fi
 
-unset FNAME
+if ! brew list universal-ctags; then
+    brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+fi
+
+brew update

@@ -135,3 +135,7 @@ fi
 if ! [ "$(command -v stern)" ]; then
     brew install stern
 fi
+
+if ! [ "$(command -v helm)" ]; then
+    brew install kubernetes-helm
+fi
