@@ -67,7 +67,7 @@ RUN rustup component add rustfmt rls-preview rust-analysis rust-src
 ENV PATH /usr/local/go/bin:$PATH
 
 # DOTFILES
-RUN echo "dotfiles commit 9b2544b43a234bd205cdc9dc96aa14d7661789b5" && \
+RUN echo "dotfiles commit 00e4a59" && \
   git init --bare $HOME/.dotfiles
 RUN /bin/sh -c "\
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no; \
