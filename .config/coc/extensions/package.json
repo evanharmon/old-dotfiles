@@ -8,7 +8,7 @@
     "coc-prettier": ">=1.1.10",
     "coc-pyls": ">=1.0.6",
     "coc-rls": ">=1.1.2",
-    "coc-snippets": ">=2.1.11",
+    "coc-snippets": ">=2.1.13",
     "coc-tsserver": ">=1.4.4",
     "coc-yaml": ">=1.0.2"
   }

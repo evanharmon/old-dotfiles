@@ -14,6 +14,7 @@ jobs:
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
+          run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-amazonlinux
       - name: docker build
       - uses: actions/docker/cli@master
         with:
@@ -28,6 +29,7 @@ jobs:
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
+          run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-aws-sdks
       - name: docker build
       - uses: actions/docker/cli@master
         with:
@@ -42,6 +44,7 @@ jobs:
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
+          run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-bin
       - name: docker build
       - uses: actions/docker/cli@master
         with:
@@ -56,6 +59,7 @@ jobs:
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
+          run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-python
       - name: docker build
       - uses: actions/docker/cli@master
         with:
@@ -70,6 +74,7 @@ jobs:
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
+          run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-ruby
       - name: docker build
       - uses: actions/docker/cli@master
         with:
@@ -84,6 +89,7 @@ jobs:
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
+          run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-golang
       - name: docker build
       - uses: actions/docker/cli@master
         with:
@@ -98,6 +104,7 @@ jobs:
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
+          run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-nvim
       - name: docker build
       - uses: actions/docker/cli@master
         with:

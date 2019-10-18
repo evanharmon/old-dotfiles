@@ -128,14 +128,20 @@ if ! [ "$(command -v tfswitch)" ]; then
     brew install warrensbox/tap/tfswitch
 fi
 
-if ! [ "$(command -v skaffold)" ]; then
+if [ "$(command -v skaffold)" ]; then
+    brew upgrade skaffold
+else
     brew install skaffold
 fi
 
-if ! [ "$(command -v stern)" ]; then
+if [ "$(command -v stern)" ]; then
+    brew upgrade stern
+else
     brew install stern
 fi
 
-if ! [ "$(command -v helm)" ]; then
+if [ "$(command -v helm)" ]; then
+    brew upgrade kubernetes-helm
+else
     brew install kubernetes-helm
 fi
