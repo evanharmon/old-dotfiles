@@ -1,0 +1,8 @@
+{
+  "extensions.ignoreRecommendations": false,
+  "window.zoomLevel": 1,
+  "editor.minimap.enabled": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

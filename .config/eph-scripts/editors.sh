@@ -65,8 +65,8 @@ fi
 
 # clangd
 if [ -d /usr/local/opt/llvm ]; then
-    ln -s "/usr/local/opt/llvm/bin/clangd" "/usr/local/bin/clangd"
-    ln -s "/usr/local/opt/llvm/bin/clang-tidy" "/usr/local/bin/clang-tidy"
+    ln -sf "/usr/local/opt/llvm/bin/clangd" "/usr/local/bin/clangd"
+    ln -sf "/usr/local/opt/llvm/bin/clang-tidy" "/usr/local/bin/clang-tidy"
 fi
 
 if ! brew list universal-ctags; then
@@ -74,3 +74,33 @@ if ! brew list universal-ctags; then
 fi
 
 brew update
+
+## VSCODE
+## Must manually open vs code command palette and type `shell command`, do install code command
+if [ -f $HOME/.config/vscode/settings.json ]; then
+    ln -sf ~/.config/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
+    ln -sf ~/.config/vscode/launch.json ~/Library/Application\ Support/Code/User/launch.json
+fi
+
+# install extensions
+pkglist=(
+esbenp.prettier-vscode
+firefox-devtools.vscode-firefox-debug
+Glavin001.unibeautify-vscode
+llvm-vs-code-extensions.vscode-clangd
+ms-azuretools.vscode-docker
+ms-kubernetes-tools.vscode-kubernetes-tools
+ms-vscode.Go
+msjsdiag.debugger-for-chrome
+redhat.vscode-yaml
+rust-lang.rust
+twxs.cmake
+vscodevim.vim
+webfreak.debug
+)
+
+if [ "$(command -v code)" ]; then
+    for i in ${pkglist[@]}; do
+        code --install-extension $i
+    done
+fi
