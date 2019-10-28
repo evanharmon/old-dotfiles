@@ -87,9 +87,11 @@ pkglist=(
 esbenp.prettier-vscode
 firefox-devtools.vscode-firefox-debug
 Glavin001.unibeautify-vscode
+Kasik96.swift
 llvm-vs-code-extensions.vscode-clangd
 ms-azuretools.vscode-docker
 ms-kubernetes-tools.vscode-kubernetes-tools
+ms-vscode.cpptools
 ms-vscode.Go
 msjsdiag.debugger-for-chrome
 redhat.vscode-yaml
