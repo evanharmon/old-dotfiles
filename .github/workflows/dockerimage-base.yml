@@ -10,49 +10,34 @@ jobs:
         uses: actions/checkout@master
       # AMAZON LINUX2
       - name: docker login
-        uses: actions/docker/login@master
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-amazonlinux
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
-          run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-amazonlinux
       - name: docker build
-        uses: actions/docker/cli@master
-        with:
-          args: build -t evanharmon/eph-amazonlinux:latest -f .config/docker/Dockerfile.amazonlinux.devtools .
+        run: build -t evanharmon/eph-amazonlinux:latest -f .config/docker/Dockerfile.amazonlinux.devtools .
       - name: docker push
-        uses: actions/docker/cli@master
-        with:
-          args: push evanharmon/eph-amazonlinux:latest
+        run: push evanharmon/eph-amazonlinux:latest
       # AWS SDKS
       - name: docker login
-        uses: actions/docker/login@master
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-aws-sdks
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
-          run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-aws-sdks
       - name: docker build
-        uses: actions/docker/cli@master
-        with:
-          args: build -t evanharmon/eph-aws-sdks:latest -f .config/docker/Dockerfile.aws-sdks .
+        run: docker build -t evanharmon/eph-aws-sdks:latest -f .config/docker/Dockerfile.aws-sdks .
       - name: docker push
-        uses: actions/docker/cli@master
-        with:
-          args: push evanharmon/eph-aws-sdks:latest
+        run: push evanharmon/eph-aws-sdks:latest
       # BINARIES
       - name: docker login
-        uses: actions/docker/login@master
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-bin
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
-          run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-bin
       - name: docker build
-        uses: actions/docker/cli@master
-        with:
-          args: build -t evanharmon/eph-bin:latest -f .config/docker/Dockerfile.binaries.base .
+        run: docker build -t evanharmon/eph-bin:latest -f .config/docker/Dockerfile.binaries.base .
       - name: docker push
-        uses: actions/docker/cli@master
-        with:
-          args: push evanharmon/eph-bin:latest
+        run: docker push evanharmon/eph-bin:latest
       # PYTHON
       - name: docker login
         uses: actions/docker/login@master
@@ -61,55 +46,36 @@ jobs:
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
           run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-python
       - name: docker build
-        uses: actions/docker/cli@master
-        with:
-          args: build -t evanharmon/eph-python:latest -f .config/docker/Dockerfile.python.base .
+        run: docker build -t evanharmon/eph-python:latest -f .config/docker/Dockerfile.python.base .
       - name: docker push
-        uses: actions/docker/cli@master
-        with:
-          args: push evanharmon/eph-python:latest
+        run: docker push evanharmon/eph-python:latest
       # RUBY
       - name: docker login
-        uses: actions/docker/login@master
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-ruby
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
-          run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-ruby
       - name: docker build
-        uses: actions/docker/cli@master
-        with:
-          args: build -t evanharmon/eph-ruby:latest -f .config/docker/Dockerfile.ruby.base .
+        run: docker build -t evanharmon/eph-ruby:latest -f .config/docker/Dockerfile.ruby.base .
       - name: docker push
-        uses: actions/docker/cli@master
-        with:
-          args: push evanharmon/eph-ruby:latest
+        run: docker push evanharmon/eph-ruby:latest
       # GOLANG
       - name: docker login
-        uses: actions/docker/login@master
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-golang
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
-          run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-golang
       - name: docker build
-        uses: actions/docker/cli@master
-        with:
-          args: build -t evanharmon/eph-golang:latest -f .config/docker/Dockerfile.golang.base .
+        run: docker build -t evanharmon/eph-golang:latest -f .config/docker/Dockerfile.golang.base .
       - name: docker push
-        uses: actions/docker/cli@master
-        with:
-          args: push evanharmon/eph-golang:latest
+        run: docker push evanharmon/eph-golang:latest
       # NEOVIM
       - name: docker login
-        uses: actions/docker/login@master
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-nvim
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
-          run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-nvim
       - name: docker build
-        uses: actions/docker/cli@master
-        with:
-          args: build -t evanharmon/eph-nvim:latest -f .config/docker/Dockerfile.nvim.base .
+        run: docker build -t evanharmon/eph-nvim:latest -f .config/docker/Dockerfile.nvim.base .
       - name: docker push
-        uses: actions/docker/cli@master
-        with:
-          args: push evanharmon/eph-nvim:latest
+        run: docker push evanharmon/eph-nvim:latest
