@@ -40,11 +40,10 @@ jobs:
         run: docker push evanharmon/eph-bin:latest
       # PYTHON
       - name: docker login
-        uses: actions/docker/login@master
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-python
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
-          run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-python
       - name: docker build
         run: docker build -t evanharmon/eph-python:latest -f .config/docker/Dockerfile.python.base .
       - name: docker push
