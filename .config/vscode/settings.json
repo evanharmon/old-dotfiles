@@ -1,6 +1,6 @@
 {
   "extensions.ignoreRecommendations": false,
-  "window.zoomLevel": 0,
+  "window.zoomLevel": 1,
   "editor.minimap.enabled": false,
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -25,5 +25,39 @@
   "workbench.statusBar.visible": true,
   "[cpp]": {
     "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
-  }
+  },
+  "C_Cpp.updateChannel": "Insiders",
+  "editor.renderWhitespace": "all",
+  "C_Cpp.default.cppStandard": "c++17",
+  "C_Cpp.default.cStandard": "c11",
+  "C_Cpp.default.intelliSenseMode": "clang-x64",
+  "editor.tabCompletion": "on",
+  "C_Cpp.autoAddFileAssociations": false,
+  "C_Cpp.autocomplete": "Disabled",
+  "C_Cpp.formatting": "Disabled",
+  "vim.easymotion": true,
+  "vim.sneak": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.insertModeKeyBindings": [],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [":"],
+      "commands": ["workbench.action.showCommands"]
+    },
+    {
+      "before": ["leader", "w"],
+      "commands": ["workbench.action.files.save"]
+    }
+  ],
+  "vim.leader": "<space>",
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false
+  },
+  "vim:enableNeovim": true,
+  "vim:neovimPath": "/Users/eharmon/nvim-osx64/bin/nvim",
+  "vim:surround": true
 }

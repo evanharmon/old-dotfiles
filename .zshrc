@@ -94,6 +94,10 @@ fi
 
 # RUBY
 export RBENV_VERSION=2.6.0
+if [ "$(command -v rbenv)" ]; then
+    eval "$(rbenv init -)"
+fi
+
 if [[ ":$PATH:" != *":$HOME/.rbenv/shims:$HOME/.rbenv/bin:"* ]]; then
     export PATH=$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
 fi

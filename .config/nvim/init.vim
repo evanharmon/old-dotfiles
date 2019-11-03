@@ -8,6 +8,7 @@ set rtp+=expand("$HOME/.fnm")
 set path+=**  " Recursive find
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/dist/*	" OSX/Linux
 set shell=/bin/zsh
+set tags+=~/JUCE/tags
 
 let g:python_host_prog=expand('$PYENV_ROOT/versions/$PYENV2_NAME/bin/python')
 let g:python3_host_prog=expand('$PYENV_ROOT/versions/$PYENV3_NAME/bin/python')
@@ -50,6 +51,7 @@ Plug 'Valloric/MatchTagAlways'
 Plug 'jparise/vim-graphql'
 Plug 'jph00/swift-apple'
 Plug 'honza/vim-snippets'
+Plug 'vhdirk/vim-cmake'
 
 call plug#end()
 

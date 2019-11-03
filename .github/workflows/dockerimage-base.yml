@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@master
       # AMAZON LINUX2
       - name: docker login
-        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-amazonlinux
+        run: docker login https://index.docker.io/v1/ -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-amazonlinux
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
@@ -20,7 +20,7 @@ jobs:
         run: push evanharmon/eph-amazonlinux:latest
       # AWS SDKS
       - name: docker login
-        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-aws-sdks
+        run: docker login https://index.docker.io/v1/ -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-aws-sdks
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
@@ -30,7 +30,7 @@ jobs:
         run: push evanharmon/eph-aws-sdks:latest
       # BINARIES
       - name: docker login
-        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-bin
+        run: docker login https://index.docker.io/v1/ -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-bin
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
@@ -40,7 +40,7 @@ jobs:
         run: docker push evanharmon/eph-bin:latest
       # PYTHON
       - name: docker login
-        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-python
+        run: docker login https://index.docker.io/v1/ -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-python
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
@@ -50,7 +50,7 @@ jobs:
         run: docker push evanharmon/eph-python:latest
       # RUBY
       - name: docker login
-        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-ruby
+        run: docker login https://index.docker.io/v1/ -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-ruby
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
@@ -60,7 +60,7 @@ jobs:
         run: docker push evanharmon/eph-ruby:latest
       # GOLANG
       - name: docker login
-        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-golang
+        run: docker login https://index.docker.io/v1/ -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-golang
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
@@ -70,7 +70,7 @@ jobs:
         run: docker push evanharmon/eph-golang:latest
       # NEOVIM
       - name: docker login
-        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-nvim
+        run: docker login https://index.docker.io/v1/ -u $DOCKER_USERNAME -p $DOCKER_PASSWORD evanharmon/eph-nvim
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}

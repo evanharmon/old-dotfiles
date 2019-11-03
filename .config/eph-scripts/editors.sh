@@ -43,8 +43,13 @@ if [ ! -L $PYENV_ROOT/versions/$PYENV3_NAME ]; then
     pip install neovim pynvim
 fi
 
+## run ruby.sh first
+if ! [ "$(command -v rbenv)" ]; then
+    echo "Run `sh ruby.sh` before this script"
+fi
+
 if ! [ -x "$(gem list neovim -i)" ]; then
-    gem install neovim --user-install
+    gem install neovim
 fi
 
 # Always Grab Nightly
@@ -106,3 +111,9 @@ if [ "$(command -v code)" ]; then
         code --install-extension $i
     done
 fi
+
+## Xcode
+if ! [ "$(brew list swiftlint)" ]; then
+    brew install swiftlint
+fi
+
