@@ -1,6 +1,7 @@
 FROM evanharmon/eph-amazonlinux:latest
 LABEL maintainer="Evan Harmon <evan.p.harmon@gmail.com>"
 
+ARG RBENV_VERSION=2.6.0
 ENV HOME=/root RBENV_VERSION=2.6.0
 ENV PATH=$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
 
@@ -8,9 +9,6 @@ WORKDIR /root
 
 # Install Ruby Version Manager
 RUN curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash
-RUN mkdir -p "$(rbenv root)"/plugins && \
-    git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
-
-RUN /bin/sh -c 'rbenv install $RBENV_VERSION; rbenv global $RBENV_VERSION; gem install neovim rake fastlane'
 
 # Install Ruby
+RUN /bin/sh -c 'rbenv install $RBENV_VERSION; rbenv global $RBENV_VERSION; gem install neovim rake fastlane'
