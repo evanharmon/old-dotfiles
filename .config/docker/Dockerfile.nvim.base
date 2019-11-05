@@ -4,7 +4,8 @@ FROM evanharmon/eph-ruby:latest as RUBY
 FROM evanharmon/eph-golang:latest as GOLANG
 FROM evanharmon/eph-aws-sdks:latest as AWS-SDKS
 
-FROM evanharmon/eph-amazonlinux:latest
+ARG BASE_FROM=evanharmon/eph-amazonlinux:latest
+FROM $BASE_FROM
 COPY --from=BINS /root/bin /root/bin
 COPY --from=PYTHON /root/.pyenv /root/.pyenv
 COPY --from=RUBY /root/.rbenv /root/.rbenv
