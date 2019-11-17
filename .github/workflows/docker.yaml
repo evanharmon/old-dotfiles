@@ -12,10 +12,15 @@ on:
     paths-ignore:
       - "iterm/**"
       - ".local/**"
+      - ".config/eph-scripts/**"
+      - ".config/nvim/**"
+      - ".config/zsh/**"
+      - ".config/vscode/**"
+      - ".config/coc/**"
       - "Library/**"
       - "zsh-synthax-highlighting"
-#     paths:
-#       - ".config/docker/**"
+    paths:
+      - ".config/docker/**"
 
 jobs:
   binaries_container:
@@ -51,28 +56,28 @@ jobs:
         run: docker build -t evanharmon/eph-ruby:latest -f .config/docker/Dockerfile.ruby.base .
       - name: push ruby
         run: docker push evanharmon/eph-ruby:latest
-  # golang_container:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: checkout
-  #       uses: actions/checkout@master
-  #     - name: login
-  #       run: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" https://index.docker.io/v1/
-  #     - name: build go
-  #       run: docker build -t evanharmon/eph-golang:latest -f .config/docker/Dockerfile.golang.base .
-  #     - name: push go
-  #       run: docker push evanharmon/eph-golang:latest
-  # aws_cpp_sdks_container:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: checkout
-  #       uses: actions/checkout@master
-  #     - name: login
-  #       run: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" https://index.docker.io/v1/
-  #     - name: build aws cpp sdks
-  #       run: docker build -t evanharmon/eph-aws-sdks:latest -f .config/docker/Dockerfile.aws-sdks .
-  #     - name: push
-  #       run: docker push evanharmon/eph-aws-sdks:latest
+  golang_container:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+      - name: login
+        run: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" https://index.docker.io/v1/
+      - name: build go
+        run: docker build -t evanharmon/eph-golang:latest -f .config/docker/Dockerfile.golang.base .
+      - name: push go
+        run: docker push evanharmon/eph-golang:latest
+  aws_cpp_sdks_container:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+      - name: login
+        run: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" https://index.docker.io/v1/
+      - name: build aws cpp sdks
+        run: docker build -t evanharmon/eph-aws-sdks:latest -f .config/docker/Dockerfile.aws-sdks .
+      - name: push
+        run: docker push evanharmon/eph-aws-sdks:latest
   # final_container:
   #   needs:
   #     [

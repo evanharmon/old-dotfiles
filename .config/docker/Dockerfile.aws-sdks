@@ -1,4 +1,4 @@
-ARG BASE_FROM=evanharmon/eph-amazonlinux:latest
+ARG BASE_FROM=gcc:8.3
 FROM $BASE_FROM
 LABEL maintainer="Evan Harmon <evan.p.harmon@gmail.com>"
 
@@ -7,31 +7,29 @@ ENV INSTALL_DIR $HOME/install
 
 WORKDIR /root
 
+RUN apt-get update -y && \
+    apt-get install -y cmake
+
 RUN mkdir $INSTALL_DIR
 
 # Lambda Runtime
-RUN git clone https://github.com/awslabs/aws-lambda-cpp.git
-
-WORKDIR /root/aws-lambda-cpp
-RUN mkdir /root/aws-lambda-cpp/build
+RUN git clone https://github.com/awslabs/aws-lambda-cpp.git && \
+    mkdir -p /root/aws-lambda-cpp/build
 
 WORKDIR /root/aws-lambda-cpp/build
-RUN cmake3 .. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF \
-  -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR
-RUN make && make install
+RUN cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF \
+  -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR && \
+   make && make install
 
 # AWS SDK
 WORKDIR /root
-RUN git clone https://github.com/aws/aws-sdk-cpp.git
-
-WORKDIR /root/aws-sdk-cpp
-RUN mkdir /root/aws-sdk-cpp/build
+RUN git clone https://github.com/aws/aws-sdk-cpp.git && \
+    mkdir -p /root/aws-sdk-cpp/build
 
 WORKDIR /root/aws-sdk-cpp/build
-RUN cmake3 .. -DBUILD_ONLY=s3 \
+RUN cmake .. -DBUILD_ONLY=s3 \
   -DBUILD_SHARED_LIBS=OFF \
   -DENABLE_UNITY_BUILD=ON \
   -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR
-
-RUN make && make install
+  -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR && \
+   make && make install
