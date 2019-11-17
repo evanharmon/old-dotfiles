@@ -1,28 +1,30 @@
-ARG BASE_FROM=evanharmon/eph-amazonlinux:latest
+ARG BASE_FROM=gcc:8.3
 FROM $BASE_FROM
 LABEL maintainer="Evan Harmon <evan.p.harmon@gmail.com>"
 
 ENV HOME=/root
-ENV PYENV_ROOT=$HOME/.pyenv PYENV_VERSION='2.7.14' PYENV_VERSION3='3.5.5' PYENV2_NAME=v2 PYENV3_NAME=v3 PYENV_VIRTUALENV_DISABLE_PROMPT=1
+ENV PYENV_ROOT=$HOME/.pyenv PYENV_VERSION='2.7.16' PYENV_VERSION3='3.5.5' PYENV2_NAME=v2 PYENV3_NAME=v3 PYENV_VIRTUALENV_DISABLE_PROMPT=1
 ENV PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 
 WORKDIR /root
 
+# RUN apk add git curl wget unzip bash
+
 # PYENV / virtualenv
-RUN git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT
-RUN git clone https://github.com/pyenv/pyenv-virtualenv.git $PYENV_ROOT/plugins/pyenv-virtualenv
+RUN git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT && \
+    git clone https://github.com/pyenv/pyenv-virtualenv.git $PYENV_ROOT/plugins/pyenv-virtualenv
 
 # Python2 Environment
-RUN pyenv install --skip-existing $PYENV_VERSION
-RUN /bin/bash -c 'eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)"; \
+RUN pyenv install --skip-existing $PYENV_VERSION && \
+    /bin/bash -c 'eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)"; \
     pyenv virtualenv $PYENV_VERSION $PYENV2_NAME; \
     pyenv activate $PYENV2_NAME; \
     pip install --upgrade pip; \
     pip install neovim pynvim;'
 
 # Python3 Environment
-RUN pyenv install --skip-existing $PYENV_VERSION3
-RUN /bin/bash -c 'eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)"; \
+RUN pyenv install --skip-existing $PYENV_VERSION3 && \
+    /bin/bash -c 'eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)"; \
     pyenv install --skip-existing 3.5.5; \
     pyenv virtualenv $PYENV_VERSION3 $PYENV3_NAME; \
     pyenv activate $PYENV3_NAME; \

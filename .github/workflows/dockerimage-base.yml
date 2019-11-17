@@ -21,17 +21,17 @@ jobs:
         run: docker build -t evanharmon/eph-bin:latest - < .config/docker/Dockerfile.binaries.base
       - name: push bins
         run: docker push evanharmon/eph-bin:latest
-  # pyenv_container:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: checkout
-  #       uses: actions/checkout@master
-  #     - name: login
-  #       run: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" https://index.docker.io/v1/
-  #     - name: build python
-  #       run: docker build -t evanharmon/eph-python:latest -f .config/docker/Dockerfile.python.base .
-  #     - name: push python
-  #       run: docker push evanharmon/eph-python:latest
+  pyenv_container:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+      - name: login
+        run: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" https://index.docker.io/v1/
+      - name: build python
+        run: docker build -t evanharmon/eph-python:latest -f .config/docker/Dockerfile.python.base .
+      - name: push python
+        run: docker push evanharmon/eph-python:latest
   # rvm_container:
   #   runs-on: ubuntu-latest
   #   steps:
