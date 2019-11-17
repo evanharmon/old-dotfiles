@@ -9,7 +9,7 @@ on:
     branches:
       - master
     paths:
-      - "config/docker/**"
+      - ".config/docker/**"
 
 jobs:
   binaries_container:
