@@ -1,4 +1,4 @@
-ARG BASE_FROM=evanharmon/eph-amazonlinux:latest
+ARG BASE_FROM=alpine:latest
 FROM $BASE_FROM
 LABEL maintainer="Evan Harmon <evan.p.harmon@gmail.com>"
 
@@ -8,8 +8,10 @@ ENV CACHE_DIR $HOME/.cache
 
 WORKDIR /root
 
-RUN mkdir $BIN_DIR
-RUN mkdir $CACHE_DIR
+RUN apk add curl wget tar git bash unzip
+
+RUN mkdir $BIN_DIR && \
+    mkdir $CACHE_DIR
 
 # BAT
 ARG BAT_VERSION='bat-v0.10.0-x86_64-unknown-linux-gnu'
@@ -19,14 +21,14 @@ RUN curl -Lo $CACHE_DIR/$BAT_VERSION.tar.gz \
     mv $CACHE_DIR/$BAT_VERSION/bat $BIN_DIR/
 
 # FZF
-RUN git clone --depth 1 https://github.com/junegunn/fzf.git $BIN_DIR/.fzf
-RUN $BIN_DIR/.fzf/install --no-update-rc --no-fish --no-bash
+RUN git clone --depth 1 https://github.com/junegunn/fzf.git $BIN_DIR/.fzf && \
+    $BIN_DIR/.fzf/install --no-update-rc --no-fish --no-bash
 
 # JQ
 ARG JQ_VERSION='https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64'
 RUN curl -qLo $CACHE_DIR/jq $JQ_VERSION && \
-  chmod +x $CACHE_DIR/jq && \
-  mv $CACHE_DIR/jq $BIN_DIR
+    chmod +x $CACHE_DIR/jq && \
+    mv $CACHE_DIR/jq $BIN_DIR
 
 # FD
 ARG FD_VERSION='fd-v7.3.0-x86_64-unknown-linux-gnu'
@@ -37,27 +39,22 @@ RUN curl -Lo $CACHE_DIR/$FD_VERSION.tar.gz \
 
 # TERRAFORM
 ARG TF_DOWNLOAD_LINK="https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip"
-ARG TF_SHA256="94504f4a67bad612b5c8e3a4b7ce6ca2772b3c1559630dfd71e9c519e3d6149c"
-
 RUN curl -Lo $CACHE_DIR/terraform.zip $TF_DOWNLOAD_LINK && \
-  echo "$TF_SHA256 $CACHE_DIR/terraform.zip" | sha256sum -c && \
-  unzip $CACHE_DIR/terraform.zip -d $BIN_DIR && chmod +x $BIN_DIR/terraform
+    unzip $CACHE_DIR/terraform.zip -d $BIN_DIR && chmod +x $BIN_DIR/terraform
 
 # TERRAFORM PLUGINS
 ENV PLUGINS_DIR $HOME/bin/terraform-plugins
 ARG TF_AWS="terraform-provider-aws_1.58.0_linux_amd64.zip"
 ARG TF_AWS_DOWNLOAD_LINK="https://releases.hashicorp.com/terraform-provider-aws/1.58.0/terraform-provider-aws_1.58.0_linux_amd64.zip"
-ARG TF_AWS_SHA256="788635cd3e923ba601b238f9ec988fa5237696b2d0688d89027e8cdc31e5c3c6"
-RUN mkdir -p $PLUGINS_DIR
-RUN curl -Lo $CACHE_DIR/$TF_AWS $TF_AWS_DOWNLOAD_LINK && \
-  echo "$TF_AWS_SHA256 $CACHE_DIR/$TF_AWS" | sha256sum -c && \
-  unzip $CACHE_DIR/$TF_AWS -d $PLUGINS_DIR
+RUN mkdir -p $PLUGINS_DIR && \
+    curl -Lo $CACHE_DIR/$TF_AWS $TF_AWS_DOWNLOAD_LINK && \
+    unzip $CACHE_DIR/$TF_AWS -d $PLUGINS_DIR
 
 # C++ Tools
 ARG NINJA_VERSION='ninja-linux'
 RUN curl -Lo $CACHE_DIR/$NINJA_VERSION.zip \
-  https://github.com/ninja-build/ninja/releases/download/v1.9.0/$NINJA_VERSION.zip && \
-  unzip $CACHE_DIR/$NINJA_VERSION.zip -d $BIN_DIR && chmod +x $BIN_DIR/ninja
+    https://github.com/ninja-build/ninja/releases/download/v1.9.0/$NINJA_VERSION.zip && \
+    unzip $CACHE_DIR/$NINJA_VERSION.zip -d $BIN_DIR && chmod +x $BIN_DIR/ninja
 
 # RIPGREP
 ARG RG_VERSION="11.0.1"
@@ -69,9 +66,9 @@ RUN curl -Lo $CACHE_DIR/$RG_TAR_NAME.tar.gz \
     mv $CACHE_DIR/$RG_TAR_NAME/rg $BIN_DIR
 
 # KUBECTL
-RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-RUN chmod +x ./kubectl
-RUN mv ./kubectl $BIN_DIR/kubectl
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
+    chmod +x ./kubectl && \
+    mv ./kubectl $BIN_DIR/kubectl
 
 # HELM / TILLER
 ARG HELM_ARCH='linux-amd64'
