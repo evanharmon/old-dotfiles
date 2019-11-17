@@ -8,8 +8,6 @@ ENV PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 
 WORKDIR /root
 
-# RUN apk add git curl wget unzip bash
-
 # PYENV / virtualenv
 RUN git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT && \
     git clone https://github.com/pyenv/pyenv-virtualenv.git $PYENV_ROOT/plugins/pyenv-virtualenv

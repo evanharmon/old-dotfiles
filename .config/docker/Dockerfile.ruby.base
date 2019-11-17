@@ -1,4 +1,4 @@
-ARG BASE_FROM=evanharmon/eph-amazonlinux:latest
+ARG BASE_FROM=gcc:8.3
 FROM $BASE_FROM
 LABEL maintainer="Evan Harmon <evan.p.harmon@gmail.com>"
 
