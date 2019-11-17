@@ -9,7 +9,7 @@
     "coc-pyls": ">=1.0.6",
     "coc-rls": ">=1.1.4",
     "coc-snippets": ">=2.1.13",
-    "coc-tsserver": ">=1.4.5",
+    "coc-tsserver": ">=1.4.6",
     "coc-yaml": ">=1.0.2"
   }
 }

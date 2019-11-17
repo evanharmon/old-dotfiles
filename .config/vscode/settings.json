@@ -1,40 +1,20 @@
 {
-  "extensions.ignoreRecommendations": false,
-  "window.zoomLevel": 0,
-  "editor.minimap.enabled": false,
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "cmake.configureOnOpen": true,
-  "cmake.debugConfig": {
-    "stopAtEntry": false,
-    "MIMode": "lldb",
-    "miDebuggerPath": "~/.vscode/extensions/ms-vscode.cpptools-0.26.0/debugAdapters/lldb/bin/lldb-mi",
-    "logging": {
-      "trace": true,
-      "engineLogging": true,
-      "traceResponse": true
-    }
-  },
+  "editor.formatOnSave": false,
   "editor.lineNumbers": "relative",
   "editor.fontLigatures": true,
   "editor.fontSize": 14,
   "editor.fontFamily": "'Fira Code Retina', Menlo, Monaco, 'Courier New', monospace",
-  "breadcrumbs.enabled": false,
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.tabCompletion": "on",
+  "editor.renderWhitespace": "all",
+  "editor.minimap.enabled": false,
+  "extensions.ignoreRecommendations": false,
+  "window.zoomLevel": 0,
+  "breadcrumbs.enabled": true,
   "workbench.activityBar.visible": false,
   "workbench.statusBar.visible": true,
-  "[cpp]": {
-    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
-  },
-  "C_Cpp.updateChannel": "Insiders",
-  "editor.renderWhitespace": "all",
-  "C_Cpp.default.cppStandard": "c++17",
-  "C_Cpp.default.cStandard": "c11",
-  "C_Cpp.default.intelliSenseMode": "clang-x64",
-  "editor.tabCompletion": "on",
-  "C_Cpp.autoAddFileAssociations": false,
-  "C_Cpp.autocomplete": "Disabled",
-  "C_Cpp.formatting": "Disabled",
+  "workbench.colorTheme": "Base16 Dark Harmonic",
+  "terminal.external.osxExec": "iTerm.app",
   "vim.easymotion": true,
   "vim.sneak": true,
   "vim.incsearch": true,
@@ -55,12 +35,39 @@
   "vim.leader": "<space>",
   "vim.handleKeys": {
     "<C-a>": false,
-    "<C-f>": false
+    "<C-f>": true
   },
   "vim:enableNeovim": true,
   "vim:neovimPath": "/Users/eharmon/nvim-osx64/bin/nvim",
   "vim:surround": true,
+  "[cpp]": {
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+    "editor.formatOnSave": true
+  },
+  "C_Cpp.updateChannel": "Insiders",
+  "C_Cpp.default.cppStandard": "c++17",
+  "C_Cpp.default.cStandard": "c11",
+  "C_Cpp.default.intelliSenseMode": "clang-x64",
+  "C_Cpp.autoAddFileAssociations": false,
+  "C_Cpp.autocomplete": "Disabled",
+  "C_Cpp.formatting": "Disabled",
+  "cmake.configureOnOpen": true,
+  "cmake.debugConfig": {
+    "stopAtEntry": false,
+    "MIMode": "lldb",
+    "miDebuggerPath": "~/.vscode/extensions/ms-vscode.cpptools-0.26.0/debugAdapters/lldb/bin/lldb-mi",
+    "logging": {
+      "trace": true,
+      "engineLogging": true,
+      "traceResponse": true
+    }
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
   }
 }

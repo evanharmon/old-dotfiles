@@ -1,0 +1,30 @@
+{
+  "recommendations": [
+    "alesiong.clang-tidy-linter",
+    "AndrsDC.base16-themes",
+    "esbenp.prettier-vscode",
+    "firefox-devtools.vscode-firefox-debug",
+    "Glavin001.unibeautify-vscode",
+    "Kasik96.swift",
+    "llvm-vs-code-extensions.vscode-clangd",
+    "ms-azuretools.vscode-docker",
+    "ms-kubernetes-tools.vscode-kubernetes-tools",
+    "ms-python.python",
+    "ms-vscode-remote.remote-containers",
+    "ms-vscode-remote.remote-ssh",
+    "ms-vscode-remote.remote-ssh-edit",
+    "ms-vscode.cmake-tools",
+    "ms-vscode.cpptools",
+    "ms-vscode.Go",
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "ms-vsliveshare.vsliveshare",
+    "msjsdiag.debugger-for-chrome",
+    "redhat.vscode-yaml",
+    "rust-lang.rust",
+    "sodatea.velocity",
+    "twxs.cmake",
+    "Tyriar.terminal-tabs",
+    "vscodevim.vim",
+    "webfreak.debug"
+  ]
+}
