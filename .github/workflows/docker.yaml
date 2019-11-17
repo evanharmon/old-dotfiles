@@ -19,8 +19,6 @@ on:
       - ".config/coc/**"
       - "Library/**"
       - "zsh-synthax-highlighting"
-    paths:
-      - ".config/docker/**"
 
 jobs:
   binaries_container:
