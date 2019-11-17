@@ -4,12 +4,13 @@ env:
   DOCKER_USERNAME: ${{secrets.DOCKER_HUB_USERNAME}}
   DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
 
-on:
-  push:
-    branches:
-      - master
-    paths:
-      - ".config/docker/**"
+on: [push]
+# on:
+#   push:
+#     branches:
+#       - master
+#     paths:
+#       - ".config/docker/**"
 
 jobs:
   binaries_container:
