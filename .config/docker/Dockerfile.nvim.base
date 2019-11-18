@@ -1,25 +1,58 @@
+ARG BASE_FROM=amazonlinux
 FROM evanharmon/eph-bin:latest as BINS
 FROM evanharmon/eph-python:latest as PYTHON
 FROM evanharmon/eph-ruby:latest as RUBY
 FROM evanharmon/eph-golang:latest as GOLANG
+FROM evanharmon/eph-nodejs:latest as NODEJS
 FROM evanharmon/eph-aws-sdks:latest as AWS-SDKS
-
-ARG BASE_FROM=evanharmon/eph-amazonlinux:latest
 FROM $BASE_FROM
+LABEL maintainer="Evan Harmon <evan.p.harmon@gmail.com>"
+RUN amazon-linux-extras install \
+    rust1 \
+    vim \
+    docker
+
+RUN yum update -y && \
+    yum groupinstall -y 'Development Tools' && \
+    yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+RUN yum install -y tree \
+    readline-devel \
+    bzip2-devel \
+    sqlite-devel \
+    openssl-devel \
+    awscli \
+    nodejs \
+    which \
+    wget \
+    yum-utils \
+    rsync \
+    bash-completion \
+    cmake3 \
+    libcurl-devel \
+    clang-tools-extra.x86_64 \
+    lame lame-devel
+
+RUN debuginfo-install -y \
+    libgcc-7.3.1-5.amzn2.0.2.x86_64 \
+    libstdc++-7.3.1-5.amzn2.0.2.x86_64
+
+
 COPY --from=BINS /root/bin /root/bin
 COPY --from=PYTHON /root/.pyenv /root/.pyenv
 COPY --from=RUBY /root/.rbenv /root/.rbenv
 COPY --from=GOLANG /usr/local/go /usr/local/go
 COPY --from=GOLANG /root/go /root/go
+COPY --from=NODEJS /root/.fnm /root/.fnm
 COPY --from=AWS-SDKS /root/install /root/install
 
-ENV HOME="/root" TERM=xterm-256color
-ENV PYENV_ROOT=$HOME/.pyenv PYENV_VERSION='2.7.14' PYENV_VERSION3='3.5.5' PYENV2_NAME=v2 PYENV3_NAME=v3 PYENV_VIRTUALENV_DISABLE_PROMPT=1
-ENV PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
+ENV HOME="/root" TERM=xterm-256color \
+    PYENV_ROOT=$HOME/.pyenv PYENV_VERSION='2.7.14' PYENV_VERSION3='3.5.5' PYENV2_NAME=v2 PYENV3_NAME=v3 PYENV_VIRTUALENV_DISABLE_PROMPT=1 \
+    PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
 
 # Home Directories
 RUN mkdir -p $HOME/.local && \
-  mkdir -p $HOME/.cache
+    mkdir -p $HOME/.cache
 
 # Dependencies
 WORKDIR /root
@@ -28,36 +61,17 @@ WORKDIR /root
 RUN yum install -y zsh
 ENV ZSH=$HOME/.config/zsh
 RUN git clone git://github.com/zsh-users/zsh-completions.git $HOME/zsh-completions && \
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 
 # NEOVIM NIGHTLY
 ARG NVIM_VERSION='nvim-linux64'
 ENV PATH $HOME/bin/$NVIM_VERSION/bin:$PATH
 RUN curl -fLo $HOME/.cache/$NVIM_VERSION.tar.gz \
-  https://github.com/neovim/neovim/releases/download/nightly/$NVIM_VERSION.tar.gz && \
+    https://github.com/neovim/neovim/releases/download/nightly/$NVIM_VERSION.tar.gz && \
     tar -xzf $HOME/.cache/$NVIM_VERSION.tar.gz -C $HOME/bin
 ## NEOVIM Plugins
 RUN curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-# FNM & NPMS
-ENV DK_NODE_VERSION "v11.9.0"
-ENV PATH $HOME/.fnm:$HOME/.fnm/current/bin:$HOME/.fnm/node-versions/$DK_NODE_VERSION/installation/bin:$PATH
-RUN curl -fsSL https://github.com/Schniz/fnm/raw/master/.ci/install.sh | bash -s -- --install-dir "./.fnm" --skip-shell
-RUN /bin/bash -c 'export PATH=$HOME/.fnm:$PATH; eval `fnm env --multi`; \
-  fnm install $DK_NODE_VERSION; $HOME/.fnm/fnm use $DK_NODE_VERSION;'
-RUN npm install --global --allow-root --unsafe-perm=true \
-    add \
-    pure-prompt \
-    neovim \
-    vim-node-rpc \
-    prettier \
-    typescript \
-    coc.nvim \
-    bash-language-server \
-    javascript-typescript-langserver \
-    dockerfile-language-server-nodejs \
-    dotenv-cli
 
 # RUST
 ENV PATH $HOME/.cargo/bin:$PATH
@@ -68,8 +82,8 @@ RUN rustup component add rustfmt rls-preview rust-analysis rust-src
 ENV PATH /usr/local/go/bin:$PATH
 
 # DOTFILES
-RUN echo "dotfiles commit b36b430" && \
-  git init --bare $HOME/.dotfiles
+RUN echo "dotfiles commit 855c8b4017e138bb96737b8bcbb94cafe3250fc6" && \
+    git init --bare $HOME/.dotfiles
 RUN /bin/sh -c "\
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no; \
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME remote add origin https://github.com/evanharmon/dotfiles.git; \
@@ -80,6 +94,6 @@ RUN git config --global user.name "Evan Harmon" && \
 
 # Lastly, install plugins for editors
 RUN nvim --headless +PlugInstall +UpdateRemotePlugins +qall
-# RUN nvim --headless +GoInstallBinaries +qall
+RUN nvim --headless +GoInstallBinaries +qall
 
 CMD ["zsh", "-l"]

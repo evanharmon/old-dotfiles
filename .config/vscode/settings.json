@@ -9,7 +9,7 @@
   "editor.renderWhitespace": "all",
   "editor.minimap.enabled": false,
   "extensions.ignoreRecommendations": false,
-  "window.zoomLevel": 0,
+  "window.zoomLevel": 1,
   "breadcrumbs.enabled": true,
   "workbench.activityBar.visible": false,
   "workbench.statusBar.visible": true,

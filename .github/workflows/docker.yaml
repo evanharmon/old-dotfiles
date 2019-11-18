@@ -40,7 +40,7 @@ jobs:
       - name: login
         run: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" https://index.docker.io/v1/
       - name: build python
-        run: docker build -t evanharmon/eph-python:latest -f .config/docker/Dockerfile.python.base .
+        run: docker build -t evanharmon/eph-python:latest - < .config/docker/Dockerfile.python.base
       - name: push python
         run: docker push evanharmon/eph-python:latest
   rvm_container:
@@ -51,7 +51,7 @@ jobs:
       - name: login
         run: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" https://index.docker.io/v1/
       - name: build ruby
-        run: docker build -t evanharmon/eph-ruby:latest -f .config/docker/Dockerfile.ruby.base .
+        run: docker build -t evanharmon/eph-ruby:latest - < .config/docker/Dockerfile.ruby.base
       - name: push ruby
         run: docker push evanharmon/eph-ruby:latest
   golang_container:
@@ -62,9 +62,20 @@ jobs:
       - name: login
         run: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" https://index.docker.io/v1/
       - name: build go
-        run: docker build -t evanharmon/eph-golang:latest -f .config/docker/Dockerfile.golang.base .
+        run: docker build -t evanharmon/eph-golang:latest - < .config/docker/Dockerfile.golang.base
       - name: push go
         run: docker push evanharmon/eph-golang:latest
+  nodejs_container:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+      - name: login
+        run: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" https://index.docker.io/v1/
+      - name: build go
+        run: docker build -t evanharmon/eph-nodejs:latest - < .config/docker/Dockerfile.nodejs.base
+      - name: push go
+        run: docker push evanharmon/eph-nodejs:latest
   aws_cpp_sdks_container:
     runs-on: ubuntu-latest
     steps:
@@ -73,30 +84,25 @@ jobs:
       - name: login
         run: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" https://index.docker.io/v1/
       - name: build aws cpp sdks
-        run: docker build -t evanharmon/eph-aws-sdks:latest -f .config/docker/Dockerfile.aws-sdks .
+        run: docker build -t evanharmon/eph-aws-sdks:latest - < .config/docker/Dockerfile.aws-sdks
       - name: push
         run: docker push evanharmon/eph-aws-sdks:latest
-  # final_container:
-  #   needs:
-  #     [
-  #       binaries_container,
-  #       pyenv_container,
-  #       rvm_container,
-  #       golang_container,
-  #       aws_cpp_sdks_container,
-  #     ]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: checkout
-  #       uses: actions/checkout@master
-  #     # AMAZON LINUX2
-  #     - name: build linux
-  #       run: docker build -t evanharmon/eph-amazonlinux:latest -f .config/docker/Dockerfile.amazonlinux.devtools .
-  #     - name: login
-  #       run: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" https://index.docker.io/v1/
-  #     - name: push linux
-  #       run: docker push evanharmon/eph-amazonlinux:latest
-  #     - name: build nvim
-  #       run: docker build -t evanharmon/eph-nvim:latest -f .config/docker/Dockerfile.nvim.base .
-  #     - name: push nvim
-  #       run: docker push evanharmon/eph-nvim:latest
+  final_container:
+    needs:
+      [
+        binaries_container,
+        pyenv_container,
+        rvm_container,
+        golang_container,
+        nodejs_container,
+        aws_cpp_sdks_container,
+      ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+      # AMAZON LINUX2
+      - name: build nvim
+        run: docker build -t evanharmon/eph-nvim:latest -f .config/docker/Dockerfile.nvim.base .
+      - name: push nvim
+        run: docker push evanharmon/eph-nvim:latest
