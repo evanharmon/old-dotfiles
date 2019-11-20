@@ -15,6 +15,9 @@
   "workbench.statusBar.visible": true,
   "workbench.colorTheme": "Base16 Dark Harmonic",
   "terminal.external.osxExec": "iTerm.app",
+  "terminal.integrated.fontSize": 16,
+  "terminal.integrated.scrollback": 25000,
+  "terminal.integrated.confirmOnExit": true,
   "vim.easymotion": true,
   "vim.sneak": true,
   "vim.incsearch": true,
@@ -69,5 +72,21 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
+  },
+  "[terraform]": {
+    "editor.formatOnSave": true
+  },
+  "terraform.indexing": {
+    "enabled": false,
+    "liveIndexing": false,
+    "delay": 500,
+    "exclude": [".terraform/**/*", "**/.terraform/**/*"]
+  },
+  "terraform.languageServer": {
+    "enabled": true,
+    "args": []
+  },
+  "file.associations": {
+    "*.snap": "javascript"
   }
 }
