@@ -42,7 +42,7 @@ COPY --from=BINS /root/bin /root/bin
 COPY --from=PYTHON /root/.pyenv /root/.pyenv
 COPY --from=RUBY /root/.rbenv /root/.rbenv
 COPY --from=GOLANG /usr/local/go /usr/local/go
-COPY --from=GOLANG /root/go /root/go
+COPY --from=GOLANG /go /go
 COPY --from=NODEJS /root/.fnm /root/.fnm
 COPY --from=AWS-SDKS /root/install /root/install
 

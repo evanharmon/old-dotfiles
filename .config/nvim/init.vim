@@ -32,7 +32,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
-Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-grepper'
@@ -129,11 +129,12 @@ au BufRead,BufNewFile Dockerfile* set filetype=Dockerfile
 au BufRead,BufNewFile Dockerfile* set syntax=Dockerfile
 
 " GENERAL LETS
-let g:NERDCustomDelimiters={ 'conf': { 'left': '#' } }
-let g:NERDCustomDelimiters={ 'javascript': { 'left': '{/*', 'right': '*/}', 'leftAlt': '//' } }
-let g:NERDSpaceDelims=1
-let g:NERDDefaultAlign='left'
-let g:NERDCommentEmptyLines=0
+" Moving over to vim-commentary
+" let g:NERDCustomDelimiters={ 'conf': { 'left': '#' } }
+" let g:NERDCustomDelimiters={ 'javascript': { 'left': '{/*', 'right': '*/}', 'leftAlt': '//' } }
+" let g:NERDSpaceDelims=1
+" let g:NERDDefaultAlign='left'
+" let g:NERDCommentEmptyLines=0
 let g:fzf_buffers_jump=1
 let g:fzf_history_dir='~/.local/share/fzf-history'
 let g:fzf_tags_command='fd | ctags --links=no -L-'
@@ -187,6 +188,7 @@ endfunction
 au! User FzfStatusLine call <SID>fzf_statusline()
 
 " LINTERS / COMPLETIONS
+" Still need to fix / test cpp support
 let g:ale_linters_explicit=1
 let g:ale_fix_on_save=1
 let g:ale_linters={
@@ -209,6 +211,7 @@ let g:ale_linters={
 \ 'xml': ['xmllint'],
 \ 'yaml': ['prettier'],
 \}
+" Still need to fix / test cpp support
 let g:ale_fixers={
 \ 'css': ['prettier'],
 \ 'graphql': ['prettier'],
