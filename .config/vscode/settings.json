@@ -10,12 +10,12 @@
   "editor.minimap.enabled": false,
   "extensions.ignoreRecommendations": false,
   "window.zoomLevel": 1,
-  "breadcrumbs.enabled": true,
+  "breadcrumbs.enabled": false,
   "workbench.activityBar.visible": false,
   "workbench.statusBar.visible": true,
   "workbench.colorTheme": "Base16 Dark Harmonic",
   "terminal.external.osxExec": "iTerm.app",
-  "terminal.integrated.fontSize": 16,
+  "terminal.integrated.fontSize": 14,
   "terminal.integrated.scrollback": 25000,
   "terminal.integrated.confirmOnExit": true,
   "vim.easymotion": true,
@@ -58,7 +58,7 @@
   "cmake.debugConfig": {
     "stopAtEntry": false,
     "MIMode": "lldb",
-    "miDebuggerPath": "~/.vscode/extensions/ms-vscode.cpptools-0.26.0/debugAdapters/lldb/bin/lldb-mi",
+    "miDebuggerPath": "~/.vscode/extensions/ms-vscode.cpptools-0.26.2-insiders2/debugAdapters/lldb/bin/lldb-mi",
     "logging": {
       "trace": true,
       "engineLogging": true,
