@@ -8,7 +8,7 @@ set rtp+=expand("$HOME/.fnm")
 set path+=**  " Recursive find
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/dist/*	" OSX/Linux
 set shell=/bin/zsh
-set tags+=~/JUCE/tags
+set tags+=~/JUCE/modules/tags
 
 let g:python_host_prog=expand('$PYENV_ROOT/versions/$PYENV2_NAME/bin/python')
 let g:python3_host_prog=expand('$PYENV_ROOT/versions/$PYENV3_NAME/bin/python')
@@ -173,6 +173,32 @@ let g:delve_new_command="enew"
 let g:rustfmt_autosave=1
 let g:rust_clip_command='pbcopy'
 
+" CPP
+function! ClangCheckImpl(cmd)
+  if &autowrite | wall | endif
+  echo "Running " . a:cmd . " ..."
+  let l:output = system(a:cmd)
+  cexpr l:output
+  cwindow
+  let w:quickfix_title = a:cmd
+  if v:shell_error != 0
+    cc
+  endif
+  let g:clang_check_last_cmd = a:cmd
+endfunction
+
+function! ClangCheck()
+  let l:filename = expand('%')
+  if l:filename =~ '\.\(cpp\|cxx\|cc\|c\)$'
+    call ClangCheckImpl("clang-check " . l:filename)
+  elseif exists("g:clang_check_last_cmd")
+    call ClangCheckImpl(g:clang_check_last_cmd)
+  else
+    echo "Can't detect file's compilation arguments and no previous clang-check invocation!"
+  endif
+endfunction
+
+nmap <silent> <F5> :call ClangCheck()<CR><CR>
 " INFRASTRUCTURE AS CODE
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1

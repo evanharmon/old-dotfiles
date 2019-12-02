@@ -1,15 +1,17 @@
 {
+  "editor.detectIndentation": true,
   "editor.formatOnSave": false,
   "editor.lineNumbers": "relative",
   "editor.fontLigatures": true,
   "editor.fontSize": 14,
-  "editor.fontFamily": "'Fira Code Retina', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "'Fira Code'",
   "editor.hideCursorInOverviewRuler": true,
   "editor.tabCompletion": "on",
   "editor.renderWhitespace": "all",
   "editor.minimap.enabled": false,
+  "editor.tabSize": 4,
   "extensions.ignoreRecommendations": false,
-  "window.zoomLevel": 1,
+  "window.zoomLevel": 2,
   "breadcrumbs.enabled": false,
   "workbench.activityBar.visible": false,
   "workbench.statusBar.visible": true,
@@ -45,20 +47,42 @@
   "vim:surround": true,
   "[cpp]": {
     "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4
   },
-  "C_Cpp.updateChannel": "Insiders",
+  "C_Cpp.default.browse.path": [
+    "${workspaceFolder}",
+    "${workspaceFolder}/**",
+    "JuceLibraryCode",
+    "JuceLibraryCode/**",
+    "~/JUCE/**"
+  ],
   "C_Cpp.default.cppStandard": "c++17",
   "C_Cpp.default.cStandard": "c11",
+  "C_Cpp.default.compileCommands": "build/compile_commands.json",
+  "C_Cpp.default.compilerPath": "/usr/bin/clang",
+  "C_Cpp.default.defines": [],
+  "C_Cpp.default.forcedInclude": ["${workspaceFolder}/include/config.h"],
+  "C_Cpp.default.includePath": [
+    "${workspaceFolder}",
+    "${workspaceFolder}/**",
+    "JuceLibraryCode",
+    "JuceLibraryCode/**",
+    "~/JUCE/**"
+  ],
   "C_Cpp.default.intelliSenseMode": "clang-x64",
+  "C_Cpp.default.macFrameworkPath": [
+    "/System/Library/Frameworks",
+    "/Library/Frameworks"
+  ],
   "C_Cpp.autoAddFileAssociations": false,
-  "C_Cpp.autocomplete": "Disabled",
-  "C_Cpp.formatting": "Disabled",
+  "C_Cpp.experimentalFeatures": "Enabled",
+  "C_Cpp.updateChannel": "Insiders",
   "cmake.configureOnOpen": true,
   "cmake.debugConfig": {
     "stopAtEntry": false,
     "MIMode": "lldb",
-    "miDebuggerPath": "~/.vscode/extensions/ms-vscode.cpptools-0.26.2-insiders2/debugAdapters/lldb/bin/lldb-mi",
+    "miDebuggerPath": "~/.vscode/extensions/ms-vscode.cpptools-0.26.2-insiders3/debugAdapters/lldb/bin/lldb-mi",
     "logging": {
       "trace": true,
       "engineLogging": true,
@@ -66,6 +90,7 @@
     }
   },
   "[javascript]": {
+    "editor.tabSize": 2,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "eslint.autoFixOnSave": true,
@@ -74,6 +99,7 @@
     }
   },
   "[jsonc]": {
+    "editor.tabSize": 2,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "eslint.autoFixOnSave": true,
