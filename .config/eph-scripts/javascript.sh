@@ -8,7 +8,7 @@ if [[ "$(uname -a)" != Darwin* ]]; then
     exit 1
 fi
 
-NODE_VERSION='v11.9.0'
+NODE_VERSION='v12'
 # Node Manager
 if ! [ -d "$HOME/.fnm" ]; then
     curl -fsSL https://github.com/Schniz/fnm/raw/master/.ci/install.sh | bash -s -- --install-dir "./.fnm" --skip-shell
@@ -28,15 +28,21 @@ fi
 
 # Idempotent
 npm install -g \
+    @aws-amplify/cli \
     add \
+    cypress \
+    dependency-cruiser \
     pure-prompt \
     neovim \
     prettier \
     typescript \
+    graphql \
     coc.nvim \
     bash-language-server \
     javascript-typescript-langserver \
     dockerfile-language-server-nodejs \
+    dotenv \
+    serve \
     dotenv-cli
 
 echo "Finished. Remember to source .zshrc before continuing"

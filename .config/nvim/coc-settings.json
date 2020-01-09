@@ -20,7 +20,13 @@
     },
     "clangd": {
       "command": "clangd",
-      "args": ["--background-index"],
+      "args": [
+        "--background-index",
+        "--compile-commands-dir=build",
+        "--header-insertion=iwyu",
+        "--suggest-missing-includes",
+        "--pretty"
+      ],
       "rootPatterns": [
         "compile_flags.txt",
         "compile_commands.json",
@@ -45,7 +51,8 @@
   "snippets.extends": {
     "cpp": ["c"],
     "javascriptreact": ["javascript"],
-    "typescript": ["javascript"]
+    "typescript": ["typescript"]
   },
-  "javascript.suggestionActions.enabled": false
+  "javascript.suggestionActions.enabled": false,
+  "javascript.format.enabled": true
 }

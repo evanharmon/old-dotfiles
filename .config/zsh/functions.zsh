@@ -148,3 +148,9 @@ function aws-export-env () {
 function aws-unset-env () {
     unset AWS_DEFAULT_PROFILE AWS_PROFILE AWS_REGION AWS_ACCOUNT_ID AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_SHARED_CREDENTIALS_FILE
 }
+
+
+# SET ITERM TAB TITLE
+function ititle() {
+	echo -ne "\033]0;"$1"\007"
+}

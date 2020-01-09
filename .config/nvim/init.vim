@@ -6,6 +6,7 @@ set rtp+=expand("$HOME/.fzf")
 set rtp+=/usr/local/opt/fzf
 set rtp+=expand("$HOME/.fnm")
 set path+=**  " Recursive find
+set path+=~/JUCE/modules
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/dist/*	" OSX/Linux
 set shell=/bin/zsh
 set tags+=~/JUCE/modules/tags
@@ -52,6 +53,9 @@ Plug 'jparise/vim-graphql'
 Plug 'jph00/swift-apple'
 Plug 'honza/vim-snippets'
 Plug 'vhdirk/vim-cmake'
+
+" Must Come Last
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -100,6 +104,7 @@ set updatetime=300
 set shortmess+=c
 set signcolumn=yes
 set scrollback=100000
+set shiftround
 
 " autocmd BufEnter * silent! lcd %:p:h
 " for vim 7
@@ -129,15 +134,6 @@ au BufRead,BufNewFile Dockerfile* set filetype=Dockerfile
 au BufRead,BufNewFile Dockerfile* set syntax=Dockerfile
 
 " GENERAL LETS
-" Moving over to vim-commentary
-" let g:NERDCustomDelimiters={ 'conf': { 'left': '#' } }
-" let g:NERDCustomDelimiters={ 'javascript': { 'left': '{/*', 'right': '*/}', 'leftAlt': '//' } }
-" let g:NERDSpaceDelims=1
-" let g:NERDDefaultAlign='left'
-" let g:NERDCommentEmptyLines=0
-let g:fzf_buffers_jump=1
-let g:fzf_history_dir='~/.local/share/fzf-history'
-let g:fzf_tags_command='fd | ctags --links=no -L-'
 let g:gitgutter_enabled=0
 let g:indentLine_char="•"
 let g:indentLine_color_term=239
@@ -203,6 +199,63 @@ nmap <silent> <F5> :call ClangCheck()<CR><CR>
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
 
+" FZF SETUP WITH PREVIEW
+" fzf + rg + preview
+let g:fzf_buffers_jump=1
+let g:fzf_history_dir='~/.local/share/fzf-history'
+" let g:fzf_tags_command='fd | ctags --links=no -L-'
+let g:fzf_tags_command = 'ctags -R'
+let $FZF_PREVIEW_COMMAND='bat --color=always {}'
+let $FZF_DEFAULT_OPTS='--layout=reverse'
+let $BAT_THEME='TwoDark'
+
+command! -bang -nargs=? -complete=dir GFiles
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': '--prompt ""'}, 'right:70%'), <bang>0)
+
+" stop fzf preview from traversing back past .git folder
+function s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')
+endfunction
+
+command! ProjectGFiles execute 'GFiles' s:find_git_root()
+
+" Rip Grep
+command! -bang -nargs=* PRg
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always ".shellescape(<q-args>),
+  \ 1,
+  \ fzf#vim#with_preview({'dir': system('git rev-parse --show-toplevel 2> /dev/null')}),
+  \ <bang>0)
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep('rg --column --line-number --no-heading --color=always '.shellescape(<q-args>),
+  \ 1,
+  \ fzf#vim#with_preview(),
+  \ <bang>0)
+
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+
+function! FloatingFZF()
+  let buf = nvim_create_buf(v:false, v:true)
+  call setbufvar(buf, '&signcolumn', 'no')
+  let vertical = 1
+  let height = &lines - 3
+  let width = float2nr(&columns - (&columns * 2 / 10))
+  let col = float2nr((&columns - width) / 2)
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': vertical,
+        \ 'col': col,
+        \ 'width': width,
+        \ 'height': height,
+        \ 'style': 'minimal'
+        \ }
+
+  let win = nvim_open_win(buf, v:true, opts)
+  call setwinvar(win, '&relativenumber', 0)
+endfunction
+
+runtime macros/matchit.vim
+
 " FUNCTIONS
 function! s:fzf_statusline()
   " Override statusline as you like
@@ -215,12 +268,11 @@ au! User FzfStatusLine call <SID>fzf_statusline()
 
 " LINTERS / COMPLETIONS
 " Still need to fix / test cpp support
+" let g:ale_cpp_clangd_options='-compile-commands-dir=build --header-insert=iwyu --suggest-missing-includes'
 let g:ale_linters_explicit=1
 let g:ale_fix_on_save=1
 let g:ale_linters={
 \ 'css': ['prettier'],
-\ 'c': ['clangtidy'],
-\ 'cpp': ['clangtidy', 'cppcheck'],
 \ 'go': ['gofmt'],
 \ 'graphql': ['prettier'],
 \ 'html': ['prettier'],
@@ -352,8 +404,8 @@ nnoremap <bar> <C-w><bar>
 
 " File Management
 nmap <Leader>b :Buffers<CR>
-nmap <Leader>f :GFiles<CR>
-nmap <Leader>F :Files<CR>
+nmap <Leader>p :GFiles<CR>
+nmap <Leader>P :Files<CR>
 nmap <Leader>t :Tags<CR>
 nmap <Leader>m :History<CR>
 
@@ -374,3 +426,5 @@ imap <right> <nop>
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap _ <C-w>_
+" Open file under cursor in vertical split
+nnoremap gf :vertical wincmd f<CR>

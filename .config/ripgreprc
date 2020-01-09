@@ -1,0 +1,14 @@
+# --max-columns=150
+# --max-columns-preview
+
+# files
+--hidden
+
+--glob
+!git/*
+!node_modules/*
+!build/*
+!coverage/*
+!out/*
+
+--smart-case

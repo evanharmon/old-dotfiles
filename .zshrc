@@ -54,9 +54,13 @@ if [ -d "$PYENV_ROOT/completions" ]; then
 fi
 
 # TOOLS
-## FZF
+## FZF / RG
+# export RIPGREP_CONFIG_PATH=~/.config/ripgreprc
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND="fd . $CODE_DIR" FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND" FZF_ALT_C_COMMAND="fd -t d . $HOME"
+# export FZF_DEFAULT_COMMAND="fd . $CODE_DIR"
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
     source /usr/local/opt/fzf/shell/key-bindings.zsh
     source /usr/local/opt/fzf/shell/completion.zsh

@@ -117,3 +117,6 @@ if ! [ "$(brew list swiftlint)" ]; then
     brew install swiftlint
 fi
 
+if ! brew list ccls; then
+    brew install ccls
+fi
