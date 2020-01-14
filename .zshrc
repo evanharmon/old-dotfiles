@@ -37,14 +37,18 @@ if [[ ":$PATH:" != *":$HOME/bin:/usr/local/sbin:"* ]]; then
     export PATH=$HOME/bin:/usr/local/sbin:$PATH
 fi
 
-# PY
+if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    export PATH=$HOME/.local/bin:$PATH
+fi
+
+# PYTHON
 if [ -d "$HOME/.pyenv" ]; then
     export PYENV_ROOT="$HOME/.pyenv"
     if [[ ":$PATH:" != *":$PYENV_ROOT/shims:$PYENV_ROOT/bin:"* ]]; then
         export PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
     fi
     export PYENV2_NAME=v2 PYENV3_NAME=v3
-    export PYENV_VERSION='2.7.14' PYENV_VERSION3='3.5.5'
+    export PYENV_VERSION='2.7.14' PYENV_VERSION3='3.7.5'
     export PYENV_VIRTUALENV_DISABLE_PROMPT=1 PYENV_SHELL=zsh
     eval "$(pyenv init -)"
 fi

@@ -11,8 +11,8 @@
   "editor.minimap.enabled": false,
   "editor.tabSize": 4,
   "extensions.ignoreRecommendations": false,
-  "window.zoomLevel": 2,
-  "breadcrumbs.enabled": false,
+  "window.zoomLevel": 1,
+  "breadcrumbs.enabled": true,
   "workbench.activityBar.visible": false,
   "workbench.statusBar.visible": true,
   "workbench.colorTheme": "Base16 Dark Harmonic",
@@ -57,7 +57,7 @@
     "JuceLibraryCode/**",
     "~/JUCE/**"
   ],
-  "C_Cpp.default.cppStandard": "c++17",
+  "C_Cpp.default.cppStandard": "c++20",
   "C_Cpp.default.cStandard": "c11",
   "C_Cpp.default.compileCommands": "build/compile_commands.json",
   "C_Cpp.default.compilerPath": "/usr/bin/clang",
@@ -82,7 +82,7 @@
   "cmake.debugConfig": {
     "stopAtEntry": false,
     "MIMode": "lldb",
-    "miDebuggerPath": "~/.vscode/extensions/ms-vscode.cpptools-0.26.2-insiders3/debugAdapters/lldb/bin/lldb-mi",
+    "miDebuggerPath": "~/.vscode/extensions/ms-vscode.cpptools-0.26.2/debugAdapters/lldb/bin/lldb-mi",
     "logging": {
       "trace": true,
       "engineLogging": true,
@@ -122,5 +122,10 @@
   },
   "file.associations": {
     "*.snap": "javascript"
-  }
+  },
+  "C_Cpp.configurationWarnings": "Disabled",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "C_Cpp.errorSquiggles": "Disabled"
 }

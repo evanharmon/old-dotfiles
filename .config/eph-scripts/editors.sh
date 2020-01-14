@@ -7,7 +7,7 @@ PYENV_ROOT="${PYENV_ROOT:-$HOME/.pyenv}"
 PYENV2_NAME="${PYENV2_NAME:-v2}"
 PYENV3_NAME="${PYENV3_NAME:-v3}"
 PYENV_VERSION="${PYENV_VERSION:-2.7.14}"
-PYENV_VERSION3="${PYENV_VERSION3:-3.5.5}"
+PYENV_VERSION3="${PYENV_VERSION3:-3.7.7}"
 
 if [[ "$(uname -a)" != Darwin* ]]; then
     echo "This script only supports Mac"

@@ -14,6 +14,10 @@ if ! [ -x "$(command -v fd)" ]; then
     brew install fd
 fi
 
+if ! [ -x "$(command -v nmap)" ]; then
+    brew install nmap
+fi
+
 if ! [ -x "$(command -v bat)" ]; then
     VERSION='bat-v0.9.0-x86_64-apple-darwin'
     curl -Lo $HOME/.cache/$VERSION.tar.gz \

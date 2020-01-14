@@ -17,13 +17,14 @@ fi
 
 # SETUP PYENV
 ## EVERYONE SHOULD HAVE A PRIVATE BOOTH AT THIS PY PARTY
+DEFAULT_PYTHON_VERSION=3.7.5
 if ! [ "$(command -v pyenv)" ]; then
   curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
   export PATH="/Users/evan/.pyenv/bin:$PATH"
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
-  pyenv install --skip-existing 3.5.5
-  pyenv virtualenv 3.5.5 aws
+  pyenv install --skip-existing $DEFAULT_PYTHON_VERSION
+  pyenv virtualenv $DEFAULT_PYTHON_VERSION aws
   pyenv activate aws
 fi
 
