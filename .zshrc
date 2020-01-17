@@ -92,12 +92,13 @@ export GO111MODULE=on
 if [[ ":$PATH:" != *":$HOME/.yarn/bin:"* ]]; then
     export PATH=$HOME/.yarn/bin:$PATH
 fi
+NODE_VERSION=v12
 if [ -d "$HOME/.fnm" ]; then
     if [[ ":$PATH:" != *":$HOME/.fnm:$HOME/.fnm/current/bin:node_modules/.bin:"* ]]; then
         export PATH=$HOME/.fnm:$HOME/.fnm/current/bin:node_modules/.bin:$PATH
     fi
     eval `fnm env`
-    fnm use v11.9.0
+    fnm use $NODE_VERSION
 fi
 
 # RUBY

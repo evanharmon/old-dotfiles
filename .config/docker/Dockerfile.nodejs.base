@@ -11,7 +11,7 @@ RUN mkdir -p $HOME/.local && \
 WORKDIR /root
 
 # FNM & NPM PACKAGES
-ENV DK_NODE_VERSION "v11.9.0"
+ENV DK_NODE_VERSION "v12"
 ENV PATH $HOME/.fnm:$HOME/.fnm/current/bin:$HOME/.fnm/node-versions/$DK_NODE_VERSION/installation/bin:$PATH
 RUN curl -fsSL https://github.com/Schniz/fnm/raw/master/.ci/install.sh | bash -s -- --install-dir "./.fnm" --skip-shell
 RUN /bin/bash -c 'export PATH=$HOME/.fnm:$PATH; eval `fnm env --multi`; \

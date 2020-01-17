@@ -11,7 +11,8 @@ fi
 NODE_VERSION='v12'
 # Node Manager
 if ! [ -d "$HOME/.fnm" ]; then
-    curl -fsSL https://github.com/Schniz/fnm/raw/master/.ci/install.sh | bash -s -- --install-dir "./.fnm" --skip-shell
+    curl -fsSL https://github.com/Schniz/fnm/raw/master/.ci/install.sh |
+        bash -s -- --install-dir "./.fnm" --skip-shell --force-install
 fi
 
 if [ -d "$HOME/.fnm" ]; then
@@ -28,21 +29,18 @@ fi
 
 # Idempotent
 npm install -g \
-    @aws-amplify/cli \
     add \
-    cypress \
+    bash-language-server \
+    coc.nvim \
     dependency-cruiser \
-    pure-prompt \
+    dockerfile-language-server-nodejs \
+    graphql \
+    ios-deploy \
+    javascript-typescript-langserver \
     neovim \
     prettier \
-    typescript \
-    graphql \
-    coc.nvim \
-    bash-language-server \
-    javascript-typescript-langserver \
-    dockerfile-language-server-nodejs \
-    dotenv \
+    pure-prompt \
     serve \
-    dotenv-cli
+    typescript \
 
 echo "Finished. Remember to source .zshrc before continuing"
