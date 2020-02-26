@@ -1,6 +1,6 @@
 {
   "editor.detectIndentation": true,
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "editor.lineNumbers": "relative",
   "editor.fontLigatures": true,
   "editor.fontSize": 14,
@@ -11,7 +11,7 @@
   "editor.minimap.enabled": false,
   "editor.tabSize": 4,
   "extensions.ignoreRecommendations": false,
-  "window.zoomLevel": 1,
+  "window.zoomLevel": 0,
   "breadcrumbs.enabled": true,
   "workbench.activityBar.visible": false,
   "workbench.statusBar.visible": true,
@@ -127,5 +127,9 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "C_Cpp.errorSquiggles": "Disabled"
+  "C_Cpp.errorSquiggles": "Disabled",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "[graphql]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

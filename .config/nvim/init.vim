@@ -164,6 +164,8 @@ let g:go_term_mode="split"
 let g:go_term_height=10
 let g:go_term_width=10
 let g:delve_new_command="enew"
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 
 " RUST
 let g:rustfmt_autosave=1
@@ -273,7 +275,7 @@ let g:ale_linters_explicit=1
 let g:ale_fix_on_save=1
 let g:ale_linters={
 \ 'css': ['prettier'],
-\ 'go': ['gofmt'],
+\ 'go': ['gopls'],
 \ 'graphql': ['prettier'],
 \ 'html': ['prettier'],
 \ 'javascript': ['prettier'],
@@ -344,6 +346,8 @@ augroup mygroup
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
+
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
 vmap <leader>a  <Plug>(coc-codeaction-selected)

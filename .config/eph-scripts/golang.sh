@@ -8,7 +8,7 @@ if [[ "$(uname -a)" != Darwin* ]]; then
 fi
 
 CACHE=$HOME/.cache
-GOLANG_VERSION='1.11'
+GOLANG_VERSION='1.13'
 GOLANG_DOWNLOAD=''
 OS=''
 ARCH=''
@@ -45,14 +45,17 @@ if [ ! -d $HOME/.protoc ]; then
   unzip $CACHE/protoc-3.6.1-osx-x86_64.zip -d $HOME/.protoc
 fi
 
-# Idempotent
-go get -u golang.org/x/oauth2
-go get -u cloud.google.com/go/storage
-go get -u google.golang.org/appengine/...
-go get -u github.com/saibing/bingo
-go get -u github.com/golang/mock/gomock
-go install github.com/golang/mock/mockgen
+## INSTALL PKG NOT SUPPORTING GO MODULES
+GO111MODULE=off
 go get -u github.com/derekparker/delve/cmd/dlv
+go get golang.org/x/tools/...
+GO111MODULE=auto
+
+# Idempotent
+go get golang.org/x/oauth2
+go get cloud.google.com/go/storage
+go get google.golang.org/appengine/...
+go get github.com/golang/mock/gomock && go install github.com/golang/mock/mockgen
 
 unset OS
 unset ARCH

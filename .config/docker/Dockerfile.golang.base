@@ -12,38 +12,26 @@ WORKDIR /root
 
 RUN apk add curl wget git unzip tar bash
 
-# TOOLS
-## Bingo uses go modules, needs to be outside old gopath
-ENV GO111MODULE=on BINGO_PATH="/root/code/bingo"
-RUN mkdir -p $BINGO_PATH
-WORKDIR $BINGO_PATH
-RUN go get -v golang.org/x/tools/cmd/gopls
-RUN git clone -b bingo https://github.com/saibing/tools.git && \
-  cd tools/cmd/gopls && \
-  go install
-
-# DEBUGGER
+## INSTALL PKGs NOT SUPPORTING GO MODULES
 ## Delve has not been updated for go modules, use old go path
 ENV GO111MODULE=off
 RUN go get -u github.com/derekparker/delve/cmd/dlv
+RUN go get golang.org/x/tools/...
 ENV GO111MODULE=auto
 
 # VIM-GO BINARIES
-RUN go get github.com/zmb3/gogetdoc && go install github.com/zmb3/gogetdoc && \
-  go get golang.org/x/tools/cmd/guru && go install golang.org/x/tools/cmd/guru && \
-  go get github.com/davidrjenni/reftools/cmd/fillstruct && go install github.com/davidrjenni/reftools/cmd/fillstruct && \
-  go get github.com/rogpeppe/godef && go install github.com/rogpeppe/godef && \
-  go get github.com/fatih/motion && go install github.com/fatih/motion && \
-  go get github.com/kisielk/errcheck && go install github.com/kisielk/errcheck && \
-  go get github.com/bhcleek/lsp-position/cmd/lsp-position && go install github.com/bhcleek/lsp-position/cmd/lsp-position && \
-  go get github.com/mdempsky/gocode && go install github.com/mdempsky/gocode && \
-  go get github.com/josharian/impl && go install github.com/josharian/impl && \
-  go get github.com/golangci/golangci-lint/cmd/golangci-lint && go install github.com/golangci/golangci-lint/cmd/golangci-lint && \
-  go get golang.org/x/tools/cmd/goimports && go install golang.org/x/tools/cmd/goimports && \
-  go get github.com/stamblerre/gocode && go install github.com/stamblerre/gocode && \
-  go get github.com/fatih/gomodifytags && go install github.com/fatih/gomodifytags && \
-  go get honnef.co/go/tools/cmd/keyify && go install honnef.co/go/tools/cmd/keyify && \
-  go get golang.org/x/lint/golint && go install golang.org/x/lint/golint && \
-  go get github.com/koron/iferr && go install github.com/koron/iferr && \
-  go get github.com/klauspost/asmfmt/cmd/asmfmt && go install github.com/klauspost/asmfmt/cmd/asmfmt && \
-  go get github.com/alecthomas/gometalinter && go install github.com/alecthomas/gometalinter
+# RUN go get github.com/zmb3/gogetdoc && go install github.com/zmb3/gogetdoc && \
+#   go get github.com/davidrjenni/reftools/cmd/fillstruct && go install github.com/davidrjenni/reftools/cmd/fillstruct && \
+#   go get github.com/rogpeppe/godef && go install github.com/rogpeppe/godef && \
+#   go get github.com/fatih/motion && go install github.com/fatih/motion && \
+#   go get github.com/kisielk/errcheck && go install github.com/kisielk/errcheck && \
+#   go get github.com/bhcleek/lsp-position/cmd/lsp-position && go install github.com/bhcleek/lsp-position/cmd/lsp-position && \
+#   go get github.com/mdempsky/gocode && go install github.com/mdempsky/gocode && \
+#   go get github.com/josharian/impl && go install github.com/josharian/impl && \
+#   go get github.com/golangci/golangci-lint/cmd/golangci-lint && go install github.com/golangci/golangci-lint/cmd/golangci-lint && \
+#   go get github.com/stamblerre/gocode && go install github.com/stamblerre/gocode && \
+#   go get github.com/fatih/gomodifytags && go install github.com/fatih/gomodifytags && \
+#   go get github.com/koron/iferr && go install github.com/koron/iferr && \
+#   go get github.com/klauspost/asmfmt/cmd/asmfmt && go install github.com/klauspost/asmfmt/cmd/asmfmt && \
+#   go get github.com/alecthomas/gometalinter && go install github.com/alecthomas/gometalinter && \
+#   go get honnef.co/go/tools/cmd/keyify && go install honnef.co/go/tools/cmd/keyify

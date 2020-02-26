@@ -105,7 +105,7 @@ function aws-export-env () {
     account_id=$(aws --profile $profile --output text sts get-caller-identity --query Account)
 
     rv="$?"
-    if [[ $rv -ne 0 || ! account_id ]]; then
+    if [[ $rv -ne 0 || ! $account_id ]]; then
         echo "$pkg: failed to get account_id" 1>&2
         return "$rv"
     fi
