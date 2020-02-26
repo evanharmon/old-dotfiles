@@ -72,9 +72,9 @@ jobs:
         uses: actions/checkout@master
       - name: login
         run: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" https://index.docker.io/v1/
-      - name: build go
+      - name: build nodejs
         run: docker build -t evanharmon/eph-nodejs:latest - < .config/docker/Dockerfile.nodejs.base
-      - name: push go
+      - name: push nodejs
         run: docker push evanharmon/eph-nodejs:latest
   aws_cpp_sdks_container:
     runs-on: ubuntu-latest

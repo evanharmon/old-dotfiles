@@ -16,7 +16,7 @@ ENV PATH $HOME/.fnm:$HOME/.fnm/current/bin:$HOME/.fnm/node-versions/$DK_NODE_VER
 RUN curl -fsSL https://github.com/Schniz/fnm/raw/master/.ci/install.sh | bash -s -- --install-dir "./.fnm" --skip-shell
 RUN /bin/bash -c 'export PATH=$HOME/.fnm:$PATH; eval `fnm env --multi`; \
     fnm install $DK_NODE_VERSION; $HOME/.fnm/fnm use $DK_NODE_VERSION;'
-RUN npm install --global --allow-root --unsafe-perm=true \
+RUN $HOME/.fnm/fnm use $DK_NODE_VERSION && npm install --global --allow-root --unsafe-perm=true \
     add \
     pure-prompt \
     neovim \
