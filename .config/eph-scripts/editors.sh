@@ -7,7 +7,7 @@ PYENV_ROOT="${PYENV_ROOT:-$HOME/.pyenv}"
 PYENV2_NAME="${PYENV2_NAME:-v2}"
 PYENV3_NAME="${PYENV3_NAME:-v3}"
 PYENV_VERSION="${PYENV_VERSION:-2.7.14}"
-PYENV_VERSION3="${PYENV_VERSION3:-3.7.7}"
+PYENV_VERSION3="${PYENV_VERSION3:-3.8.5}"
 
 if [[ "$(uname -a)" != Darwin* ]]; then
     echo "This script only supports Mac"
@@ -54,7 +54,7 @@ fi
 
 # Always Grab Nightly
 FNAME='nvim-macos.tar.gz'
-curl -Lo $HOME/.cache/$FNAME "https://github.com/neovim/neovim/releases/download/nightly/$FNAME"
+curl -fLo $HOME/.cache/$FNAME "https://github.com/neovim/neovim/releases/download/nightly/$FNAME"
 tar xzvf $HOME/.cache/$FNAME -C $HOME
 
 # Always Grab Latest Version
@@ -89,6 +89,8 @@ fi
 
 # install extensions
 pkglist=(
+alesiong.clang-tidy-linter
+AndrsDC.base16-themes
 esbenp.prettier-vscode
 firefox-devtools.vscode-firefox-debug
 Glavin001.unibeautify-vscode
@@ -96,12 +98,21 @@ Kasik96.swift
 llvm-vs-code-extensions.vscode-clangd
 ms-azuretools.vscode-docker
 ms-kubernetes-tools.vscode-kubernetes-tools
+ms-python.python
+ms-vscode-remote.remote-containers
+ms-vscode-remote.remote-ssh
+ms-vscode-remote.remote-ssh-edit
+ms-vscode.cmake-tools
 ms-vscode.cpptools
-ms-vscode.Go
+golang.go
+ms-vscode.vscode-typescript-tslint-plugin
+ms-vsliveshare.vsliveshare
 msjsdiag.debugger-for-chrome
 redhat.vscode-yaml
 rust-lang.rust
+sodatea.velocity
 twxs.cmake
+Tyriar.terminal-tabs
 vscodevim.vim
 webfreak.debug
 )
