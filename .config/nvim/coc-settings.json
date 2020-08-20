@@ -56,6 +56,7 @@
     "javascriptreact": ["javascript"],
     "typescript": ["typescript"]
   },
+  "snippets.ultisnips.directories": ["UltiSnips", "gosnippets/UltiSnips"],
   "javascript.suggestionActions.enabled": false,
   "javascript.format.enabled": true
 }

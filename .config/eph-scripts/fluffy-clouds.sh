@@ -17,7 +17,7 @@ fi
 
 # SETUP PYENV
 ## EVERYONE SHOULD HAVE A PRIVATE BOOTH AT THIS PY PARTY
-DEFAULT_PYTHON_VERSION=3.7.5
+DEFAULT_PYTHON_VERSION=3.8.5
 if ! [ "$(command -v pyenv)" ]; then
   curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
   export PATH="/Users/evan/.pyenv/bin:$PATH"

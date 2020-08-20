@@ -48,7 +48,7 @@ if [ -d "$HOME/.pyenv" ]; then
         export PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
     fi
     export PYENV2_NAME=v2 PYENV3_NAME=v3
-    export PYENV_VERSION='2.7.14' PYENV_VERSION3='3.7.5'
+    export PYENV_VERSION='2.7.14' PYENV_VERSION3='3.8.5'
     export PYENV_VIRTUALENV_DISABLE_PROMPT=1 PYENV_SHELL=zsh
     eval "$(pyenv init -)"
 fi
@@ -59,9 +59,9 @@ fi
 
 # TOOLS
 ## FZF / RG
-# export RIPGREP_CONFIG_PATH=~/.config/ripgreprc
+## ripgre config causing errors on every rg run
+export RIPGREP_CONFIG_PATH=~/.config/ripgreprc
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# export FZF_DEFAULT_COMMAND="fd . $CODE_DIR"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"

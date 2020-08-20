@@ -1,15 +1,15 @@
 {
   "dependencies": {
-    "coc-css": ">=1.2.2",
+    "coc-css": ">=1.2.3",
     "coc-emmet": ">=1.1.4",
     "coc-highlight": ">=1.2.5",
-    "coc-html": ">=1.2.3",
-    "coc-json": ">=1.2.5",
-    "coc-prettier": ">=1.1.11",
+    "coc-html": ">=1.2.4",
+    "coc-json": ">=1.2.6",
+    "coc-prettier": ">=1.1.14",
     "coc-pyls": ">=1.0.6",
-    "coc-rls": ">=1.1.4",
-    "coc-snippets": ">=2.1.19",
-    "coc-tsserver": ">=1.4.9",
-    "coc-yaml": ">=1.0.3"
+    "coc-rls": ">=1.1.6",
+    "coc-snippets": ">=2.1.26",
+    "coc-tsserver": ">=1.5.1",
+    "coc-yaml": ">=1.0.4"
   }
 }

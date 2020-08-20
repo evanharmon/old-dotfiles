@@ -38,24 +38,21 @@ Plug 'tpope/vim-fugitive'
 Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-grepper'
 
-Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go'
 Plug 'sebdah/vim-delve'
 
 Plug 'majutsushi/tagbar'
 Plug 'uarun/vim-protobuf'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'eval `fnm env` & cd app & npm install'  }
 Plug 'hashivim/vim-terraform'
 Plug 'juliosueiras/vim-terraform-completion'
 Plug 'Valloric/MatchTagAlways'
 Plug 'jparise/vim-graphql'
 Plug 'jph00/swift-apple'
 Plug 'honza/vim-snippets'
+Plug 'jhkersul/vim-jest-snippets'
 Plug 'vhdirk/vim-cmake'
-
-" Must Come Last
-Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -117,7 +114,8 @@ endif
 " APPEARANCE
 set background=dark
 syntax on
-colorscheme base16-harmonic-dark
+" base16-atlas is good too
+colorscheme base16-ia-dark
 hi htmlArg gui=italic
 hi Comment gui=italic
 hi Type    gui=italic
@@ -294,7 +292,7 @@ let g:ale_linters={
 " Still need to fix / test cpp support
 let g:ale_fixers={
 \ 'css': ['prettier'],
-\ 'graphql': ['prettier'],
+\ 'graphql': [],
 \ 'html': ['prettier'],
 \ 'javascript': ['prettier'],
 \ 'javascript.jsx': ['prettier'],

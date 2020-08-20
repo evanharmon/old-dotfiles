@@ -11,11 +11,10 @@
   "editor.minimap.enabled": false,
   "editor.tabSize": 4,
   "extensions.ignoreRecommendations": false,
-  "window.zoomLevel": 0,
+  "window.zoomLevel": 1,
   "breadcrumbs.enabled": true,
   "workbench.activityBar.visible": false,
   "workbench.statusBar.visible": true,
-  "workbench.colorTheme": "Base16 Dark Harmonic",
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.fontSize": 14,
   "terminal.integrated.scrollback": 25000,
@@ -117,8 +116,10 @@
     "exclude": [".terraform/**/*", "**/.terraform/**/*"]
   },
   "terraform.languageServer": {
-    "enabled": true,
-    "args": []
+    "external": true,
+    "args": [
+      "serve"
+    ]
   },
   "file.associations": {
     "*.snap": "javascript"
@@ -131,5 +132,16 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "[graphql]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "go.useLanguageServer": true,
+  "task.problemMatchers.neverPrompt": {
+    "shell": true
+  },
+  "vs-kubernetes": {
+    "vs-kubernetes.draft-path.mac": "/Users/eharmon/.vs-kubernetes/tools/draft/darwin-amd64/draft",
+    "vs-kubernetes.minikube-path.mac": "/Users/eharmon/.vs-kubernetes/tools/minikube/darwin-amd64/minikube",
+    "vs-kubernetes.kubectl-path.mac": "/Users/eharmon/.vs-kubernetes/tools/kubectl/kubectl",
+    "vs-kubernetes.helm-path.mac": "/Users/eharmon/.vs-kubernetes/tools/helm/darwin-amd64/helm"
+  },
+  "editor.parameterHints.enabled": false
 }

@@ -1,5 +1,6 @@
 # make mv easier
 autoload -U zmv
+autoload -U +X compinit && compinit
 autoload -U promptinit; promptinit
 prompt pure
 # Timestamp and Terraform workspace
