@@ -10,6 +10,6 @@
 --glob=!out/*
 --glob=!Library/*
 --glob=!Documents/*
---global=!bin/*
+--glob=!bin/*
 
 --smart-case

@@ -118,6 +118,10 @@ if ! [ "$(command -v terraform)" ]; then
   unzip $HOME/.cache/$FNAME -d $HOME/bin
 fi
 
+if ! [ "$(command -v terragrunt)" ]; then
+    brew install terragrunt
+fi
+
 if ! [ "$(command -v packer)" ]; then
     FNAME='packer_1.3.3_darwin_amd64.zip'
   curl -Lo $HOME/.cache/$FNAME \
@@ -127,6 +131,10 @@ fi
 
 if ! [ "$(command -v tfswitch)" ]; then
     brew install warrensbox/tap/tfswitch
+fi
+
+if ! [ "$(command -v tgswitch)" ]; then
+    brew install warrensbox/tap/tgswitch
 fi
 
 if [ "$(command -v skaffold)" ]; then
