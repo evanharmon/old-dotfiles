@@ -89,3 +89,8 @@ if ! [ -x "$(command -v helm)" ]; then
     mv $HOME/.cache/darwin-amd64/helm $HOME/bin
     mv $HOME/.cache/darwin-amd64/tiller $HOME/bin
 fi
+
+if ! [ -x "$(command -v gh)" ]; then
+    brew install gh
+fi
+
