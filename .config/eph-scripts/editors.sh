@@ -23,10 +23,6 @@ if [[ ! -d $HOME/.local ]]; then
 	mkdir $HOME/.local
 fi
 
-if ! brew list editorconfig; then
-    brew install editorconfig
-fi
-
 if [ ! -L $PYENV_ROOT/versions/$PYENV2_NAME ]; then
     pyenv install --skip-existing $PYENV_VERSION
     pyenv virtualenv $PYENV_VERSION $PYENV2_NAME
@@ -93,28 +89,14 @@ alesiong.clang-tidy-linter
 AndrsDC.base16-themes
 esbenp.prettier-vscode
 firefox-devtools.vscode-firefox-debug
-Glavin001.unibeautify-vscode
-Kasik96.swift
+golang.go
+hashicorp.terraform
 llvm-vs-code-extensions.vscode-clangd
-ms-azuretools.vscode-docker
-ms-kubernetes-tools.vscode-kubernetes-tools
 ms-python.python
-ms-vscode-remote.remote-containers
-ms-vscode-remote.remote-ssh
-ms-vscode-remote.remote-ssh-edit
 ms-vscode.cmake-tools
 ms-vscode.cpptools
-golang.go
-ms-vscode.vscode-typescript-tslint-plugin
 ms-vsliveshare.vsliveshare
-msjsdiag.debugger-for-chrome
-redhat.vscode-yaml
-rust-lang.rust
-sodatea.velocity
-twxs.cmake
-Tyriar.terminal-tabs
 vscodevim.vim
-webfreak.debug
 )
 
 if [ "$(command -v code)" ]; then
