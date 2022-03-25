@@ -41,7 +41,13 @@ done
 alias trimcopy="tr -d '\n' | pbcopy"
 
 # Recursively delete `.DS_Store` files
-alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
+alias dscleanup="find . -name '*.DS_Store' -type f -ls -delete"
+
+# Recursively delete `.terragrunt_cache` folders
+alias tgcleanup="find . -type d -name ".terragrunt-cache" -prune -exec rm -rf {} \;"
+
+# Recursively delete `.terraform` folders
+alias tfcleanup="find . -type d -name ".terraform" -prune -exec rm -rf {} \;"
 
 # File size
 alias fs="stat -f \"%z bytes\""
