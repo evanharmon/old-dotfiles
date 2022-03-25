@@ -1,4 +1,5 @@
 {
+  "editor.insertSpaces": true,
   "editor.detectIndentation": true,
   "editor.formatOnSave": true,
   "editor.lineNumbers": "relative",
@@ -9,16 +10,17 @@
   "editor.tabCompletion": "on",
   "editor.renderWhitespace": "all",
   "editor.minimap.enabled": false,
-  "editor.tabSize": 4,
+  "editor.tabSize": 2,
   "extensions.ignoreRecommendations": false,
-  "window.zoomLevel": 1,
-  "breadcrumbs.enabled": true,
-  "workbench.activityBar.visible": false,
+  "breadcrumbs.enabled": false,
   "workbench.statusBar.visible": true,
+  "workbench.editor.decorations.colors": true,
+  "workbench.editor.decorations.badges": true,
+  "workbench.editor.wrapTabs": false,
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.fontSize": 14,
   "terminal.integrated.scrollback": 25000,
-  "terminal.integrated.confirmOnExit": true,
+  "terminal.integrated.confirmOnExit": "always",
   "vim.easymotion": true,
   "vim.sneak": true,
   "vim.incsearch": true,
@@ -69,7 +71,6 @@
     "JuceLibraryCode/**",
     "~/JUCE/**"
   ],
-  "C_Cpp.default.intelliSenseMode": "clang-x64",
   "C_Cpp.default.macFrameworkPath": [
     "/System/Library/Frameworks",
     "/Library/Frameworks"
@@ -92,7 +93,6 @@
     "editor.tabSize": 2,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
-    "eslint.autoFixOnSave": true,
     "editor.codeActionsOnSave": {
       "source.fixAll.tsLint": true
     }
@@ -101,7 +101,6 @@
     "editor.tabSize": 2,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
-    "eslint.autoFixOnSave": true,
     "editor.codeActionsOnSave": {
       "source.fixAll.tsLint": true
     }
@@ -117,9 +116,7 @@
   },
   "terraform.languageServer": {
     "external": true,
-    "args": [
-      "serve"
-    ]
+    "args": ["serve"]
   },
   "file.associations": {
     "*.snap": "javascript"
@@ -129,7 +126,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "C_Cpp.errorSquiggles": "Disabled",
-  "diffEditor.ignoreTrimWhitespace": false,
   "[graphql]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -137,11 +133,98 @@
   "task.problemMatchers.neverPrompt": {
     "shell": true
   },
-  "vs-kubernetes": {
-    "vs-kubernetes.draft-path.mac": "/Users/eharmon/.vs-kubernetes/tools/draft/darwin-amd64/draft",
-    "vs-kubernetes.minikube-path.mac": "/Users/eharmon/.vs-kubernetes/tools/minikube/darwin-amd64/minikube",
-    "vs-kubernetes.kubectl-path.mac": "/Users/eharmon/.vs-kubernetes/tools/kubectl/kubectl",
-    "vs-kubernetes.helm-path.mac": "/Users/eharmon/.vs-kubernetes/tools/helm/darwin-amd64/helm"
+  "files.associations": {
+    "*.hcl": "terraform"
   },
-  "editor.parameterHints.enabled": false
+  "sourcekit-lsp.serverPath": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
+  "sourcekit-lsp.serverArguments": [
+    "-Xswiftc",
+    "-sdk",
+    "-Xswiftc",
+    "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.0.sdk",
+    "-Xswiftc",
+    "-target",
+    "-Xswiftc",
+    "x86_64-apple-ios13.6-simulator"
+  ],
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "liveshare.authenticationProvider": "GitHub",
+  "clangd.onConfigChanged": "restart",
+  "C_Cpp.vcpkg.enabled": false,
+  "C_Cpp.intelliSenseEngineFallback": "Enabled",
+  "C_Cpp.formatting": "Default",
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[go]": {
+    "editor.defaultFormatter": "golang.go"
+  },
+  "go.formatTool": "gofmt",
+  "go.toolsManagement.autoUpdate": true,
+  "editor.cursorStyle": "line",
+  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+  "editor.wordWrap": "off",
+  "vim.smartRelativeLine": true,
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "redhat.telemetry.enabled": false,
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow": "/.githhub/workflows/**/*.yml"
+  },
+  "yaml.customTags": [
+    "!And",
+    "!And sequence",
+    "!If",
+    "!If sequence",
+    "!Not",
+    "!Not sequence",
+    "!Equals",
+    "!Equals sequence",
+    "!Or",
+    "!Or sequence",
+    "!FindInMap",
+    "!FindInMap sequence",
+    "!Base64",
+    "!Join",
+    "!Join sequence",
+    "!Cidr",
+    "!Ref",
+    "!Sub",
+    "!Sub sequence",
+    "!GetAtt",
+    "!GetAZs",
+    "!ImportValue",
+    "!ImportValue sequence",
+    "!Select",
+    "!Select sequence",
+    "!Split",
+    "!Split sequence"
+  ],
+  "terminal.integrated.cursorBlinking": true,
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "json.schemas": [],
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "editor.linkedEditing": true,
+  "html.format.indentInnerHtml": true,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "workbench.activityBar.visible": false,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "reactSnippets.settings.prettierEnabled": true,
+  "reactSnippets.settings.semiColons": false,
+  "json.maxItemsComputed": 10000,
+  "window.zoomLevel": 1
 }
