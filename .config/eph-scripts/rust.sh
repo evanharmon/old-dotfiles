@@ -28,3 +28,8 @@ fi
 if [ "$(command -v rustup)" ]; then
     rustup component add rustfmt rls-preview rust-analysis rust-src
 fi
+
+# CARGO packages
+rustup update
+brew tap mike-engel/jwt-cli
+brew install jwt-cli
