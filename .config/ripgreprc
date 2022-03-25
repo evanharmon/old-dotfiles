@@ -11,5 +11,7 @@
 --glob=!Library/*
 --glob=!Documents/*
 --glob=!bin/*
+--glob=!.git/*
 
 --smart-case
+--context=3
