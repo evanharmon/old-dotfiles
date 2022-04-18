@@ -49,8 +49,9 @@ if ! [ -x "$(gem list neovim -i)" ]; then
 fi
 
 # Always Grab Nightly
-FNAME='nightly.tar.gz'
-curl -fLo $HOME/.cache/$FNAME "https://github.com/neovim/neovim/archive/$FNAME"
+# https://github.com/neovim/neovim/releases/download/nightly/
+FNAME='nvim-macos.tar.gz'
+curl -fLo $HOME/.cache/$FNAME "https://github.com/neovim/neovim/releases/download/nightly/$FNAME"
 tar xzvf $HOME/.cache/$FNAME -C $HOME
 
 # Always Grab Latest Version

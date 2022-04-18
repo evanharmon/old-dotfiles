@@ -92,7 +92,7 @@ export GO111MODULE=on
 if [[ ":$PATH:" != *":$HOME/.yarn/bin:"* ]]; then
     export PATH=$HOME/.yarn/bin:$PATH
 fi
-NODE_VERSION=v16
+NODE_VERSION=v17
 if [ -d "$HOME/.fnm" ]; then
     if [[ ":$PATH:" != *":$HOME/.fnm:$HOME/.fnm/current/bin:node_modules/.bin:"* ]]; then
         export PATH=$HOME/.fnm:$HOME/.fnm/current/bin:node_modules/.bin:$PATH
@@ -119,7 +119,7 @@ if [ -d "/usr/local/opt/llvm/bin/clangd" ]; then
 fi
 
 # Android
-export PATH=$PATH:~/Library/Android/sdk/platform-tools # support for `adb devices` command
+# export PATH=$PATH:~/Library/Android/sdk/platform-tools # support for `adb devices` command
 
 # DOCKER
 # export DOCKER_BUILDKIT=1

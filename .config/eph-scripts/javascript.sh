@@ -8,7 +8,7 @@ if [[ "$(uname -a)" != Darwin* ]]; then
     exit 1
 fi
 
-NODE_VERSION='v12'
+NODE_VERSION='v17'
 # Node Manager
 if ! [ -d "$HOME/.fnm" ]; then
     curl -fsSL https://github.com/Schniz/fnm/raw/master/.ci/install.sh |
