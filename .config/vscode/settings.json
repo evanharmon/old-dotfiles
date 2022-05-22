@@ -1,7 +1,6 @@
 {
   "editor.insertSpaces": true,
   "editor.detectIndentation": true,
-  "editor.formatOnSave": true,
   "editor.lineNumbers": "relative",
   "editor.fontLigatures": true,
   "editor.fontSize": 14,
@@ -9,10 +8,8 @@
   "editor.hideCursorInOverviewRuler": true,
   "editor.tabCompletion": "on",
   "editor.renderWhitespace": "all",
-  "editor.minimap.enabled": false,
   "editor.tabSize": 2,
   "extensions.ignoreRecommendations": false,
-  "breadcrumbs.enabled": false,
   "workbench.statusBar.visible": true,
   "workbench.editor.decorations.colors": true,
   "workbench.editor.decorations.badges": true,
@@ -20,7 +17,6 @@
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.fontSize": 14,
   "terminal.integrated.scrollback": 25000,
-  "terminal.integrated.confirmOnExit": "always",
   "vim.easymotion": true,
   "vim.sneak": true,
   "vim.incsearch": true,
@@ -211,20 +207,18 @@
   "json.schemas": [],
   "git.confirmSync": false,
   "git.autofetch": true,
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
   "editor.suggestSelection": "first",
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "editor.linkedEditing": true,
-  "html.format.indentInnerHtml": true,
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
   "workbench.activityBar.visible": false,
   "editor.multiCursorModifier": "ctrlCmd",
-  "reactSnippets.settings.prettierEnabled": true,
-  "reactSnippets.settings.semiColons": false,
-  "json.maxItemsComputed": 10000,
+  "json.maxItemsComputed": 20000,
+  "editor.minimap.enabled": false,
+  "editor.foldingMaximumRegions": 10000,
+  "workbench.startupEditor": "none",
+  "markdown-preview-github-styles.colorTheme": "system",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "breadcrumbs.enabled": false,
+  "editor.accessibilitySupport": "off",
+  "workbench.sideBar.location": "right",
   "window.zoomLevel": 1
 }

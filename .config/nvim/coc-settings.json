@@ -5,10 +5,13 @@
     "html",
     "javascript",
     "javascript.jsx",
+    "javascriptreact",
     "json",
     "less",
     "Markdown",
     "scss",
+    "typescript",
+    "typescriptreact",
     "yaml"
   ],
   "languageserver": {
@@ -54,7 +57,8 @@
   "snippets.extends": {
     "cpp": ["c"],
     "javascriptreact": ["javascript"],
-    "typescript": ["typescript"]
+    "typescript": ["typescript"],
+    "typescriptreact": ["typescript"]
   },
   "snippets.ultisnips.directories": ["UltiSnips", "gosnippets/UltiSnips"],
   "javascript.suggestionActions.enabled": false,

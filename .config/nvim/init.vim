@@ -21,7 +21,9 @@ autocmd VimEnter *
   \| endif
 
 call plug#begin(expand('$HOME/.local/share/nvim/plugged'))
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'chriskempson/base16-vim'
+Plug 'xiyaowong/nvim-transparent'
 Plug 'airblade/vim-gitgutter'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -34,28 +36,49 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-commentary'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'tpope/vim-fugitive'
 Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-grepper'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'rust-lang/rust.vim'
-Plug 'fatih/vim-go'
-Plug 'sebdah/vim-delve'
+
+Plug 'leafgarland/typescript-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips'
+Plug 'mlaursen/vim-react-snippets'
+Plug 'hail2u/vim-css3-syntax' " updates vim's built-in css to support CSS3
+Plug 'cakebaker/scss-syntax.vim'
 
 Plug 'majutsushi/tagbar'
 Plug 'uarun/vim-protobuf'
-Plug 'hashivim/vim-terraform'
-Plug 'juliosueiras/vim-terraform-completion'
 Plug 'Valloric/MatchTagAlways'
-Plug 'jparise/vim-graphql'
-Plug 'jph00/swift-apple'
-Plug 'honza/vim-snippets'
-Plug 'jhkersul/vim-jest-snippets'
 Plug 'vhdirk/vim-cmake'
+
+" not actively using these plugs
+" Plug 'rust-lang/rust.vim'
+" Plug 'fatih/vim-go'
+" Plug 'sebdah/vim-delve'
+" Plug 'jph00/swift-apple'
+" Plug 'jhkersul/vim-jest-snippets'
+" Plug 'jparise/vim-graphql'
+" Plug 'hashivim/vim-terraform'
+" Plug 'juliosueiras/vim-terraform-completion'
+
+" Devicons Must be last
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  context_commentstring = {
+    enable = true
+  }
+}
+EOF
 
 filetype plugin indent on
 syntax enable
@@ -168,6 +191,9 @@ let g:go_info_mode='gopls'
 " RUST
 let g:rustfmt_autosave=1
 let g:rust_clip_command='pbcopy'
+
+" SCSS
+au FileType scss set comments^=:///
 
 " CPP
 function! ClangCheckImpl(cmd)
@@ -286,6 +312,8 @@ let g:ale_linters={
 \ 'sh': ['language_server'],
 \ 'swift': ['swiftlint'],
 \ 'terraform': ['fmt'],
+\ 'typescript': ['prettier'],
+\ 'typescriptreact': ['prettier'],
 \ 'xml': ['xmllint'],
 \ 'yaml': ['prettier'],
 \}
@@ -299,6 +327,8 @@ let g:ale_fixers={
 \ 'json': ['prettier'],
 \ 'less': ['prettier'],
 \ 'markdown': ['prettier'],
+\ 'typescript': ['prettier'],
+\ 'typescriptreact': ['prettier'],
 \ 'scss': ['prettier'],
 \ 'yaml': ['prettier'],
 \}
@@ -355,6 +385,7 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>rn  <Plug>(coc-rename)
 " COC SETUP END
 
 " SNIPPETS BEGIN

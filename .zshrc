@@ -6,10 +6,10 @@ if [[ "$OSTYPE" == darwin* && -d $HOME/.zplug ]]; then
 fi
 
 
-if [[ "$OSTYPE" == darwin* ]]; then
-    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-    export BROWSER='none' ## avoid opening browsers on npm runs
-fi
+# if [[ "$OSTYPE" == darwin* ]]; then
+#     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+#     export BROWSER='none' ## avoid opening browsers on npm runs
+# fi
 
 fpath=($HOME/zsh-completions/src $fpath)
 for config ($ZSH/**/*.zsh) source $config
@@ -94,9 +94,9 @@ if [[ ":$PATH:" != *":$HOME/.yarn/bin:"* ]]; then
 fi
 NODE_VERSION=v17
 if [ -d "$HOME/.fnm" ]; then
-    if [[ ":$PATH:" != *":$HOME/.fnm:$HOME/.fnm/current/bin:node_modules/.bin:"* ]]; then
-        export PATH=$HOME/.fnm:$HOME/.fnm/current/bin:node_modules/.bin:$PATH
-    fi
+    # if [[ ":$PATH:" != *":$HOME/.fnm:$HOME/.fnm/current/bin:node_modules/.bin:"* ]]; then
+    #     export PATH=$HOME/.fnm:$HOME/.fnm/current/bin:node_modules/.bin:$PATH
+    # fi
     eval `fnm env`
     fnm use $NODE_VERSION
 fi
@@ -117,9 +117,6 @@ if [ -d "/usr/local/opt/llvm/bin/clangd" ]; then
         export PATH=/usr/local/opt/llvm/bin:$PATH
     fi
 fi
-
-# Android
-# export PATH=$PATH:~/Library/Android/sdk/platform-tools # support for `adb devices` command
 
 # DOCKER
 # export DOCKER_BUILDKIT=1
