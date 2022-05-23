@@ -1,6 +1,7 @@
 {
   "editor.insertSpaces": true,
   "editor.detectIndentation": true,
+  "editor.glyphMargin": false,
   "editor.lineNumbers": "relative",
   "editor.fontLigatures": true,
   "editor.fontSize": 14,
@@ -220,5 +221,6 @@
   "breadcrumbs.enabled": false,
   "editor.accessibilitySupport": "off",
   "workbench.sideBar.location": "right",
-  "window.zoomLevel": 1
+  "window.zoomLevel": 1,
+  "editor.folding": false
 }
