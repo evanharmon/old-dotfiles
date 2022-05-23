@@ -1,21 +1,21 @@
-.cache
-.aws
-.ssh
-.bash_history
-.zsh_history
-.docker
-AndroidStudioProjects
-Applications
-Desktop
-Documents
-Downloads
-!Library/Application\ Support/Anki2/evan/backups
-Library/*
-Movies
-Music
-Pictures
+./.cache
+./.aws
+./.ssh
+./.bash_history
+./.zsh_history
+./.docker
+./AndroidStudioProjects
+./Applications
+./Desktop
+./Documents
+./Downloads
+!./Library/Application\ Support/Anki2/evan/backups
+./Library/*
+./Movies
+./Music
+./Pictures
 !code/eph
 code
-go
-bin
+./go
+./bin
 
